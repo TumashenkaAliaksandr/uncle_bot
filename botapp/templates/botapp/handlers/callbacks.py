@@ -8,7 +8,7 @@ from asgiref.sync import sync_to_async
 from botapp.models import Album
 from botapp.templates.botapp.config import logger
 from botapp.templates.botapp.handlers.clear_chat import clear_chat
-from botapp.templates.botapp.keyboards import settings_keyboard, keyboard
+from botapp.templates.botapp.keyboards import settings_keyboard, keyboard, donate_keyboard
 from botapp.templates.botapp.utils.message_utils import send_and_store
 from botapp.templates.botapp.loader import sent_messages, bot
 
@@ -89,6 +89,9 @@ async def process_album_callback(callback_query: types.CallbackQuery):
             for msg in messages:
                 sent_messages.setdefault(callback_query.message.chat.id, []).append(msg.message_id)
 
+    # Отправляем сообщение с главным меню и сохраняем ID
+    await send_and_store(callback_query.message.chat.id, "📀 Приятного прослушивания", reply_markup=keyboard)
+
 
 @router.message(lambda message: message.text == "⚙️ Настройки")
 async def show_settings(message: types.Message):
@@ -112,3 +115,11 @@ async def clear_chat_handler(message: types.Message):
 async def back_to_main_menu(message: types.Message):
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
     await send_and_store(message.chat.id, "🚩 Главное меню:", reply_markup=keyboard)
+
+
+@router.message(lambda message: message.text == "💰 Донаты")
+async def donate_handler(message: types.Message):
+    # Сохраняем ID входящего сообщения пользователя для удаления
+    sent_messages.setdefault(message.chat.id, []).append(message.message_id)
+    await send_and_store(message.chat.id, "Спасибо за поддержку! Выберите удобный способ доната:", reply_markup=donate_keyboard)
+

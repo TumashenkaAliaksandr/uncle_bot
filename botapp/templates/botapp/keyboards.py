@@ -2,6 +2,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from botapp.models import Album
 from asgiref.sync import sync_to_async
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 # Главная клавиатура с тремя кнопками: Музыка, Донаты, Настройки
 keyboard = ReplyKeyboardMarkup(
@@ -31,3 +32,11 @@ async def albums_keyboard():
         )
     builder.adjust(1)
     return builder.as_markup()
+
+
+donate_keyboard = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text="💎 Поддержать через Tribute", url="https://t.me/tribute_bot?start=yourchannel")],
+    [InlineKeyboardButton(text="☁️ CloudTips", url="https://cloudtips.ru/yourprofile")],
+    [InlineKeyboardButton(text="💳 ЮKassa", url="https://yookassa.ru/yourpaymentlink")]
+])
+
