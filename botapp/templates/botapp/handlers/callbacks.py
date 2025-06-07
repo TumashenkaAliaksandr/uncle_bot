@@ -45,17 +45,17 @@ async def process_album_callback(callback_query: types.CallbackQuery):
                         f"📀 Альбом:\n{album.name}\n"
                         f"✍️ Описание:\n{album.description}\n"
                         f"📅 Релиз: {album.release_date}\n"
-                        f"Авторы: {album.authors}"
+                        f"🦸🧙 Авторы: {album.authors}"
                     )
                 )
             )
         else:
             await send_and_store(
                 callback_query.message.chat.id,
-                f"📀 Открываю Альбом:\n ⭐ {album.name} ⭐\n🖼️ Обложка не найдена по пути: {cover_path}"
+                f"📀 Открываю Альбом:\n ⭐ {album.name} ⭐\n🖼️❌ Обложка не найдена по пути: {cover_path}"
             )
     else:
-        await send_and_store(callback_query.message.chat.id, f"📀 Альбом: {album.name}\n🖼️ Обложка отсутствует")
+        await send_and_store(callback_query.message.chat.id, f"📀 Альбом: {album.name}\n🖼️❌ Обложка отсутствует")
 
     # Добавляем аудио треки
     for track in tracks:
@@ -67,7 +67,7 @@ async def process_album_callback(callback_query: types.CallbackQuery):
                 )
             )
         else:
-            logger.warning(f"Аудиофайл не найден или отсутствует: {track.title}")
+            logger.warning(f"❌🎵 Аудиофайл не найден или отсутствует: {track.title}")
 
     # Отправляем фото группами и сохраняем ID сообщений
     if photos:
@@ -90,7 +90,7 @@ async def process_album_callback(callback_query: types.CallbackQuery):
                 sent_messages.setdefault(callback_query.message.chat.id, []).append(msg.message_id)
 
     # Отправляем сообщение с главным меню и сохраняем ID
-    await send_and_store(callback_query.message.chat.id, "📀 Приятного прослушивания", reply_markup=keyboard)
+    await send_and_store(callback_query.message.chat.id, "📀 Приятного прослушивания 🎧", reply_markup=keyboard)
 
 
 @router.message(lambda message: message.text == "⚙️ Настройки")
@@ -121,5 +121,5 @@ async def back_to_main_menu(message: types.Message):
 async def donate_handler(message: types.Message):
     # Сохраняем ID входящего сообщения пользователя для удаления
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    await send_and_store(message.chat.id, "Спасибо за поддержку! Выберите удобный способ доната:", reply_markup=donate_keyboard)
+    await send_and_store(message.chat.id, "Спасибо за желание поддержать! Выберите удобный способ доната:", reply_markup=donate_keyboard)
 
