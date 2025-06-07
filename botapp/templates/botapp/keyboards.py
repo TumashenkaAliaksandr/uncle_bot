@@ -3,9 +3,20 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from botapp.models import Album
 from asgiref.sync import sync_to_async
 
+# Главная клавиатура с тремя кнопками: Музыка, Донаты, Настройки
 keyboard = ReplyKeyboardMarkup(
     keyboard=[
-        [KeyboardButton(text="🎵 Музыка"), KeyboardButton(text="💰 Донаты")]
+        [KeyboardButton(text="🎵 Музыка"), KeyboardButton(text="💰 Донаты")],
+        [KeyboardButton(text="⚙️ Настройки")]
+    ],
+    resize_keyboard=True
+)
+
+# Клавиатура настроек с кнопкой "Почистить чат" и "Назад"
+settings_keyboard = ReplyKeyboardMarkup(
+    keyboard=[
+        [KeyboardButton(text="🧹 Почистить чат")],
+        [KeyboardButton(text="⬅️ Назад")]
     ],
     resize_keyboard=True
 )
