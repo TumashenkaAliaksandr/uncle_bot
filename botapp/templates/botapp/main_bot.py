@@ -1,3 +1,4 @@
+# botapp/templates/botapp/main_bot.py
 import os
 import django
 import asyncio
@@ -12,6 +13,8 @@ dp.include_router(commands.router)
 dp.include_router(callbacks.router)
 
 async def main():
+    from botapp.templates.botapp.config import logger
+    logger.info("Бот запускается...")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":

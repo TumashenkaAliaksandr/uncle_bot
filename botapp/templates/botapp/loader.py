@@ -4,3 +4,5 @@ from botapp.templates.botapp.config import TOKEN
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
+
+sent_messages = {}

@@ -9,23 +9,26 @@ from botapp.models import Album
 from botapp.templates.botapp.config import logger
 from botapp.templates.botapp.handlers.clear_chat import clear_chat
 from botapp.templates.botapp.keyboards import settings_keyboard, keyboard
+from botapp.templates.botapp.utils.message_utils import send_and_store
+from botapp.templates.botapp.loader import sent_messages, bot
 
 router = Router()
 MAX_MEDIA_PER_MSG = 10
 
 @router.callback_query(lambda c: c.data and c.data.startswith('album_'))
 async def process_album_callback(callback_query: types.CallbackQuery):
+    # Отвечаем сразу, чтобы избежать ошибки "query is too old"
+    await callback_query.answer()
+
     album_id = int(callback_query.data.split('_')[1])
     album = await sync_to_async(lambda: Album.objects.filter(id=album_id).first())()
     if not album:
-        await callback_query.message.answer("🤷‍♂️ 📀Альбом не найден.")
-        await callback_query.answer()
+        await send_and_store(callback_query.message.chat.id, "🤷‍♂️ 📀 Альбом не найден.")
         return
 
     tracks = await sync_to_async(list)(album.tracks.order_by('id').all())
     if not tracks:
-        await callback_query.message.answer("🚫 В этом альбоме пока нет треков.")
-        await callback_query.answer()
+        await send_and_store(callback_query.message.chat.id, "🚫 В этом альбоме пока нет треков.")
         return
 
     photos = []
@@ -38,15 +41,15 @@ async def process_album_callback(callback_query: types.CallbackQuery):
             photos.append(
                 InputMediaPhoto(
                     media=FSInputFile(cover_path),
-                    caption=f"📀 Альбом: {album.name}"
+                    caption=f"📀 Альбом:\n{album.name}\n✍️ Описание:\n{album.description}\n📅 Релиз: {album.release_date}\nАвторы: {album.authors}"
                 )
             )
         else:
-            await callback_query.message.answer(
+            await send_and_store(callback_query.message.chat.id,
                 f"📀 Открываю Альбом:\n ⭐ {album.name} ⭐\n🖼️ Обложка не найдена по пути: {cover_path}"
             )
     else:
-        await callback_query.message.answer(f"📀 Альбом: {album.name}\n🖼️ Обложка отсутствует")
+        await send_and_store(callback_query.message.chat.id, f"📀 Альбом: {album.name}\n🖼️ Обложка отсутствует")
 
     # Добавляем аудио треки
     for track in tracks:
@@ -60,32 +63,46 @@ async def process_album_callback(callback_query: types.CallbackQuery):
         else:
             logger.warning(f"Аудиофайл не найден или отсутствует: {track.title}")
 
-    # Отправляем фото группами
+    # Отправляем фото группами и сохраняем ID сообщений
     if photos:
         for i in range(0, len(photos), MAX_MEDIA_PER_MSG):
             chunk = photos[i:i + MAX_MEDIA_PER_MSG]
-            await callback_query.message.answer_media_group(media=chunk)
+            messages = await bot.send_media_group(callback_query.message.chat.id, media=chunk)
+            for msg in messages:
+                sent_messages.setdefault(callback_query.message.chat.id, []).append(msg.message_id)
 
-    # Отправляем аудио группами
+    # Отправляем аудио группами и сохраняем ID сообщений
     if audios:
         for i in range(0, len(audios), MAX_MEDIA_PER_MSG):
             chunk = audios[i:i + MAX_MEDIA_PER_MSG]
-            await callback_query.message.answer_media_group(media=chunk)
-
-    await callback_query.answer()
+            messages = await bot.send_media_group(callback_query.message.chat.id, media=chunk)
+            for msg in messages:
+                sent_messages.setdefault(callback_query.message.chat.id, []).append(msg.message_id)
 
 
 @router.message(lambda message: message.text == "⚙️ Настройки")
 async def show_settings(message: types.Message):
-    await message.answer("Вы в настройках:", reply_markup=settings_keyboard)
+    # Сохраняем ID входящего сообщения пользователя для удаления
+    sent_messages.setdefault(message.chat.id, []).append(message.message_id)
+    await send_and_store(message.chat.id, "Вы в настройках 🛠️:", reply_markup=settings_keyboard)
 
 
 @router.message(lambda message: message.text == "🧹 Почистить чат")
 async def clear_chat_handler(message: types.Message):
-    await message.answer("Через 5 минут начнётся очистка чата.")
-    asyncio.create_task(clear_chat(message.chat.id))
+    # Сохраняем ID входящего сообщения пользователя для удаления
+    sent_messages.setdefault(message.chat.id, []).append(message.message_id)
+    await send_and_store(message.chat.id, "Чищу чат 🧹")
+
+    async def clear_and_send_menu():
+        await clear_chat(message.chat.id)
+        await send_and_store(message.chat.id, "🚩 Главное меню:", reply_markup=keyboard)
+
+    asyncio.create_task(clear_and_send_menu())
+
 
 
 @router.message(lambda message: message.text == "⬅️ Назад")
 async def back_to_main_menu(message: types.Message):
-    await message.answer("Главное меню:", reply_markup=keyboard)
+    # Сохраняем ID входящего сообщения пользователя для удаления
+    sent_messages.setdefault(message.chat.id, []).append(message.message_id)
+    await send_and_store(message.chat.id, "🚩 Главное меню:", reply_markup=keyboard)
