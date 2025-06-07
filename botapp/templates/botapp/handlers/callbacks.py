@@ -41,11 +41,17 @@ async def process_album_callback(callback_query: types.CallbackQuery):
             photos.append(
                 InputMediaPhoto(
                     media=FSInputFile(cover_path),
-                    caption=f"📀 Альбом:\n{album.name}\n✍️ Описание:\n{album.description}\n📅 Релиз: {album.release_date}\nАвторы: {album.authors}"
+                    caption=(
+                        f"📀 Альбом:\n{album.name}\n"
+                        f"✍️ Описание:\n{album.description}\n"
+                        f"📅 Релиз: {album.release_date}\n"
+                        f"Авторы: {album.authors}"
+                    )
                 )
             )
         else:
-            await send_and_store(callback_query.message.chat.id,
+            await send_and_store(
+                callback_query.message.chat.id,
                 f"📀 Открываю Альбом:\n ⭐ {album.name} ⭐\n🖼️ Обложка не найдена по пути: {cover_path}"
             )
     else:
@@ -71,25 +77,27 @@ async def process_album_callback(callback_query: types.CallbackQuery):
             for msg in messages:
                 sent_messages.setdefault(callback_query.message.chat.id, []).append(msg.message_id)
 
-    # Отправляем аудио группами и сохраняем ID сообщений
+    # Отправляем аудио группами с protect_content=True и сохраняем ID сообщений
     if audios:
         for i in range(0, len(audios), MAX_MEDIA_PER_MSG):
             chunk = audios[i:i + MAX_MEDIA_PER_MSG]
-            messages = await bot.send_media_group(callback_query.message.chat.id, media=chunk)
+            messages = await bot.send_media_group(
+                callback_query.message.chat.id,
+                media=chunk,
+                protect_content=True  # Запрет пересылки аудио
+            )
             for msg in messages:
                 sent_messages.setdefault(callback_query.message.chat.id, []).append(msg.message_id)
 
 
 @router.message(lambda message: message.text == "⚙️ Настройки")
 async def show_settings(message: types.Message):
-    # Сохраняем ID входящего сообщения пользователя для удаления
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
     await send_and_store(message.chat.id, "Вы в настройках 🛠️:", reply_markup=settings_keyboard)
 
 
 @router.message(lambda message: message.text == "🧹 Почистить чат")
 async def clear_chat_handler(message: types.Message):
-    # Сохраняем ID входящего сообщения пользователя для удаления
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
     await send_and_store(message.chat.id, "Чищу чат 🧹")
 
@@ -100,9 +108,7 @@ async def clear_chat_handler(message: types.Message):
     asyncio.create_task(clear_and_send_menu())
 
 
-
 @router.message(lambda message: message.text == "⬅️ Назад")
 async def back_to_main_menu(message: types.Message):
-    # Сохраняем ID входящего сообщения пользователя для удаления
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
     await send_and_store(message.chat.id, "🚩 Главное меню:", reply_markup=keyboard)
