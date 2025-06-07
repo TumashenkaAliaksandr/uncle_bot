@@ -4,7 +4,6 @@ from aiogram import Router, types
 from aiogram.types.input_file import FSInputFile
 from aiogram.types import InputMediaAudio, InputMediaPhoto
 from asgiref.sync import sync_to_async
-
 from botapp.models import Album
 from botapp.templates.botapp.config import logger
 from botapp.templates.botapp.handlers.clear_chat import clear_chat
@@ -121,5 +120,5 @@ async def back_to_main_menu(message: types.Message):
 async def donate_handler(message: types.Message):
     # Сохраняем ID входящего сообщения пользователя для удаления
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    await send_and_store(message.chat.id, "Спасибо за желание поддержать! Выберите удобный способ доната:", reply_markup=donate_keyboard)
+    await send_and_store(message.chat.id, "Спасибо 🙏 за желание поддержать!\n🟢  Выберите удобный для вас способ доната:", reply_markup=donate_keyboard)
 
