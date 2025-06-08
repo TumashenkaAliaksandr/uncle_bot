@@ -8,6 +8,8 @@ from botapp.models import Album
 from botapp.templates.botapp.config import logger
 from botapp.templates.botapp.handlers.clear_chat import clear_chat
 from botapp.templates.botapp.keyboards import settings_keyboard, keyboard, donate_keyboard
+from botapp.templates.botapp.texts.proposal_texts import DONATE_TEXT, cleaning_chat_txt, your_settings_txt, \
+    MAIN_MENU_ANSWER, nice_listening
 from botapp.templates.botapp.utils.message_utils import send_and_store
 from botapp.templates.botapp.loader import sent_messages, bot
 
@@ -41,8 +43,8 @@ async def process_album_callback(callback_query: types.CallbackQuery):
                 InputMediaPhoto(
                     media=FSInputFile(cover_path),
                     caption=(
-                        f"📀 Альбом:\n{album.name}\n"
-                        f"✍️ Описание:\n{album.description}\n"
+                        f"📀 Альбом:\n✪ {album.name} ✪\n\n"
+                        f"✍️ Описание:\n{album.description}\n\n"
                         f"📅 Релиз: {album.release_date}\n"
                         f"🦸🧙 Авторы: {album.authors}"
                     )
@@ -61,8 +63,8 @@ async def process_album_callback(callback_query: types.CallbackQuery):
         if track.audio_file and os.path.exists(track.audio_file.path):
             audios.append(
                 InputMediaAudio(
-                    media=FSInputFile(track.audio_file.path),
-                    caption=track.title
+                    caption=track.title,
+                    media=FSInputFile(track.audio_file.path)
                 )
             )
         else:
@@ -89,23 +91,23 @@ async def process_album_callback(callback_query: types.CallbackQuery):
                 sent_messages.setdefault(callback_query.message.chat.id, []).append(msg.message_id)
 
     # Отправляем сообщение с главным меню и сохраняем ID
-    await send_and_store(callback_query.message.chat.id, "📀 Приятного прослушивания 🎧", reply_markup=keyboard)
+    await send_and_store(callback_query.message.chat.id, nice_listening, parse_mode="HTML", reply_markup=keyboard)
 
 
 @router.message(lambda message: message.text == "⚙️ Настройки")
 async def show_settings(message: types.Message):
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    await send_and_store(message.chat.id, "Вы в настройках 🛠️:", reply_markup=settings_keyboard)
+    await send_and_store(message.chat.id, your_settings_txt, parse_mode="HTML", reply_markup=settings_keyboard)
 
 
 @router.message(lambda message: message.text == "🧹 Почистить чат")
 async def clear_chat_handler(message: types.Message):
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    await send_and_store(message.chat.id, "Чищу чат 🧹")
+    await send_and_store(message.chat.id, cleaning_chat_txt, parse_mode="HTML")
 
     async def clear_and_send_menu():
         await clear_chat(message.chat.id)
-        await send_and_store(message.chat.id, "🚩 Главное меню:", reply_markup=keyboard)
+        await send_and_store(message.chat.id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=keyboard)
 
     asyncio.create_task(clear_and_send_menu())
 
@@ -113,12 +115,16 @@ async def clear_chat_handler(message: types.Message):
 @router.message(lambda message: message.text == "⬅️ Назад")
 async def back_to_main_menu(message: types.Message):
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    await send_and_store(message.chat.id, "🚩 Главное меню:", reply_markup=keyboard)
+    await send_and_store(message.chat.id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=keyboard)
 
 
 @router.message(lambda message: message.text == "💰 Донаты")
 async def donate_handler(message: types.Message):
     # Сохраняем ID входящего сообщения пользователя для удаления
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    await send_and_store(message.chat.id, "Спасибо 🙏 за желание поддержать!\n🟢  Выберите удобный для вас способ доната:", reply_markup=donate_keyboard)
-
+    await send_and_store(
+        message.chat.id,
+        DONATE_TEXT,
+        reply_markup=donate_keyboard,
+        parse_mode="HTML"
+    )
