@@ -11,23 +11,41 @@
 <body>
   <!-- 3D-слайдер как фон -->
   <div id="bg-slider"></div>
+  <section>
+      <div class="conteiner">
+          <!-- Контент поверх слайдера -->
+          <div class="content">
+              <div class="album-info">
+                  <h1>{{ album.name }}</h1>
+                  <p><b>Описание:</b> {{ album.description }}</p>
+                  <p><b>Дата выпуска:</b> {{ album.release_date }}</p>
+                  <p><b>Авторы:</b> {{ album.authors }}</p>
+              </div>
 
-  <!-- Контент поверх слайдера -->
-  <div class="content">
-    <div class="songs-list">
-      <h2>Песни</h2>
-      <ul>
-        <li>Песня 1</li>
-        <li>Песня 2</li>
-        <li>Песня 3</li>
-        <!-- ... -->
-      </ul>
-    </div>
-    <div class="button-row">
-      <a href="https://t.me/your_contact" class="tg-btn" target="_blank">Связь</a>
-      <a href="https://t.me/your_donate" class="tg-btn" target="_blank">Донаты</a>
-    </div>
-  </div>
+              <div class="songs-list">
+                  <h2>Песни</h2>
+                  {% for track in album.tracks.all %}
+                      <li>
+                          <span>{{ track.title }}</span>
+                          {% if track.audio_file %}
+                              <audio controls controlsList="nodownload noplaybackrate" preload="none">
+                                  <source src="{{ track.audio_file.url }}" type="audio/mpeg">
+                                  Ваш браузер не поддерживает аудио.
+                              </audio>
+                          {% endif %}
+                      </li>
+                  {% empty %}
+                      <li>Песен нет</li>
+                  {% endfor %}
+              </div>
+
+              <div class="button-row">
+                  <a href="https://t.me/your_contact" class="tg-btn" target="_blank" rel="noopener noreferrer">Связь</a>
+                  <a href="https://t.me/your_donate" class="tg-btn" target="_blank" rel="noopener noreferrer">Донаты</a>
+              </div>
+          </div>
+      </div>
+  </section>
 
   <!-- Подключение 3D-слайдера (пример на Three.js) -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/build/three.min.js"></script>
