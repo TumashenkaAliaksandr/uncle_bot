@@ -1,7 +1,7 @@
 html, body {
     height: 100%;
     margin: 0;
-    overflow: hidden; /* Запретить прокрутку */
+    overflow: hidden; /* Запрет вертикальной прокрутки */
 }
 
 body {
@@ -11,6 +11,9 @@ body {
     font-family: Arial, sans-serif;
     background: #fff;
     color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #bg-slider {
@@ -20,8 +23,17 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: 0;
-    pointer-events: none; /* Не мешает кликам по контенту */
+    pointer-events: none;
     overflow: hidden;
+}
+
+.conteiner {
+    max-width: 1200px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .content {
@@ -30,36 +42,38 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100vw;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
     background: transparent;
 }
 
 /* Информация об альбоме */
 .album-info {
     background: rgba(255, 255, 255, 0.9);
-    padding: 20px 30px;
+    padding: 10px 20px;
     border-radius: 12px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    max-width: 1200px;
-    width: 100%;
+    max-width: 100%;
     color: #222;
     text-align: center;
+    flex-shrink: 0;
 }
 
 .album-info h1 {
-    font-size: 2.4rem;
-    margin-bottom: 12px;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
     font-weight: 700;
     color: #1a1a1a;
 }
 
 .album-info p {
-    font-size: 1.1rem;
-    margin: 6px 0;
-    line-height: 1.4;
+    font-size: 0.9rem;
+    margin: 4px 0;
+    line-height: 1.2;
 }
 
 .album-info p b {
@@ -70,42 +84,49 @@ body {
 .songs-list {
     background: rgba(255, 255, 255, 0.85);
     border-radius: 16px;
-    padding: 24px 40px;
-    margin-bottom: 32px;
+    padding: 12px 20px;
+    margin-bottom: 10px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    max-width: 1200px;
+    max-width: 100%;
     width: 100%;
     color: #222;
     text-align: left;
+    overflow: hidden;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .songs-list h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
     color: #1a1a1a;
     text-align: center;
+    flex-shrink: 0;
 }
 
 .songs-list ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    overflow-y: auto;
+    flex-grow: 1;
 }
 
 .songs-list li {
-    margin-bottom: 16px;
-    font-size: 1.15rem;
+    margin-bottom: 8px;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: 8px;
 }
 
 /* Аудиоплеер */
 .songs-list audio {
     outline: none;
-    width: 180px;
-    height: 32px;
+    width: 140px;
+    height: 28px;
     border-radius: 6px;
     background: #f0f0f0;
 }
@@ -113,20 +134,21 @@ body {
 /* Кнопки */
 .button-row {
     display: flex;
-    gap: 20px;
+    gap: 12px;
     justify-content: center;
     flex-wrap: wrap;
     max-width: 600px;
-    width: 90%;
+    width: 100%;
+    flex-shrink: 0;
 }
 
 .tg-btn {
-    padding: 12px 28px;
+    padding: 10px 20px;
     border: none;
     border-radius: 8px;
     background: #229ED9;
     color: #fff;
-    font-size: 1.2rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: background 0.2s;
     text-decoration: none;

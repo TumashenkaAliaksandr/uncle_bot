@@ -22,6 +22,22 @@
                   <p><b>Авторы:</b> {{ album.authors }}</p>
               </div>
 
+              <!-- Переключатель режима воспроизведения -->
+              <div class="play-mode-selector" role="radiogroup" aria-label="Режим воспроизведения">
+                <label>
+                  <input type="radio" name="playMode" value="single" checked>
+                  Одна песня
+                </label>
+                <label>
+                  <input type="radio" name="playMode" value="loop">
+                  Все по кругу
+                </label>
+                <label>
+                  <input type="radio" name="playMode" value="random">
+                  Случайный порядок
+                </label>
+              </div>
+
               <div class="songs-list">
                   <h2>Песни</h2>
                   <ul>
@@ -29,10 +45,16 @@
                           <li class="track-item" data-slide-index="{{ forloop.counter0 }}">
                               <span>{{ track.title }}</span>
                               {% if track.audio_file %}
-                                  <audio controls controlsList="nodownload noplaybackrate" preload="none">
-                                      <source src="{{ track.audio_file.url }}" type="audio/mpeg">
-                                      Ваш браузер не поддерживает аудио.
+                                <div class="audio-player">
+                                  <audio preload="metadata" controls controlsList="nodownload noplaybackrate" data-index="{{ forloop.counter0 }}">
+                                    <source src="{{ track.audio_file.url }}" type="audio/mpeg">
+                                    Ваш браузер не поддерживает аудио.
                                   </audio>
+                                  <div class="progress-container">
+                                    <progress value="0" max="100" class="progress-bar"></progress>
+                                    <span class="time-display">00:00 / 00:00</span>
+                                  </div>
+                                </div>
                               {% endif %}
                           </li>
                       {% empty %}
