@@ -3,7 +3,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Музыкальный Сайт</title>
+  <title>Музыка от ДЯДИ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="{% static 'botapp/static/css/style.css' %}">
@@ -24,19 +24,21 @@
 
               <div class="songs-list">
                   <h2>Песни</h2>
-                  {% for track in album.tracks.all %}
-                      <li>
-                          <span>{{ track.title }}</span>
-                          {% if track.audio_file %}
-                              <audio controls controlsList="nodownload noplaybackrate" preload="none">
-                                  <source src="{{ track.audio_file.url }}" type="audio/mpeg">
-                                  Ваш браузер не поддерживает аудио.
-                              </audio>
-                          {% endif %}
-                      </li>
-                  {% empty %}
-                      <li>Песен нет</li>
-                  {% endfor %}
+                  <ul>
+                      {% for track in album.tracks.all %}
+                          <li class="track-item" data-slide-index="{{ forloop.counter0 }}">
+                              <span>{{ track.title }}</span>
+                              {% if track.audio_file %}
+                                  <audio controls controlsList="nodownload noplaybackrate" preload="none">
+                                      <source src="{{ track.audio_file.url }}" type="audio/mpeg">
+                                      Ваш браузер не поддерживает аудио.
+                                  </audio>
+                              {% endif %}
+                          </li>
+                      {% empty %}
+                          <li>Песен нет</li>
+                      {% endfor %}
+                  </ul>
               </div>
 
               <div class="button-row">
