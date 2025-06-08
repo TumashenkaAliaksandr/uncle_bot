@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Музыкальный Сайт</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="{% static 'botapp/static/css/style.css' %}">
+</head>
+<body>
+  <!-- 3D-слайдер как фон -->
+  <div id="bg-slider"></div>
+
+  <!-- Контент поверх слайдера -->
+  <div class="content">
+    <div class="songs-list">
+      <h2>Песни</h2>
+      <ul>
+        <li>Песня 1</li>
+        <li>Песня 2</li>
+        <li>Песня 3</li>
+        <!-- ... -->
+      </ul>
+    </div>
+    <div class="button-row">
+      <a href="https://t.me/your_contact" class="tg-btn" target="_blank">Связь</a>
+      <a href="https://t.me/your_donate" class="tg-btn" target="_blank">Донаты</a>
+    </div>
+  </div>
+
+  <!-- Подключение 3D-слайдера (пример на Three.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.148.0/build/three.min.js"></script>
+  <script src="{% static 'botapp/static/js/main.js' %}"></script>
+</body>
+</html>
