@@ -35,18 +35,16 @@ const materials = [
   }),
 ];
 
-// Освещение для материалов с освещением
+// Освещение
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(5, 5, 5);
 scene.add(directionalLight);
-
-const ambientLight = new THREE.AmbientLight(0x404040, 0.5); // мягкий свет
+const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
 scene.add(ambientLight);
 
 let currentSlideIndex = 0;
 let mesh = new THREE.Mesh(geometries[currentSlideIndex], materials[currentSlideIndex]);
 scene.add(mesh);
-
 camera.position.z = 3;
 
 function changeSlide(index) {
@@ -54,7 +52,6 @@ function changeSlide(index) {
   scene.remove(mesh);
   mesh.geometry.dispose();
   mesh.material.dispose();
-
   mesh = new THREE.Mesh(geometries[index], materials[index]);
   scene.add(mesh);
   currentSlideIndex = index;
@@ -66,7 +63,6 @@ function animate() {
   mesh.rotation.y += 0.01;
   renderer.render(scene, camera);
 }
-
 animate();
 
 window.addEventListener('resize', () => {
@@ -75,31 +71,55 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// Получаем все аудио и радиокнопки выбора режима
+// Аудио и режимы
 const audios = document.querySelectorAll('.songs-list audio');
 const playModeRadios = document.querySelectorAll('input[name="playMode"]');
 
-let playMode = "single"; // по умолчанию
+let playMode = "single";
 let currentAudioIndex = -1;
 
-// Обновляем playMode при переключении радиокнопок
 playModeRadios.forEach(radio => {
   radio.addEventListener('change', () => {
-    if (radio.checked) {
-      playMode = radio.value;
-    }
+    if (radio.checked) playMode = radio.value;
   });
 });
 
 function playAudioAtIndex(index) {
   if (index < 0 || index >= audios.length) return;
-  audios.forEach(audio => audio.pause());
+
+  // Сброс времени и прогресса предыдущей песни
+  if (currentAudioIndex !== -1 && currentAudioIndex !== index) {
+    audios[currentAudioIndex].pause();
+    audios[currentAudioIndex].currentTime = 0;
+    resetProgressBar(currentAudioIndex);
+  }
+
+  // Сброс времени новой песни, если переключаемся
+  if (currentAudioIndex !== index) {
+    audios[index].currentTime = 0;
+  }
+
+  // Пауза всех аудио кроме выбранного
+  audios.forEach((audio, i) => {
+    if (i !== index) audio.pause();
+  });
+
   audios[index].play();
   currentAudioIndex = index;
   changeSlide(index);
 }
 
-// Клик по песне — воспроизведение и смена слайда
+function resetProgressBar(index) {
+  const player = audios[index].closest('.audio-player');
+  if (!player) return;
+  const progressBar = player.querySelector('.progress-bar');
+  const timeDisplay = player.querySelector('.time-display');
+  if (progressBar) progressBar.value = 0;
+  if (timeDisplay && audios[index].duration) {
+    timeDisplay.textContent = formatTime(0) + ' / ' + formatTime(audios[index].duration);
+  }
+}
+
 document.querySelectorAll('.track-item').forEach(item => {
   item.style.cursor = 'pointer';
   item.addEventListener('click', () => {
@@ -108,56 +128,57 @@ document.querySelectorAll('.track-item').forEach(item => {
   });
 });
 
-// При воспроизведении останавливаем другие аудио
 audios.forEach(audio => {
   audio.addEventListener('play', () => {
     audios.forEach(otherAudio => {
-      if (otherAudio !== audio) {
-        otherAudio.pause();
-      }
+      if (otherAudio !== audio) otherAudio.pause();
     });
   });
 });
 
-// Обработка окончания аудио с учётом текущего playMode и currentAudioIndex
+function getRandomIndex(excludeIndex, max) {
+  if (max <= 1) return 0;
+  let randIndex = Math.floor(Math.random() * max);
+  while (randIndex === excludeIndex) {
+    randIndex = Math.floor(Math.random() * max);
+  }
+  return randIndex;
+}
+
 audios.forEach((audio, index) => {
   audio.addEventListener('ended', () => {
+    audio.currentTime = 0;
+    resetProgressBar(index);
+
     if (playMode === "single") {
-      currentAudioIndex = -1; // останавливаемся
+      // В режиме "одна песня" повторяем текущую песню с начала
+      playAudioAtIndex(currentAudioIndex);
     } else if (playMode === "loop") {
-      // Следующая песня по кругу от текущей, а не от index из события
       let nextIndex = (currentAudioIndex + 1) % audios.length;
       playAudioAtIndex(nextIndex);
     } else if (playMode === "random") {
-      let nextIndex;
-      do {
-        nextIndex = Math.floor(Math.random() * audios.length);
-      } while (nextIndex === currentAudioIndex && audios.length > 1);
+      let nextIndex = getRandomIndex(currentAudioIndex, audios.length);
       playAudioAtIndex(nextIndex);
     }
   });
 });
-// Обновление прогресс-бара и времени для каждого кастомного аудиоплеера
+
 document.querySelectorAll('.audio-player').forEach(player => {
   const audio = player.querySelector('audio');
   const progressBar = player.querySelector('.progress-bar');
   const timeDisplay = player.querySelector('.time-display');
 
-  // Обновляем длительность после загрузки метаданных
   audio.addEventListener('loadedmetadata', () => {
     timeDisplay.textContent = formatTime(0) + ' / ' + formatTime(audio.duration);
   });
 
-  // Обновляем прогресс и текущее время при проигрывании
   audio.addEventListener('timeupdate', () => {
-    if (audio.duration) {
-      const progressPercent = (audio.currentTime / audio.duration) * 100;
-      progressBar.value = progressPercent;
-      timeDisplay.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
-    }
+    if (!audio.duration) return;
+    const progressPercent = (audio.currentTime / audio.duration) * 100;
+    progressBar.value = progressPercent;
+    timeDisplay.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
   });
 
-  // Позволяет кликать по прогрессбару для перемотки
   progressBar.addEventListener('click', e => {
     const rect = progressBar.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
