@@ -5,13 +5,13 @@ from aiogram.types.input_file import FSInputFile
 from aiogram.types import InputMediaAudio, InputMediaPhoto
 from asgiref.sync import sync_to_async
 from botapp.models import Album
-from botapp.templates.botapp.config import logger
-from botapp.templates.botapp.handlers.clear_chat import clear_chat
-from botapp.templates.botapp.keyboards import settings_keyboard, keyboard, donate_keyboard
-from botapp.templates.botapp.texts.proposal_texts import DONATE_TEXT, cleaning_chat_txt, your_settings_txt, \
+from botapp.bot.config import logger
+from botapp.bot.handlers.clear_chat import clear_chat
+from botapp.bot.keyboards import settings_keyboard, keyboard, donate_keyboard
+from botapp.bot.texts.proposal_texts import DONATE_TEXT, cleaning_chat_txt, your_settings_txt, \
     MAIN_MENU_ANSWER, nice_listening
-from botapp.templates.botapp.utils.message_utils import send_and_store
-from botapp.templates.botapp.loader import sent_messages, bot
+from botapp.bot.utils.message_utils import send_and_store
+from botapp.bot.loader import sent_messages, bot
 
 router = Router()
 MAX_MEDIA_PER_MSG = 10

@@ -2,11 +2,11 @@ from aiogram import Router, F
 from aiogram.filters import Command
 from aiogram.types import Message
 
-from botapp.templates.botapp.keyboards import keyboard, albums_keyboard, donate_keyboard
-from botapp.templates.botapp.config import logger
-from botapp.templates.botapp.texts.proposal_texts import thanks_donate_command_txt, HELLO_TXT_FIRST, sending_album_txt
-from botapp.templates.botapp.utils.message_utils import send_and_store
-from botapp.templates.botapp.loader import sent_messages
+from botapp.bot.keyboards import keyboard, albums_keyboard, donate_keyboard
+from botapp.bot.config import logger
+from botapp.bot.texts.proposal_texts import thanks_donate_command_txt, HELLO_TXT_FIRST, sending_album_txt
+from botapp.bot.utils.message_utils import send_and_store
+from botapp.bot.loader import sent_messages
 
 router = Router()
 

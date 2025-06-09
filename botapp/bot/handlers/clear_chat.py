@@ -1,8 +1,7 @@
 import asyncio
 
-from botapp.templates.botapp.keyboards import keyboard
-from botapp.templates.botapp.loader import bot, sent_messages
-from botapp.templates.botapp.config import logger
+from botapp.bot.loader import bot, sent_messages
+from botapp.bot.config import logger
 
 async def clear_chat(chat_id: int, delay_seconds: int = 5):
     await asyncio.sleep(delay_seconds)

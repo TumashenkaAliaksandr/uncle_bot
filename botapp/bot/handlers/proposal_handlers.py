@@ -3,10 +3,10 @@ from aiogram import Router, types
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
-from botapp.templates.botapp.handlers.clear_chat import clear_chat
-from botapp.templates.botapp.keyboards import keyboard
-from botapp.templates.botapp.loader import sent_messages, bot
-from botapp.templates.botapp.texts.proposal_texts import ASK_PROPOSAL_TEXT, thanks_by_proposal_txt
+from botapp.bot.handlers.clear_chat import clear_chat
+from botapp.bot.keyboards import keyboard
+from botapp.bot.loader import sent_messages, bot
+from botapp.bot.texts.proposal_texts import ASK_PROPOSAL_TEXT, thanks_by_proposal_txt
 
 router = Router()
 

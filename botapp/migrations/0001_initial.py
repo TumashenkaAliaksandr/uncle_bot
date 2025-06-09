@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=255, verbose_name='Название трека')),
                 ('description', models.TextField(blank=True, verbose_name='Описание')),
                 ('cover', models.ImageField(blank=True, null=True, upload_to='tracks/covers/', verbose_name='Обложка')),
-                ('album', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tracks', to='botapp.album', verbose_name='Альбом')),
+                ('album', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tracks', to='bot.album', verbose_name='Альбом')),
             ],
         ),
     ]

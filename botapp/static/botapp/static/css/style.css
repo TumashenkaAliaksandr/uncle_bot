@@ -125,7 +125,7 @@ body {
 /* Аудиоплеер */
 .songs-list audio {
     outline: none;
-    width: 140px;
+    width: 260px;
     height: 28px;
     border-radius: 6px;
     background: #f0f0f0;
