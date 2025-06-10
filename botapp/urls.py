@@ -5,7 +5,10 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    # path('', views.index, name='index'),
+    path('', views.player, name='player'),
+    path('album/<int:album_id>/', views.player, name='album_player'),
+    path('track/<int:track_id>/', views.player, name='track_player'),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,88 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Аудиоплеер</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Ваш кастомный CSS -->
+    <link rel="stylesheet" href="{% static 'botapp/static/css/player.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<section>
+  <div class="theme-switcher position-absolute top-0 end-0 m-3">
+    <button id="themeToggle" class="btn btn-outline-light">
+      <span class="icon">🌗</span>
+      <span class="text">Сменить тему</span>
+    </button>
+  </div>
+</section>
+
+
+
+<div class="player-container mx-auto mt-4 p-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-5 text-center">
+            <div class="cover mb-3">
+                {% if current_track.cover %}
+                    <img id="trackCover" src="{{ current_track.cover.url }}" alt="Обложка" class="img-fluid rounded">
+                {% else %}
+                    <img id="trackCover" src="{% static 'botapp/static/img/no_images.png' %}" alt="Обложка"
+                         class="img-fluid rounded">
+                {% endif %}
+            </div>
+            <div class="track-info mb-3">
+                <h2 id="trackTitle" class="h5">{{ current_track.title }}</h2>
+                <p id="trackAlbum" class="">Альбом: {{ current_track.album.name }}</p>
+            </div>
+        </div>
+        <div class="col-12 col-sm-7">
+            <audio id="audioPlayer" src="{{ current_track.audio_file.url }}" preload="auto" class="w-100 mb-3"></audio>
+            <canvas id="visualizer" width="100%" height="80"></canvas>
+            <div class="controls d-flex justify-content-center my-3 flex-wrap gap-3">
+                <button id="prevBtn" class="btn btn-outline-light btn-sm">⏮️</button>
+                <button id="playPauseBtn" class="btn btn-outline-light btn-sm">▶️</button>
+                <button id="nextBtn" class="btn btn-outline-light btn-sm">⏭️</button>
+                <button id="loopBtn" class="btn btn-outline-light btn-sm">🔁</button>
+                <button id="shuffleBtn" class="btn btn-outline-light btn-sm">🔀</button>
+            </div>
+            <div class="progress-container d-flex align-items-center gap-2 mb-3">
+                <span id="currentTime">0:00</span>
+                <input type="range" id="progressBar" value="0" min="0" max="100" class="form-range flex-grow-1">
+                <span id="duration">0:00</span>
+            </div>
+            <div class="volume-container d-flex align-items-center gap-2 mb-3">
+                <input type="range" id="volumeBar" min="0" max="1" step="0.01" value="1" class="form-range w-50">
+                <span id="volumeIcon">🔊</span>
+            </div>
+            <div class="track-list bg-secondary bg-opacity-25 rounded p-2" style="max-height: 200px; overflow-y: auto;">
+                <ul id="trackList" class="list-unstyled d-flex flex-wrap gap-2 justify-content-start">
+                    {% for track in tracks %}
+                        <li data-id="{{ track.id }}"
+                            class="d-flex align-items-center gap-2 p-2 rounded {% if track.id == current_track.id %}active bg-success bg-opacity-25{% endif %}"
+                            style="cursor:pointer;">
+                            {% if track.cover %}
+                                <img src="{{ track.cover.url }}" alt="Обложка" class="mini-cover rounded">
+                            {% else %}
+                                <img src="{% static 'botapp/static/img/no_images.png' %}" alt="Обложка"
+                                     class="mini-cover rounded">
+                            {% endif %}
+                            <span class="text-truncate" style="max-width: 150px;">{{ track.title }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS Bundle (Popper + Bootstrap JS) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Ваш кастомный JS -->
+<script src="{% static 'botapp/static/js/player.js' %}"></script>
+</body>
+</html>

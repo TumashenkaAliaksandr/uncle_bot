@@ -1,0 +1,181 @@
+body {
+    background: var(--bg, #181818);
+    color: var(--fg, #fff);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    transition: background 0.3s, color 0.3s;
+}
+.player-container {
+    width: 85%;
+    margin: 40px auto;
+    background: var(--panel, #222);
+    border-radius: 20px;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.4);
+    padding: 30px 20px;
+    text-align: center;
+}
+.cover img {
+    width: 220px;
+    height: 220px;
+    border-radius: 16px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.track-info h2 {
+    font-size: 1.4em;
+    margin: 0;
+}
+.track-info p {
+    /*color: #aaa;*/
+    font-size: 1em;
+    margin: 0 0 10px 0;
+}
+.controls button {
+    background: none;
+    border: none;
+    color: var(--fg, #fff);
+    font-size: 1.6em;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.controls button.active, .controls button:focus {
+    color: #1db954;
+}
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 16px 0;
+}
+#progressBar {
+    flex: 1;
+    accent-color: #1db954;
+}
+.volume-container {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+#volumeBar {
+    width: 100px;
+    accent-color: #1db954;
+}
+.track-list {
+    margin-top: 24px;
+    background: var(--panel2, #181818);
+    border-radius: 8px;
+    padding: 10px;
+    max-height: 180px;
+    overflow-y: auto;
+}
+.track-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.track-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+.track-list li.active, .track-list li:hover {
+    background: #1db95422;
+}
+.mini-cover {
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+.theme-switcher {
+    position: absolute !important;
+    top: 18px !important;
+    right: 110px !important;
+}
+.theme-switcher button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* расстояние между иконкой и текстом */
+}
+
+.theme-switcher .text {
+  display: none; /* скрываем текст по умолчанию */
+  white-space: nowrap; /* чтобы текст не переносился */
+}
+
+.theme-switcher button:hover .text {
+  display: inline; /* показываем текст при наведении */
+}
+
+
+
+:root {
+    --bg: #181818;
+    --fg: #fff;
+    --panel: #222;
+    --panel2: #181818;
+}
+body.light {
+    --bg: #fff;
+    --fg: #222;
+    --panel: #f4f4f4;
+    --panel2: #eaeaea;
+}
+
+
+/* Стили для мобильных устройств (до 576px) */
+@media (max-width: 575.98px) {
+    .player-container {
+        width: 95% !important;
+        margin: 20px auto !important;
+        padding: 15px 10px !important;
+    }
+    .cover img {
+        width: 125px !important;
+        height: 125px !important;
+        margin-bottom: 10px !important;
+    }
+    .track-info h2 {
+        font-size: 1.1em !important;
+    }
+    .track-info p {
+        font-size: 0.9em !important;
+    }
+    .controls button {
+        font-size: 1.3em !important;
+        margin: 0 5px !important;
+        padding: 6px 0 !important;
+    }
+    #volumeBar {
+        width: 80px !important;
+    }
+
+    .theme-switcher button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        left: 58px;
+        position: absolute;
+    }
+    .progress-container {
+        margin: 12px 0 !important;
+    }
+    .track-list ul {
+        justify-content: center !important;
+    }
+    .track-list li {
+        width: 45% !important;
+        padding: 6px 5px !important;
+        font-size: 0.9em !important;
+    }
+    .mini-cover {
+        width: 40px !important;
+        height: 40px !important;
+    }
+}
