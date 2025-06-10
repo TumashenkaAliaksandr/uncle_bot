@@ -1,9 +1,28 @@
 body {
+    position: relative;
     background: var(--bg, #181818);
     color: var(--fg, #fff);
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: 'Rubik', 'Segoe UI', Arial, sans-serif;
     transition: background 0.3s, color 0.3s;
+    overflow-x: hidden;
 }
+
+body::before {
+  content: "";
+  position: fixed; /* фиксируем, чтобы фон не двигался при прокрутке */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('albums/covers/Musical_Ground2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.05; /* очень низкая непрозрачность — почти невидимо */
+  pointer-events: none; /* чтобы не мешать взаимодействию */
+  z-index: -1; /* позади всего содержимого */
+}
+
 .player-container {
     width: 85%;
     margin: 40px auto;
@@ -28,7 +47,7 @@ body {
 .track-info p {
     /*color: #aaa;*/
     font-size: 1em;
-    margin: 0 0 10px 0;
+    margin: 10px 0 10px 0;
 }
 .controls button {
     background: none;
@@ -110,13 +129,13 @@ body {
   transition: box-shadow 0.3s ease;
 
   /* Форма стрелки с помощью clip-path */
-  clip-path: polygon(
-    0% 50%,    /* левый центр */
-    20% 0%,    /* верхняя точка стрелки */
-    100% 0%,   /* верхний правый угол */
-    100% 100%, /* нижний правый угол */
-    20% 100%   /* нижняя точка стрелки */
-  );
+  /*clip-path: polygon(*/
+  /*  0% 50%,    !* левый центр *!*/
+  /*  20% 0%,    !* верхняя точка стрелки *!*/
+  /*  100% 0%,   !* верхний правый угол *!*/
+  /*  100% 100%, !* нижний правый угол *!*/
+  /*  20% 100%   !* нижняя точка стрелки *!*/
+  /*);*/
 }
 
 /* Псевдоэлемент для "стрелочного" наконечника слева */
@@ -127,7 +146,7 @@ body {
   left: 0;
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #96c5ac52, #22df7b59);
+  /*background: linear-gradient(135deg, #96c5ac52, #22df7b59);*/
   clip-path: polygon(100% 0, 0 50%, 100% 100%);
   filter: blur(1px);
   transform: translateY(-50%);
@@ -212,6 +231,32 @@ body.light {
     --panel2: #eaeaea;
 }
 
+@media (max-width: 480px) {
+  #desperateButton {
+    padding: 14px 40px 14px 30px; /* уменьшенный padding */
+    font-size: 1rem; /* чуть меньше шрифт */
+    box-shadow: 0 0 10px rgba(135, 206, 250, 0.6);
+  }
+  #desperateButton::before {
+    width: 30px;
+    height: 30px;
+    box-shadow: 0 0 8px rgba(135, 206, 250, 0.7);
+  }
+  #desperateButton::after {
+    width: 140%;
+    height: 140%;
+    filter: blur(18px);
+  }
+  /* Можно при необходимости уменьшить амплитуду анимации slideAway */
+  @keyframes slideAway {
+    0%   { transform: translateX(0) rotate(0); opacity: 1; }
+    40%  { transform: translateX(-80px) rotate(-10deg); opacity: 0; }
+    41%  { transform: translateX(80px) rotate(10deg); opacity: 0; }
+    75%  { transform: translateX(0) rotate(0); opacity: 1; }
+    85%  { transform: translateX(0) scale(1.05); box-shadow: 0 0 15px 8px rgba(135, 206, 250, 0.7); }
+    100% { transform: translateX(80px) rotate(10deg); opacity: 0; box-shadow: none; }
+  }
+}
 
 /* Стили для мобильных устройств (до 576px) */
 @media (max-width: 575.98px) {
@@ -239,6 +284,9 @@ body.light {
     #volumeBar {
         width: 80px !important;
     }
+    .player-title {
+        display: none;
+    }
 
     .theme-switcher button {
         display: flex;
@@ -265,4 +313,47 @@ body.light {
     #visualizer {
         display: none;
     }
+}
+
+.player-title {
+  position: absolute;
+  top: 12%;
+  left: 67%;
+  transform: translate(-50%, -50%);
+  /*color: white;*/
+  font-size: 2rem;
+  pointer-events: none; /* чтобы не мешал кликам */
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* Контейнер на весь экран */
+#skyContainer {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none; /* чтобы не мешать кликам */
+  overflow: hidden;
+  z-index: -10;
+}
+
+/* Общий стиль пульсирующих объектов */
+.pulse-dot {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: pulseScale 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px currentColor);
+  pointer-events: none;
+}
+
+/* Анимация пульсации */
+@keyframes pulseScale {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
 }

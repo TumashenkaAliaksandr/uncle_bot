@@ -15,6 +15,7 @@
 
 <section>
   <div class="theme-switcher position-absolute top-0 end-0 m-3">
+      <!-- Здесь сам плеер или другой контент -->
     <button id="themeToggle" class="btn btn-outline-light">
       <span class="icon">🌗</span>
       <span class="text">Сменить тему</span>
@@ -36,11 +37,12 @@
                 {% endif %}
             </div>
             <div class="track-info mb-3">
-                <h2 id="trackTitle" class="h5">{{ current_track.title }}</h2>
-                <p id="trackAlbum" class="">Альбом: {{ current_track.album.name }}</p>
+                <h2 id="trackTitle" class="h5">𝄞 {{ current_track.title }}</h2>
+                <p id="trackAlbum" class="">💽 Альбом: {{ current_track.album.name }}</p>
             </div>
         </div>
         <div class="col-12 col-sm-7">
+        <h1 class="player-title">ДЯДЯ ПЛЕЕР</h1>
             <audio id="audioPlayer" src="{{ current_track.audio_file.url }}" preload="auto" class="w-100 mb-3"></audio>
             <canvas id="visualizer" width="100%" height="80"></canvas>
             <div class="controls d-flex justify-content-center my-3 flex-wrap gap-3">
@@ -79,6 +81,7 @@
         </div>
     </div>
 </div>
+<section class="conteiner">
 <div class="d-flex justify-content-center my-4">
     <button id="desperateButton" class="btn btn-danger btn-lg">
         На ДЯДЮ! 👨🏻‍🔧
@@ -87,13 +90,34 @@
     <div id="clouds" class="cloud-cloud cloud2"></div>
     <div class="ufo"></div>
 </div>
+</section>
 
 <div id="skyContainer">
-  <div class="cloud-cloud cloud1"></div>
-  <div class="cloud-cloud cloud2"></div>
-  <div class="ufo"></div>
-  <!-- Можно добавить больше облаков и НЛО для эффекта "потока" -->
+    <div class="pulse-dot"
+         style="width: 60px; height: 20px; top: 10%; left: 15%; background-color: #ff4d4d; animation-delay: 0s;"></div>
+    <div class="pulse-dot"
+         style="width: 15px; height: 15px; top: 30%; left: 40%; background-color: #4dff88; animation-delay: 0.5s;"></div>
+    <div class="pulse-dot"
+         style="width: 25px; height: 25px; top: 60%; left: 50%; background-color: #4d88ff; animation-delay: 1s;"></div>
+    <div class="pulse-dot"
+         style="width: 18px; height: 18px; top: 80%; left: 20%; background-color: #ffdb4d; animation-delay: 1.5s;"></div>
+    <div class="pulse-dot"
+         style="width: 22px; height: 22px; top: 50%; left: 85%; background-color: #ff4da6; animation-delay: 2s;"></div>
+    <div class="pulse-dot"
+         style="width: 20px; height: 20px; top: 10%; left: 15%; background-color: #ff4d4d; animation-delay: 0s;"></div>
+    <div class="pulse-dot"
+         style="width: 15px; height: 15px; top: 30%; left: 40%; background-color: #4dff88; animation-delay: 0.5s;"></div>
+    <div class="pulse-dot"
+         style="width: 25px; height: 25px; top: 60%; left: 70%; background-color: #4d88ff; animation-delay: 1s;"></div>
+    <div class="pulse-dot"
+         style="width: 18px; height: 18px; top: 40%; left: 20%; background-color: #ffdb4d; animation-delay: 1.5s;"></div>
+    <div class="pulse-dot"
+         style="width: 29px; height: 22px; top: 50%; left: 96%; background-color: #ff4da6; animation-delay: 2s;"></div>
+    <!-- Добавьте сколько угодно -->
 </div>
+
+
+
 
 
 

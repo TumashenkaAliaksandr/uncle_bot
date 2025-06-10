@@ -148,3 +148,20 @@ function drawVisualizer() {
 
 // Начальная инициализация
 selectTrack(tracks.findIndex(t => t.element.classList.contains('active')), false);
+
+
+const container = document.getElementById('skyContainer');
+const colors = ['#ff4d4d', '#4dff88', '#4d88ff', '#ffdb4d', '#ff4da6', '#66ffff', '#ff9966'];
+
+for (let i = 0; i < 30; i++) {
+  const dot = document.createElement('div');
+  dot.className = 'pulse-dot';
+  const size = 10 + Math.random() * 20;
+  dot.style.width = `${size}px`;
+  dot.style.height = `${size}px`;
+  dot.style.top = `${Math.random() * 90}%`;
+  dot.style.left = `${Math.random() * 90}%`;
+  dot.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+  dot.style.animationDelay = `${Math.random() * 2.5}s`;
+  container.appendChild(dot);
+}
