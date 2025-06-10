@@ -22,146 +22,191 @@ let isLoop = false;
 let isShuffle = false;
 let playedOnce = false;
 
-for (let li of trackList.children) {
+// Инициализация треков из списка
+if (trackList) {
+  for (let li of trackList.children) {
     tracks.push({
-        id: li.dataset.id,
-        title: li.textContent.trim(),
-        cover: li.querySelector('img').src,
-        element: li
+      id: li.dataset.id,
+      title: li.textContent.trim(),
+      cover: li.querySelector('img') ? li.querySelector('img').src : '',
+      element: li
     });
     li.addEventListener('click', () => {
-        selectTrack([...trackList.children].indexOf(li), true);
+      selectTrack([...trackList.children].indexOf(li), true);
     });
+  }
 }
 
+// Форматирование времени в ММ:СС
 function formatTime(sec) {
-    sec = Math.floor(sec);
-    return `${Math.floor(sec/60)}:${('0'+(sec%60)).slice(-2)}`;
+  sec = Math.floor(sec);
+  return `${Math.floor(sec / 60)}:${('0' + (sec % 60)).slice(-2)}`;
 }
 
-function selectTrack(idx, resetProgress=true) {
-    if (idx < 0) idx = tracks.length - 1;
-    if (idx >= tracks.length) idx = 0;
-    currentTrackIdx = idx;
-    // Сброс прогресса, если не дослушал
-    if (resetProgress) audio.currentTime = 0;
-    for (let t of tracks) t.element.classList.remove('active');
-    tracks[idx].element.classList.add('active');
-    fetch(`/track/${tracks[idx].id}/`)
-        .then(resp => resp.text())
-        .then(html => {
-            // Парсим только нужные данные
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            audio.src = doc.getElementById('audioPlayer').src;
-            trackCover.src = doc.getElementById('trackCover').src;
-            trackTitle.textContent = doc.getElementById('trackTitle').textContent;
-            trackAlbum.textContent = doc.getElementById('trackAlbum').textContent;
-            audio.load();
-            if (playedOnce) audio.play();
-        });
+// Выбор и загрузка трека
+function selectTrack(idx, resetProgress = true) {
+  if (tracks.length === 0) return;
+  if (idx < 0) idx = tracks.length - 1;
+  if (idx >= tracks.length) idx = 0;
+  currentTrackIdx = idx;
+
+  if (resetProgress) audio.currentTime = 0;
+  tracks.forEach(t => t.element.classList.remove('active'));
+  tracks[idx].element.classList.add('active');
+
+  fetch(`/track/${tracks[idx].id}/`)
+    .then(resp => {
+      if (!resp.ok) throw new Error('Network response was not ok');
+      return resp.text();
+    })
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const newAudio = doc.getElementById('audioPlayer');
+      const newCover = doc.getElementById('trackCover');
+      const newTitle = doc.getElementById('trackTitle');
+      const newAlbum = doc.getElementById('trackAlbum');
+
+      if (newAudio && newAudio.src) audio.src = newAudio.src;
+      if (newCover && newCover.src) trackCover.src = newCover.src;
+      if (newTitle) trackTitle.textContent = newTitle.textContent;
+      if (newAlbum) trackAlbum.textContent = newAlbum.textContent;
+
+      audio.load();
+      if (playedOnce) audio.play();
+    })
+    .catch(err => console.error('Error loading track:', err));
 }
 
-playPauseBtn.onclick = () => {
-    if (audio.paused) {
-        audio.play();
-        playPauseBtn.textContent = '⏸️';
-        playedOnce = true;
-    } else {
-        audio.pause();
-        playPauseBtn.textContent = '▶️';
-    }
-};
+// Play/Pause переключение
+playPauseBtn && playPauseBtn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    playedOnce = true;
+  } else {
+    audio.pause();
+  }
+});
 
-audio.onplay = () => playPauseBtn.textContent = '⏸️';
-audio.onpause = () => playPauseBtn.textContent = '▶️';
+// Обновление кнопки Play/Pause при воспроизведении и паузе
+audio.addEventListener('play', () => {
+  if (playPauseBtn) playPauseBtn.textContent = '⏸️';
+});
+audio.addEventListener('pause', () => {
+  if (playPauseBtn) playPauseBtn.textContent = '▶️';
+});
 
+// Обновление прогресса и времени
 audio.addEventListener('timeupdate', () => {
-    progressBar.value = audio.currentTime / audio.duration * 100 || 0;
-    currentTimeEl.textContent = formatTime(audio.currentTime);
-    durationEl.textContent = formatTime(audio.duration || 0);
-});
-progressBar.addEventListener('input', () => {
-    audio.currentTime = progressBar.value * audio.duration / 100;
+  if (!audio.duration || isNaN(audio.duration)) return;
+  progressBar.value = (audio.currentTime / audio.duration) * 100 || 0;
+  currentTimeEl.textContent = formatTime(audio.currentTime);
+  durationEl.textContent = formatTime(audio.duration);
 });
 
-prevBtn.onclick = () => selectTrack(currentTrackIdx - 1);
-nextBtn.onclick = () => selectTrack(isShuffle ? Math.floor(Math.random()*tracks.length) : currentTrackIdx + 1);
+// Прокрутка по прогрессбару
+progressBar && progressBar.addEventListener('input', () => {
+  if (!audio.duration || isNaN(audio.duration)) return;
+  audio.currentTime = (progressBar.value / 100) * audio.duration;
+});
 
-loopBtn.onclick = () => {
-    isLoop = !isLoop;
-    audio.loop = isLoop;
-    loopBtn.classList.toggle('active', isLoop);
-};
-shuffleBtn.onclick = () => {
-    isShuffle = !isShuffle;
-    shuffleBtn.classList.toggle('active', isShuffle);
-};
-audio.onended = () => {
-    if (!isLoop) nextBtn.onclick();
-};
+// Кнопки предыдущий/следующий
+prevBtn && prevBtn.addEventListener('click', () => selectTrack(currentTrackIdx - 1));
+nextBtn && nextBtn.addEventListener('click', () => {
+  if (isShuffle) {
+    selectTrack(Math.floor(Math.random() * tracks.length));
+  } else {
+    selectTrack(currentTrackIdx + 1);
+  }
+});
 
-volumeBar.oninput = () => {
-    audio.volume = volumeBar.value;
-    volumeIcon.textContent = audio.volume == 0 ? '🔇' : (audio.volume < 0.5 ? '🔉' : '🔊');
-};
-volumeBar.value = 1;
+// Переключение повторения
+loopBtn && loopBtn.addEventListener('click', () => {
+  isLoop = !isLoop;
+  audio.loop = isLoop;
+  loopBtn.classList.toggle('active', isLoop);
+});
+
+// Переключение перемешивания
+shuffleBtn && shuffleBtn.addEventListener('click', () => {
+  isShuffle = !isShuffle;
+  shuffleBtn.classList.toggle('active', isShuffle);
+});
+
+// Автоматический переход к следующему треку
+audio.addEventListener('ended', () => {
+  if (!isLoop) nextBtn && nextBtn.click();
+});
+
+// Управление громкостью
+volumeBar && volumeBar.addEventListener('input', () => {
+  audio.volume = volumeBar.value;
+  if (volumeIcon) {
+    volumeIcon.textContent = audio.volume === 0 ? '🔇' : (audio.volume < 0.5 ? '🔉' : '🔊');
+  }
+});
+if (volumeBar) volumeBar.value = 1;
 audio.volume = 1;
 
-themeToggle.onclick = () => {
-    document.body.classList.toggle('light');
-};
+// Переключение темы
+themeToggle && themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('light');
+});
 
-// График баланса (визуализация)
+// Визуализатор аудио
 const canvas = document.getElementById('visualizer');
-const ctx = canvas.getContext('2d');
+const ctx = canvas ? canvas.getContext('2d') : null;
 let audioCtx, analyser, src, dataArray;
 
 function setupVisualizer() {
-    if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        src = audioCtx.createMediaElementSource(audio);
-        analyser = audioCtx.createAnalyser();
-        src.connect(analyser);
-        analyser.connect(audioCtx.destination);
-        analyser.fftSize = 128;
-        dataArray = new Uint8Array(analyser.frequencyBinCount);
-    }
-}
-audio.onplay = () => {
-    playPauseBtn.textContent = '⏸️';
-    setupVisualizer();
-    drawVisualizer();
-};
-function drawVisualizer() {
-    if (!analyser) return;
-    analyser.getByteFrequencyData(dataArray);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    let barWidth = (canvas.width / dataArray.length);
-    for (let i = 0; i < dataArray.length; i++) {
-        let barHeight = dataArray[i] * 0.6;
-        ctx.fillStyle = 'lime';
-        ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth - 2, barHeight);
-    }
-    if (!audio.paused) requestAnimationFrame(drawVisualizer);
+  if (!audioCtx && audio && ctx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    src = audioCtx.createMediaElementSource(audio);
+    analyser = audioCtx.createAnalyser();
+    src.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    analyser.fftSize = 128;
+    dataArray = new Uint8Array(analyser.frequencyBinCount);
+  }
 }
 
-// Начальная инициализация
+audio.addEventListener('play', () => {
+  if (playPauseBtn) playPauseBtn.textContent = '⏸️';
+  setupVisualizer();
+  drawVisualizer();
+});
+
+function drawVisualizer() {
+  if (!analyser || !ctx || !canvas) return;
+  analyser.getByteFrequencyData(dataArray);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  let barWidth = canvas.width / dataArray.length;
+  for (let i = 0; i < dataArray.length; i++) {
+    let barHeight = dataArray[i] * 0.6;
+    ctx.fillStyle = 'lime';
+    ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth - 2, barHeight);
+  }
+  if (!audio.paused) requestAnimationFrame(drawVisualizer);
+}
+
+// Инициализация — выбираем активный трек или первый
 selectTrack(tracks.findIndex(t => t.element.classList.contains('active')), false);
 
-
+// Создание пульсирующих точек в #skyContainer
 const container = document.getElementById('skyContainer');
 const colors = ['#ff4d4d', '#4dff88', '#4d88ff', '#ffdb4d', '#ff4da6', '#66ffff', '#ff9966'];
 
-for (let i = 0; i < 30; i++) {
-  const dot = document.createElement('div');
-  dot.className = 'pulse-dot';
-  const size = 10 + Math.random() * 20;
-  dot.style.width = `${size}px`;
-  dot.style.height = `${size}px`;
-  dot.style.top = `${Math.random() * 90}%`;
-  dot.style.left = `${Math.random() * 90}%`;
-  dot.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-  dot.style.animationDelay = `${Math.random() * 2.5}s`;
-  container.appendChild(dot);
+if (container) {
+  for (let i = 0; i < 30; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'pulse-dot';
+    const size = 10 + Math.random() * 20;
+    dot.style.width = `${size}px`;
+    dot.style.height = `${size}px`;
+    dot.style.top = `${Math.random() * 90}%`;
+    dot.style.left = `${Math.random() * 90}%`;
+    dot.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    dot.style.animationDelay = `${Math.random() * 2.5}s`;
+    container.appendChild(dot);
+  }
 }

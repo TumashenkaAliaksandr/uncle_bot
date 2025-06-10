@@ -2,7 +2,7 @@ body {
     position: relative;
     background: var(--bg, #181818);
     color: var(--fg, #fff);
-    font-family: 'Rubik', 'Segoe UI', Arial, sans-serif;
+    font-family: 'Igra Sans', 'Rubik', 'Segoe UI', Arial, sans-serif;
     transition: background 0.3s, color 0.3s;
     overflow-x: hidden;
 }
@@ -318,7 +318,7 @@ body.light {
 .player-title {
   position: absolute;
   top: 12%;
-  left: 67%;
+  left: 50%;
   transform: translate(-50%, -50%);
   /*color: white;*/
   font-size: 2rem;
