@@ -93,6 +93,90 @@ body {
     border-radius: 6px;
     object-fit: cover;
 }
+
+#desperateButton {
+  position: relative;
+  display: inline-block;
+  animation: slideAway 6s ease-in-out infinite;
+  background: linear-gradient(45deg, rgb(120 159 171 / 80%), transparent 70%), radial-gradient(circle at top left, #85aa99, transparent 60%), radial-gradient(circle at bottom right, #1db954, transparent 70%);
+  background-blend-mode: screen;
+  color: #f0f8ff;
+  border: none;
+  padding: 20px 60px 20px 40px; /* Отступы под стрелку слева */
+  font-size: 1.2rem;
+  cursor: pointer;
+  overflow: visible;
+  box-shadow: 0 0 15px rgba(135, 206, 250, 0.7);
+  transition: box-shadow 0.3s ease;
+
+  /* Форма стрелки с помощью clip-path */
+  clip-path: polygon(
+    0% 50%,    /* левый центр */
+    20% 0%,    /* верхняя точка стрелки */
+    100% 0%,   /* верхний правый угол */
+    100% 100%, /* нижний правый угол */
+    20% 100%   /* нижняя точка стрелки */
+  );
+}
+
+/* Псевдоэлемент для "стрелочного" наконечника слева */
+#desperateButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #96c5ac52, #22df7b59);
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+  filter: blur(1px);
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(135, 206, 250, 0.8);
+}
+
+/* Дым под кнопкой — голубоватый, плавный */
+#desperateButton::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 180%;
+  height: 180%;
+  background: rgba(135, 206, 250, 0.4);
+  filter: blur(25px);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  animation: smokeShadow 6s ease-in-out infinite;
+  z-index: -1;
+}
+
+/* Анимация дыма */
+@keyframes smokeShadow {
+  0%, 40% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+  50%, 70% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+  90%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+}
+
+/* Анимация движения кнопки */
+@keyframes slideAway {
+  0%   { transform: translateX(0) rotate(0); opacity: 1; }
+  40%  { transform: translateX(-150px) rotate(-10deg); opacity: 0; }
+  41%  { transform: translateX(150px) rotate(10deg); opacity: 0; }
+  75%  { transform: translateX(0) rotate(0); opacity: 1; }
+  85%  { transform: translateX(0) scale(1.1); box-shadow: 0 0 20px 10px rgba(135, 206, 250, 0.8); }
+  100% { transform: translateX(150px) rotate(10deg); opacity: 0; box-shadow: none; }
+}
+
+#desperateButton:hover {
+  animation-play-state: paused;
+  box-shadow: 0 0 30px 15px rgb(53, 106, 220);
+}
+
+
 .theme-switcher {
     position: absolute !important;
     top: 18px !important;
