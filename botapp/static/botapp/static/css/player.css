@@ -39,7 +39,15 @@ body::before {
     object-fit: cover;
     margin-bottom: 15px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    right: 125px;
+    position: relative;
 }
+
+.track-info {
+    position: relative;
+    right: 125px;
+}
+
 .track-info h2 {
     font-size: 1.4em;
     margin: 0;
@@ -269,12 +277,21 @@ body.light {
         width: 125px !important;
         height: 125px !important;
         margin-bottom: 10px !important;
+        position: relative;
+        right: 0;
     }
+    .track-info{
+        position: relative;
+        right: 0;
+    }
+
     .track-info h2 {
         font-size: 1.1em !important;
+        right: 0;
     }
     .track-info p {
         font-size: 0.9em !important;
+        right: 0;
     }
     .controls button {
         font-size: 1.3em !important;
