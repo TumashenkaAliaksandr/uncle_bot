@@ -8,7 +8,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 keyboard = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text="🎵 Музыка"), KeyboardButton(text="💰 Донаты"), KeyboardButton(text="✒️ Написать")],
-        [KeyboardButton(text="⚙️ Настройки")],
+        [KeyboardButton(text="⚙️ Настройки"), KeyboardButton(text="🎧 Слушать веб версию")],
     ],
     resize_keyboard=True
 )
