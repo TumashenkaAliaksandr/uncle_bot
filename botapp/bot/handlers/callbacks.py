@@ -93,6 +93,21 @@ async def process_album_callback(callback_query: types.CallbackQuery):
     # Отправляем сообщение с главным меню и сохраняем ID
     await send_and_store(callback_query.message.chat.id, nice_listening, parse_mode="HTML", reply_markup=keyboard)
 
+@router.message(lambda message: message.text == "🎧 Слушать веб версию")
+async def show_settings(message: types.Message):
+    sent_messages.setdefault(message.chat.id, []).append(message.message_id)
+    # Текст с HTML-ссылкой
+    sing_answer_txt = (
+        'Вы можете слушать веб-версию по ссылке: '
+        '<a href="https://phoenixpegasus.pythonanywhere.com/" target="_blank">Открыть сайт</a>'
+    )
+    await send_and_store(
+        message.chat.id,
+        sing_answer_txt,
+        parse_mode="HTML",
+        reply_markup=keyboard
+    )
+
 
 @router.message(lambda message: message.text == "⚙️ Настройки")
 async def show_settings(message: types.Message):
