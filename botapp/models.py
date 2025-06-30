@@ -7,6 +7,10 @@ class Album(models.Model):
     release_date = models.DateField(verbose_name="Дата выпуска")
     authors = models.CharField(max_length=255, verbose_name="Авторы")
 
+    class Meta:
+        verbose_name = '💽 Альбом'
+        verbose_name_plural = '💽 Альбомы'
+
     def __str__(self):
         return self.name
 
@@ -16,6 +20,10 @@ class Track(models.Model):
     description = models.TextField(blank=True, verbose_name="Описание")
     cover = models.ImageField(upload_to='tracks/covers/', blank=True, null=True, verbose_name="Обложка")
     audio_file = models.FileField(upload_to='tracks/audio/', blank=True, null=True, verbose_name="Аудиофайл (MP3)")
+
+    class Meta:
+        verbose_name = '🎼 Трек'
+        verbose_name_plural = '🎼 Треки'
 
     def __str__(self):
         return self.title
@@ -36,8 +44,21 @@ class News(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Новости'
-        verbose_name_plural = 'Новости'
+        verbose_name = '📰 Новость'
+        verbose_name_plural = '📰 Новости'
 
     def __str__(self):
         return self.title_news
+
+
+class SongInfo(models.Model):
+    title = models.CharField(max_length=255, verbose_name="Название песни")
+    lyrics = models.TextField(verbose_name="Текст песни")
+    chords = models.TextField(verbose_name="Аккорды песни", help_text="Введите аккорды в текстовом формате")
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "🍓 Песня"
+        verbose_name_plural = "🍓 Аккорды песен"

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from urllib.parse import quote
 
-from botapp.models import Track, Album, News
+from botapp.models import Track, Album, News, SongInfo
 
 
 class TrackInline(admin.TabularInline):
@@ -62,3 +62,9 @@ class NewsAdmin(admin.ModelAdmin):
             'fields': ('title_news', 'description', 'photo', 'date', 'track')
         }),
     )
+
+
+@admin.register(SongInfo)
+class SongInfoAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+    search_fields = ('title',)
