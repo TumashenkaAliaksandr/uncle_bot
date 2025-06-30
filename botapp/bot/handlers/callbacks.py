@@ -109,7 +109,7 @@ async def show_settings(message: types.Message):
     )
 
 
-@router.message(lambda message: message.text == "⚙️ Настройки")
+@router.message(lambda message: message.text == "⚙️")
 async def show_settings(message: types.Message):
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
     await send_and_store(message.chat.id, your_settings_txt, parse_mode="HTML", reply_markup=settings_keyboard)
@@ -128,6 +128,11 @@ async def clear_chat_handler(message: types.Message):
 
 
 @router.message(lambda message: message.text == "⬅️ Назад")
+async def back_to_main_menu(message: types.Message):
+    sent_messages.setdefault(message.chat.id, []).append(message.message_id)
+    await send_and_store(message.chat.id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=keyboard)
+
+@router.message(lambda message: message.text == "⬅️")
 async def back_to_main_menu(message: types.Message):
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
     await send_and_store(message.chat.id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=keyboard)
