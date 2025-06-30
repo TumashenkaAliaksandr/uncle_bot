@@ -7,11 +7,12 @@ from asgiref.sync import sync_to_async
 from botapp.models import Album
 from botapp.bot.config import logger
 from botapp.bot.handlers.clear_chat import clear_chat
-from botapp.bot.keyboards import settings_keyboard, keyboard, donate_keyboard
+from botapp.bot.keyboards import settings_keyboard, keyboard, donate_keyboard, get_songs_keyboard
 from botapp.bot.texts.proposal_texts import DONATE_TEXT, cleaning_chat_txt, your_settings_txt, \
     MAIN_MENU_ANSWER, nice_listening
 from botapp.bot.utils.message_utils import send_and_store
 from botapp.bot.loader import sent_messages, bot
+
 
 router = Router()
 MAX_MEDIA_PER_MSG = 10
@@ -148,3 +149,20 @@ async def donate_handler(message: types.Message):
         reply_markup=donate_keyboard,
         parse_mode="HTML"
     )
+
+
+@router.message(lambda message: message.text == "🎸 Табы")
+async def tab_handler(message: types.Message):
+    keyboard = await get_songs_keyboard()
+    await message.answer("✅ Выберите песню что бы получить текст и аккорды:", reply_markup=keyboard)
+
+
+@router.message(lambda message: message.text == "📺 Видео")
+async def video_handler(message: types.Message):
+    await message.answer("🤷‍♂ Сорян, видосов пока нет..")
+
+
+@router.message(lambda message: message.text == "📰 Новости")
+async def news_handler(message: types.Message):
+    await message.answer("🤷‍♂ Сорян, Новостей пока нет..")
+

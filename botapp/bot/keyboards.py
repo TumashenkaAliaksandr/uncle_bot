@@ -3,6 +3,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from botapp.models import Album
 from asgiref.sync import sync_to_async
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from botapp.models import SongInfo
 
 # Главная клавиатура с тремя кнопками: Музыка, Донаты, Настройки
 keyboard = ReplyKeyboardMarkup(
@@ -40,4 +41,16 @@ donate_keyboard = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text="☁️ CloudTips", url="https://cloudtips.ru/yourprofile")],
     [InlineKeyboardButton(text="💳 ЮKassa", url="https://yookassa.ru/yourpaymentlink")]
 ])
+
+
+async def get_songs_keyboard():
+    songs = await sync_to_async(list)(SongInfo.objects.all())
+
+    buttons = []
+    for song in songs:
+        buttons.append([InlineKeyboardButton(text=song.title, callback_data=f"song_{song.id}")])
+
+    keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)
+    return keyboard
+
 
