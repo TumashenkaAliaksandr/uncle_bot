@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from urllib.parse import quote
-from .models import Album, Track
+
+from botapp.models import Track, Album, News
+
 
 class TrackInline(admin.TabularInline):
     model = Track
@@ -47,3 +49,16 @@ class TrackAdmin(admin.ModelAdmin):
             )
         return "(Аудиофайл не загружен)"
     audio_player.short_description = "Прослушать трек"
+
+
+@admin.register(News)
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ('title_news', 'date', 'track')
+    search_fields = ('title_news', 'description')
+    list_filter = ('date',)
+    readonly_fields = ('date',)
+    fieldsets = (
+        (None, {
+            'fields': ('title_news', 'description', 'photo', 'date', 'track')
+        }),
+    )
