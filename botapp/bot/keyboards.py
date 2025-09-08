@@ -9,7 +9,7 @@ from botapp.models import SongInfo
 keyboard = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text="🎵 Музыка"), KeyboardButton(text="📰 Новости"), KeyboardButton(text="✒️ Написать")],
-        [KeyboardButton(text="🎧 Слушать веб версию"), KeyboardButton(text="📺 Видео")],
+        [KeyboardButton(text="🎧 Слушать веб версию"), KeyboardButton(text="💰 Донаты"), KeyboardButton(text="📺 Видео")],
         [KeyboardButton(text="🎸 Табы"), KeyboardButton(text="⚙️")],
     ],
     resize_keyboard=True

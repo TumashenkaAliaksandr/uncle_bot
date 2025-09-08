@@ -1,6 +1,6 @@
 import logging
 
-TOKEN = "8364479367:AAEgIA-whZJGZLHhhFN8b6-uZJ5W36zDWb4"
+TOKEN = "1689625811:AAHJ9ZRqy-oiPvI43d68HdWLc1awBj_T2I8"
 
 # Логирование
 logging.basicConfig(
