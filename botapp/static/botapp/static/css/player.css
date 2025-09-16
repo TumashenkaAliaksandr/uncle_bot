@@ -1,6 +1,6 @@
 body {
     position: relative;
-    background: var(--bg, #181818);
+    background: var(--bg, #0a2b3c);
     color: var(--fg, #fff);
     font-family: 'Igra Sans', 'Rubik', 'Segoe UI', Arial, sans-serif;
     transition: background 0.3s, color 0.3s;
@@ -8,39 +8,41 @@ body {
 }
 
 body::before {
-  content: "";
-  position: fixed; /* фиксируем, чтобы фон не двигался при прокрутке */
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-image: url('albums/covers/Musical_Ground2.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.05; /* очень низкая непрозрачность — почти невидимо */
-  pointer-events: none; /* чтобы не мешать взаимодействию */
-  z-index: -1; /* позади всего содержимого */
+    content: "";
+    position: fixed; /* фиксируем, чтобы фон не двигался при прокрутке */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('albums/covers/Musical_Ground2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.05; /* очень низкая непрозрачность — почти невидимо */
+    pointer-events: none; /* чтобы не мешать взаимодействию */
+    z-index: -1; /* позади всего содержимого */
 }
 
 .player-container {
     width: 85%;
     margin: 40px auto;
-    background: var(--panel, #222);
+    background: var(--panel, #0f3143bf);
     border-radius: 20px;
-    box-shadow: 0 6px 32px rgba(0,0,0,0.4);
+    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.4);
     padding: 30px 20px;
     text-align: center;
 }
+
 .cover img {
     width: 220px;
     height: 220px;
     border-radius: 16px;
     object-fit: cover;
     margin-bottom: 15px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    /*box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);*/
     right: 125px;
     position: relative;
+    box-shadow: rgba(255, 77, 77, 0.2) 0px 4px 8px;
 }
 
 .track-info {
@@ -52,11 +54,13 @@ body::before {
     font-size: 1.4em;
     margin: 0;
 }
+
 .track-info p {
     /*color: #aaa;*/
     font-size: 1em;
     margin: 10px 0 10px 0;
 }
+
 .controls button {
     background: none;
     border: none;
@@ -66,29 +70,70 @@ body::before {
     cursor: pointer;
     transition: color 0.2s;
 }
+
 .controls button.active, .controls button:focus {
     color: #1db954;
 }
+
+.countdown-container {
+    max-width: 469px;
+    margin: 2rem auto;
+    background-color: var(--panel, #2642518f);
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
+    position: relative;
+    right: 90%;
+    top: 63%;
+}
+
+
+.countdown-container h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #cbab6c;
+    text-shadow: 1px 1px 2px #c1c1c1;
+}
+
+#countdown {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ff4d4d;
+    letter-spacing: 1.2px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+}
+
+.margin-files {
+    position: relative;
+    top: 55px;
+    left: 55px;
+}
+
 .progress-container {
     display: flex;
     align-items: center;
     gap: 8px;
     margin: 16px 0;
 }
+
 #progressBar {
     flex: 1;
     accent-color: #1db954;
 }
+
 .volume-container {
     margin: 8px 0;
     display: flex;
     align-items: center;
     gap: 8px;
 }
+
 #volumeBar {
     width: 100px;
     accent-color: #1db954;
 }
+
 .track-list {
     margin-top: 24px;
     background: var(--panel2, #181818);
@@ -97,11 +142,13 @@ body::before {
     max-height: 180px;
     overflow-y: auto;
 }
+
 .track-list ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
+
 .track-list li {
     display: flex;
     align-items: center;
@@ -111,9 +158,11 @@ body::before {
     border-radius: 6px;
     transition: background 0.2s;
 }
+
 .track-list li.active, .track-list li:hover {
     background: #1db95422;
 }
+
 .mini-cover {
     width: 34px;
     height: 34px;
@@ -122,85 +171,113 @@ body::before {
 }
 
 #desperateButton {
-  position: relative;
-  display: inline-block;
-  animation: slideAway 6s ease-in-out infinite;
-  background: linear-gradient(45deg, rgb(120 159 171 / 80%), transparent 70%), radial-gradient(circle at top left, #85aa99, transparent 60%), radial-gradient(circle at bottom right, #1db954, transparent 70%);
-  background-blend-mode: screen;
-  color: #f0f8ff;
-  border: none;
-  padding: 20px 60px 20px 40px; /* Отступы под стрелку слева */
-  font-size: 1.2rem;
-  cursor: pointer;
-  overflow: visible;
-  box-shadow: 0 0 15px rgba(135, 206, 250, 0.7);
-  transition: box-shadow 0.3s ease;
+    position: relative;
+    display: inline-block;
+    animation: slideAway 6s ease-in-out infinite;
+    background: linear-gradient(45deg, rgb(120 159 171 / 80%), transparent 70%), radial-gradient(circle at top left, #85aa99, transparent 60%), radial-gradient(circle at bottom right, #1db954, transparent 70%);
+    background-blend-mode: screen;
+    color: #f0f8ff;
+    border: none;
+    padding: 20px 60px 20px 40px; /* Отступы под стрелку слева */
+    font-size: 1.2rem;
+    cursor: pointer;
+    overflow: visible;
+    box-shadow: 0 0 15px rgba(135, 206, 250, 0.7);
+    transition: box-shadow 0.3s ease;
 
-  /* Форма стрелки с помощью clip-path */
-  /*clip-path: polygon(*/
-  /*  0% 50%,    !* левый центр *!*/
-  /*  20% 0%,    !* верхняя точка стрелки *!*/
-  /*  100% 0%,   !* верхний правый угол *!*/
-  /*  100% 100%, !* нижний правый угол *!*/
-  /*  20% 100%   !* нижняя точка стрелки *!*/
-  /*);*/
+    /* Форма стрелки с помощью clip-path */
+    /*clip-path: polygon(*/
+    /*  0% 50%,    !* левый центр *!*/
+    /*  20% 0%,    !* верхняя точка стрелки *!*/
+    /*  100% 0%,   !* верхний правый угол *!*/
+    /*  100% 100%, !* нижний правый угол *!*/
+    /*  20% 100%   !* нижняя точка стрелки *!*/
+    /*);*/
 }
 
 /* Псевдоэлемент для "стрелочного" наконечника слева */
 #desperateButton::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 40px;
-  height: 40px;
-  /*background: linear-gradient(135deg, #96c5ac52, #22df7b59);*/
-  clip-path: polygon(100% 0, 0 50%, 100% 100%);
-  filter: blur(1px);
-  transform: translateY(-50%);
-  z-index: 1;
-  pointer-events: none;
-  box-shadow: 0 0 10px rgba(135, 206, 250, 0.8);
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    /*background: linear-gradient(135deg, #96c5ac52, #22df7b59);*/
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+    filter: blur(1px);
+    transform: translateY(-50%);
+    z-index: 1;
+    pointer-events: none;
+    box-shadow: 0 0 10px rgba(135, 206, 250, 0.8);
 }
 
 /* Дым под кнопкой — голубоватый, плавный */
 #desperateButton::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 180%;
-  height: 180%;
-  background: rgba(135, 206, 250, 0.4);
-  filter: blur(25px);
-  border-radius: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  opacity: 0;
-  pointer-events: none;
-  animation: smokeShadow 6s ease-in-out infinite;
-  z-index: -1;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 180%;
+    height: 180%;
+    background: rgba(135, 206, 250, 0.4);
+    filter: blur(25px);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    pointer-events: none;
+    animation: smokeShadow 6s ease-in-out infinite;
+    z-index: -1;
 }
 
 /* Анимация дыма */
 @keyframes smokeShadow {
-  0%, 40% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
-  50%, 70% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
-  90%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+    0%, 40% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    50%, 70% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    90%, 100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
 }
 
 /* Анимация движения кнопки */
 @keyframes slideAway {
-  0%   { transform: translateX(0) rotate(0); opacity: 1; }
-  40%  { transform: translateX(-150px) rotate(-10deg); opacity: 0; }
-  41%  { transform: translateX(150px) rotate(10deg); opacity: 0; }
-  75%  { transform: translateX(0) rotate(0); opacity: 1; }
-  85%  { transform: translateX(0) scale(1.1); box-shadow: 0 0 20px 10px rgba(135, 206, 250, 0.8); }
-  100% { transform: translateX(150px) rotate(10deg); opacity: 0; box-shadow: none; }
+    0% {
+        transform: translateX(0) rotate(0);
+        opacity: 1;
+    }
+    40% {
+        transform: translateX(-150px) rotate(-10deg);
+        opacity: 0;
+    }
+    41% {
+        transform: translateX(150px) rotate(10deg);
+        opacity: 0;
+    }
+    75% {
+        transform: translateX(0) rotate(0);
+        opacity: 1;
+    }
+    85% {
+        transform: translateX(0) scale(1.1);
+        box-shadow: 0 0 20px 10px rgba(135, 206, 250, 0.8);
+    }
+    100% {
+        transform: translateX(150px) rotate(10deg);
+        opacity: 0;
+        box-shadow: none;
+    }
 }
 
 #desperateButton:hover {
-  animation-play-state: paused;
-  box-shadow: 0 0 30px 15px rgb(53, 106, 220);
+    animation-play-state: paused;
+    box-shadow: 0 0 30px 15px rgb(53, 106, 220);
 }
 
 
@@ -209,61 +286,84 @@ body::before {
     top: 18px !important;
     right: 110px !important;
 }
+
 .theme-switcher button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem; /* расстояние между иконкой и текстом */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* расстояние между иконкой и текстом */
 }
 
 .theme-switcher .text {
-  display: none; /* скрываем текст по умолчанию */
-  white-space: nowrap; /* чтобы текст не переносился */
+    display: none; /* скрываем текст по умолчанию */
+    white-space: nowrap; /* чтобы текст не переносился */
 }
 
 .theme-switcher button:hover .text {
-  display: inline; /* показываем текст при наведении */
+    display: inline; /* показываем текст при наведении */
 }
-
 
 
 :root {
-    --bg: #181818;
+    --bg: #0a2b3c;
     --fg: #fff;
-    --panel: #222;
+    --panel: rgba(15, 49, 67, 0.75);
     --panel2: #181818;
 }
+
 body.light {
     --bg: #fff;
     --fg: #222;
-    --panel: #f4f4f4;
+    --panel: rgba(157, 187, 175, 0.48);
     --panel2: #eaeaea;
 }
 
 @media (max-width: 480px) {
-  #desperateButton {
-    padding: 14px 40px 14px 30px; /* уменьшенный padding */
-    font-size: 1rem; /* чуть меньше шрифт */
-    box-shadow: 0 0 10px rgba(135, 206, 250, 0.6);
-  }
-  #desperateButton::before {
-    width: 30px;
-    height: 30px;
-    box-shadow: 0 0 8px rgba(135, 206, 250, 0.7);
-  }
-  #desperateButton::after {
-    width: 140%;
-    height: 140%;
-    filter: blur(18px);
-  }
-  /* Можно при необходимости уменьшить амплитуду анимации slideAway */
-  @keyframes slideAway {
-    0%   { transform: translateX(0) rotate(0); opacity: 1; }
-    40%  { transform: translateX(-80px) rotate(-10deg); opacity: 0; }
-    41%  { transform: translateX(80px) rotate(10deg); opacity: 0; }
-    75%  { transform: translateX(0) rotate(0); opacity: 1; }
-    85%  { transform: translateX(0) scale(1.05); box-shadow: 0 0 15px 8px rgba(135, 206, 250, 0.7); }
-    100% { transform: translateX(80px) rotate(10deg); opacity: 0; box-shadow: none; }
-  }
+    #desperateButton {
+        padding: 14px 40px 14px 30px; /* уменьшенный padding */
+        font-size: 1rem; /* чуть меньше шрифт */
+        box-shadow: 0 0 10px rgba(135, 206, 250, 0.6);
+    }
+
+    #desperateButton::before {
+        width: 30px;
+        height: 30px;
+        box-shadow: 0 0 8px rgba(135, 206, 250, 0.7);
+    }
+
+    #desperateButton::after {
+        width: 140%;
+        height: 140%;
+        filter: blur(18px);
+    }
+
+    /* Можно при необходимости уменьшить амплитуду анимации slideAway */
+    @keyframes slideAway {
+        0% {
+            transform: translateX(0) rotate(0);
+            opacity: 1;
+        }
+        40% {
+            transform: translateX(-80px) rotate(-10deg);
+            opacity: 0;
+        }
+        41% {
+            transform: translateX(80px) rotate(10deg);
+            opacity: 0;
+        }
+        75% {
+            transform: translateX(0) rotate(0);
+            opacity: 1;
+        }
+        85% {
+            transform: translateX(0) scale(1.05);
+            box-shadow: 0 0 15px 8px rgba(135, 206, 250, 0.7);
+        }
+        100% {
+            transform: translateX(80px) rotate(10deg);
+            opacity: 0;
+            box-shadow: none;
+        }
+    }
 }
 
 @media (max-width: 400px) {
@@ -286,38 +386,45 @@ body.light {
         margin: 20px auto !important;
         padding: 15px 10px !important;
     }
+
     .cover img {
         width: 125px !important;
         height: 125px !important;
         margin-bottom: 10px !important;
         position: relative;
-        right: 0!important;
+        right: 0 !important;
     }
-    .track-info{
+
+    .track-info {
         position: relative;
-        right: 0!important;
+        right: 0 !important;
     }
 
     .track-info h2 {
         font-size: 1.1em !important;
         right: 0;
     }
+
     .track-info p {
         font-size: 0.9em !important;
         right: 0;
     }
+
     .controls button {
         font-size: 1.3em !important;
         margin: 0 5px !important;
         padding: 6px 0 !important;
     }
+
     #volumeBar {
         width: 80px !important;
         display: none;
     }
+
     #volumeIcon {
         display: none;
     }
+
     .player-title {
         display: none;
     }
@@ -329,67 +436,75 @@ body.light {
         left: 58px;
         position: absolute;
     }
+
     .progress-container {
         margin: 12px 0 !important;
     }
+
     .track-list ul {
         justify-content: center !important;
     }
+
     .track-list li {
         width: 45% !important;
         padding: 6px 5px !important;
         font-size: 0.9em !important;
     }
+
     .mini-cover {
         width: 40px !important;
         height: 40px !important;
     }
+
     #visualizer {
         display: none;
     }
 }
 
 .player-title {
-  position: absolute;
-  top: 12%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /*color: white;*/
-  font-size: 1.7rem;
-  pointer-events: none; /* чтобы не мешал кликам */
-  user-select: none;
-  white-space: nowrap;
+    position: absolute;
+    top: 12%;
+    left: 44%;
+    transform: translate(-50%, -50%);
+    /*color: white;*/
+    font-size: 1.7rem;
+    pointer-events: none; /* чтобы не мешал кликам */
+    user-select: none;
+    white-space: nowrap;
 }
 
 /* Контейнер на весь экран */
 #skyContainer {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none; /* чтобы не мешать кликам */
-  overflow: hidden;
-  z-index: -10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none; /* чтобы не мешать кликам */
+    overflow: hidden;
+    z-index: -10;
 }
 
 /* Общий стиль пульсирующих объектов */
 .pulse-dot {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.7;
-  animation: pulseScale 2.5s ease-in-out infinite;
-  filter: drop-shadow(0 0 5px currentColor);
-  pointer-events: none;
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: pulseScale 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 5px currentColor);
+    pointer-events: none;
 }
 
 /* Анимация пульсации */
 @keyframes pulseScale {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 1;
-  }
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
 }
 
 .btn:hover,
@@ -414,6 +529,40 @@ body.light {
     .track-info {
         position: relative;
         right: 15px;
+    }
+
+    .countdown-container {
+        max-width: 469px;
+        margin: 2rem auto;
+        background-color: var(--panel, #2642518f);
+        padding: 1.5rem 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
+        position: relative;
+        right: 0;
+        top: 0;
+    }
+
+    #countdown {
+        font-size: 1.1rem !important;
+        font-weight: 900;
+        color: #ff4d4d;
+        letter-spacing: 1.2px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        user-select: none;
+    }
+
+    .countdown-container h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        color: #cbab6c;
+        text-shadow: 1px 1px 2px #c1c1c1;
+    }
+
+    .margin-files {
+        position: relative;
+        top: 5px;
+        left: 0;
     }
 }
 

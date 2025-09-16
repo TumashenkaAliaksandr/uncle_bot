@@ -62,3 +62,12 @@ class SongInfo(models.Model):
     class Meta:
         verbose_name = "🍓 Песня"
         verbose_name_plural = "🍓 Аккорды песен"
+
+
+class Countdown(models.Model):  # Явно указать id
+    end_time = models.DateTimeField("Конечное время", help_text="Дата и время окончания отсчёта")
+    name = models.CharField(max_length=100, unique=True, verbose_name="Название счётчика", blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name or 'Отсчёт'} до {self.end_time}"
+

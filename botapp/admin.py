@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from urllib.parse import quote
 
-from botapp.models import Track, Album, News, SongInfo
+from botapp.models import Track, Album, News, SongInfo, Countdown
 
 
 class TrackInline(admin.TabularInline):
@@ -68,3 +68,8 @@ class NewsAdmin(admin.ModelAdmin):
 class SongInfoAdmin(admin.ModelAdmin):
     list_display = ('title',)
     search_fields = ('title',)
+
+
+@admin.register(Countdown)
+class CountdownAdmin(admin.ModelAdmin):
+    list_display = ('name', 'end_time',)
