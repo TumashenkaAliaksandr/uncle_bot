@@ -117,22 +117,24 @@ body::before {
 }
 
 .margin-citate {
-    font-style: italic;
-    font-weight: 500;
-    font-size: 0.88rem;
-    line-height: 1.4;
-    color: #434141;
-    background: #f0f0f08a;
-    border-left: 6px solid #ffb347; /* акцентная цветная полоса слева */
-    padding: 0.5rem 1rem;
-    margin: 1rem 0;
-    border-radius: 9px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-    max-width: fit-content;
-    user-select: text;
-    position: relative;
-    top: 40%;
-    right: 74%;
+  display: none; /* скрываем по умолчанию */
+  font-style: italic;
+  font-weight: 500;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: #434141;
+  background: #f0f0f08a;
+  border-left: 6px solid #ffb347;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  border-radius: 9px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  max-width: fit-content;
+  user-select: text;
+  position: relative;
+  top: 40%;
+  right: 74%;
+    z-index: 9999;
 }
 
 .margin-citate::before {
@@ -858,7 +860,7 @@ body::before {
 
 .black-hole-link {
   position: absolute;
-  left: 55%;
+  left: 57%;
   top: 45%;
   transform: translate(-50%, -50%);
   width: 340px;
@@ -1617,7 +1619,7 @@ body.light {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: #0a2b3ca6;
+    background: #0a4564a6;
     padding: 8px 12px;
     border-radius: 8px;
     box-shadow: 0 25px 25px -17px rgb(162 188 139);
