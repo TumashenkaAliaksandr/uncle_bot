@@ -192,3 +192,15 @@ function formatTime(seconds) {
   const secs = Math.floor(seconds % 60);
   return `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
 }
+
+
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const blackHoleContainer = document.querySelector('.black-hole-container');
+    if (blackHoleContainer) {
+      blackHoleContainer.classList.add('animate');
+    }
+  }, 300000); // 5 минут в миллисекундах
+});
+
+

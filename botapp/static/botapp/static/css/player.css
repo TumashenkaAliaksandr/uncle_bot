@@ -296,7 +296,7 @@ body::before {
 .alien-craft {
   position: fixed;
   bottom: -60px; /* начинает снизу за экраном */
-  left: calc(50% + 30px); /* сдвиг немного правее центра */
+  left: calc(50% + 20px); /* сдвиг немного правее центра */
   transform: translateX(-50%);
   display: inline-block;
   width: 64px;
@@ -344,31 +344,31 @@ body::before {
     bottom: -60px;
     opacity: 0;
     transform: translateX(-50%) translateY(0) scale(1) rotate(0deg);
-    left: calc(50% + 30px);
+    left: calc(50% + 20px);
   }
   40% {
     bottom: 50%;
     opacity: 1;
     transform: translateX(-50%) translateY(0) scale(1.1) rotate(5deg);
-    left: calc(50% + 30px);
+    left: calc(50% + 20px);
   }
   70% {
     bottom: 50%;
     opacity: 1;
     transform: translateX(-50%) translateY(0) scale(1.1) rotate(-5deg);
-    left: calc(50% + 30px);
+    left: calc(50% + 20px);
   }
   90% {
     bottom: 50%;
     opacity: 1;
     transform: translateX(-50%) translateY(0) scale(1) rotate(0deg);
-    left: calc(50% + 30px);
+    left: calc(50% + 20px);
   }
   100% {
     bottom: 50%;
     opacity: 0;
     transform: translateX(-50%) translateY(-40px) scale(0.7) rotate(0deg);
-    left: calc(50% + 30px);
+    left: calc(50% + 20px);
   }
 }
 
@@ -400,7 +400,7 @@ body::before {
   right: 84px;
   top: 84px;
   display: inline-block;
-  width: 44px;
+  width: 54px;
   user-select: none;
   pointer-events: auto; /* ссылка кликабельна */
   text-decoration: none;
@@ -539,7 +539,7 @@ body::before {
 .omuamua-link {
     position: absolute;
     left: 60px;
-    top: 355px;
+    top: 460px;
     display: inline-block;
     width: 120px;
     user-select: none;
@@ -732,10 +732,9 @@ body::before {
     }
 }
 
-
 .black-hole-link {
   position: absolute;
-  left: 50%;
+  left: 45%;
   top: 50%;
   transform: translate(-50%, -50%);
   width: 340px;
@@ -749,7 +748,7 @@ body::before {
   position: relative;
   width: 100%;
   height: 100%;
-  animation: blackHoleCycle 306s linear infinite;
+  animation: blackHoleCycle 77s linear infinite;
   transform-origin: center center;
   overflow: visible;
 }
@@ -764,8 +763,7 @@ body::before {
   background: black;
   border-radius: 50%;
   border: 10px solid transparent;
-  box-shadow:
-    0 6px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.4);
   transform: translateX(-50%);
   z-index: 10;
   display: flex;
@@ -775,6 +773,7 @@ body::before {
   font-size: 1.25rem;
   color: #8a2be2;
 }
+
 .typing-text {
   position: relative;
   width: 100%;
@@ -798,17 +797,17 @@ body::before {
 
 .typing-text span:first-child {
   animation:
-    fadeIn 1s forwards 12s,
-    typing1 8s steps(16, end) forwards 12s,
-    fadeOut 2s ease forwards 20s;
+    fadeIn 1s forwards 3s,
+    typing1 8s steps(16, end) forwards 3s,
+    fadeOut 2s ease forwards 11s;
   opacity: 1;
 }
 
 .typing-text span:nth-child(2) {
   animation:
-    fadeIn 1s ease forwards 22s,
-    typing2 8s steps(17, end) forwards 22s,
-    fadeOut 2s ease forwards 32s;
+    fadeIn 1s ease forwards 17s,
+    typing2 8s steps(17, end) forwards 17s,
+    fadeOut 2s ease forwards 27s;
 }
 
 @keyframes fadeIn {
@@ -841,7 +840,7 @@ body::before {
   background: radial-gradient(circle, rgba(128, 0, 128, 0.2), transparent 70%);
   border-radius: 50%;
   transform: translateX(-50%);
-  animation: shadowPulse 15s ease-in-out infinite;
+  animation: shadowPulse 4s ease-in-out infinite;
   z-index: 9;
 }
 
@@ -862,8 +861,8 @@ body::before {
   width: 30px;
   height: 30px;
   animation-name: planetOrbit1, planetSwallow1;
-  animation-duration: 60s, 60s;
-  animation-delay: 0s, 60s; /* поглощение начинается после 60 секунд */
+  animation-duration: 15s, 15s;
+  animation-delay: 0s, 15s;
   animation-fill-mode: forwards;
   animation-timing-function: linear, ease-in-out;
 }
@@ -873,8 +872,8 @@ body::before {
   height: 40px;
   background: radial-gradient(circle at 40% 40%, #5ad, #036);
   animation-name: planetOrbit2, planetSwallow2;
-  animation-duration: 70s, 70s;
-  animation-delay: 0s, 70s;
+  animation-duration: 17.5s, 17.5s;
+  animation-delay: 0s, 17.5s;
   animation-fill-mode: forwards;
   animation-timing-function: linear, ease-in-out;
 }
@@ -884,8 +883,8 @@ body::before {
   height: 25px;
   background: radial-gradient(circle at 40% 40%, #ada, #070);
   animation-name: planetOrbit3, planetSwallow3;
-  animation-duration: 80s, 80s;
-  animation-delay: 0s, 80s;
+  animation-duration: 20s, 20s;
+  animation-delay: 0s, 20s;
   animation-fill-mode: forwards;
   animation-timing-function: linear, ease-in-out;
 }
@@ -894,14 +893,13 @@ body::before {
   width: 25px;
   height: 25px;
   background: radial-gradient(circle at 40% 40%, #c9aadd, #770067);
-  animation-name: planetOrbit3, planetSwallow3;
-  animation-duration: 80s, 80s;
-  animation-delay: 0s, 80s;
+  animation-name: planetOrbit4, planetSwallow4;
+  animation-duration: 20s, 20s;
+  animation-delay: 0s, 20s;
   animation-fill-mode: forwards;
   animation-timing-function: linear, ease-in-out;
 }
 
-/* Полный цикл анимации черной дыры */
 @keyframes blackHoleCycle {
   0% {
     opacity: 0;
@@ -915,9 +913,9 @@ body::before {
     opacity: 1;
     transform: scale(1) translate(-50%, -50%);
   }
-  80% {
-    opacity: 0;
-    transform: scale(0.1) translate(-50%, -50%);
+  90% {
+    opacity: 0.3;
+    transform: scale(0.4) translate(-50%, -50%);
   }
   100% {
     opacity: 0;
@@ -925,7 +923,7 @@ body::before {
   }
 }
 
-/* Пульсация ореола */
+
 @keyframes shadowPulse {
   0%, 100% {
     transform: translateX(-50%) scale(1);
@@ -937,7 +935,6 @@ body::before {
   }
 }
 
-/* Планеты вращаются рядом с начальным появлением */
 @keyframes planetOrbit1 {
   0% {
     opacity: 1;
@@ -980,7 +977,6 @@ body::before {
   }
 }
 
-
 @keyframes planetOrbit4 {
   0% {
     opacity: 1;
@@ -995,7 +991,6 @@ body::before {
   }
 }
 
-/* Планеты затягиваются в черную дыру */
 @keyframes planetSwallow1 {
   0% {
     transform: rotate(360deg) translateX(150px) rotate(-360deg);
@@ -1025,6 +1020,130 @@ body::before {
   }
   100% {
     transform: rotate(350deg) translateX(0) rotate(-350deg);
+    opacity: 0;
+  }
+}
+
+@keyframes planetSwallow4 {
+  0% {
+    transform: rotate(330deg) translateX(140px) rotate(-330deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(380deg) translateX(0) rotate(-380deg);
+    opacity: 0;
+  }
+}
+
+.planet1::before,
+.planet2::before,
+.planet3::before,
+.planet4::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  pointer-events: none;
+  opacity: 0.7; /* базовая прозрачность */
+}
+
+/* Разные стили и прозрачность для каждой планеты */
+.planet1::before {
+  background-image: url('../svg/notes.svg');
+  opacity: 0.8;
+}
+
+.planet2::before {
+  background-image: url('../svg/notes.svg');
+  opacity: 0.7;
+}
+
+.planet3::before {
+  background-image: url('../svg/notes.svg');
+  opacity: 0.75;
+}
+
+.planet4::before {
+  background-image: url('../svg/notes.svg');
+  opacity: 0.65;
+}
+
+.comet {
+  position: fixed;
+  width: 80px;
+  height: 20px;
+  background: url('../svg/comet.svg') no-repeat center/contain;
+  pointer-events: none;
+  opacity: 0;
+  display: none;
+}
+
+.comet3 {
+  top: 30vh;
+  right: 0;
+  background: url('../svg/corable.svg') no-repeat center/contain;
+  pointer-events: none;
+  opacity: 0;
+  display: none;
+}
+
+
+/* Первая комета: сверху слева 0,0, летит под углом 45° вниз и вправо */
+.comet1 {
+  top: 0;
+  left: 0;
+  animation: none;
+}
+
+@keyframes comet1Move {
+  from {
+    transform: translate(0, 0) rotate(45deg);
+    opacity: 1;
+  }
+  to {
+    transform: translate(300px, 300px) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* Вторая комета: справа сверху 30% вниз */
+.comet2 {
+  top: 30vh;
+  right: 0;
+  animation: none;
+}
+
+@keyframes comet2Move {
+  from {
+    transform: translate(0, 0) rotate(135deg);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-250px, 250px) rotate(135deg);
+    opacity: 0;
+  }
+}
+
+/* Третья комета: справа сверху 20% вниз, летит влево через весь экран */
+.comet3 {
+  top: 20vh;
+  right: 0;
+  animation: none;
+}
+
+@keyframes comet3Move {
+  from {
+    transform: translate(0, 0) rotate(-180deg);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-100vw, 0) rotate(-180deg);
     opacity: 0;
   }
 }
@@ -1360,4 +1479,87 @@ body.light {
         position: relative;
         right: 15px;
     }
+}
+
+.chips-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  user-select: none;
+}
+
+.chips-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #0a2b3ca6;
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0 25px 25px -17px rgb(162 188 139);
+}
+
+.chips-arrow {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: #707070;
+  transition: color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.chips-arrow:hover,
+.chips-arrow:focus {
+  color: #000000;
+  outline: none;
+}
+
+.chips-arrow-left {
+  transform: rotate(0deg);
+}
+
+.chips-arrow-right {
+  transform: rotate(0deg);
+}
+
+.chips-scroll {
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.chips-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.chip-chip {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  background-color: #eeeeee;
+  border: none;
+  border-radius: 18px;
+  padding: 6px 14px;
+  margin: 0 4px;
+  font-size: 14px;
+  color: #333333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  outline: none;
+  user-select: none;
+}
+
+.chip-chip.selected,
+.chip-chip:hover,
+.chip-chip:focus {
+  background-color: #244e86;
+  color: white;
+  box-shadow: 0 0 6px rgb(6 95 212 / 0.6);
+  outline: none;
 }
