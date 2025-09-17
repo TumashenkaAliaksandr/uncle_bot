@@ -35,15 +35,15 @@
             </button>
 
             <div class="chips-scroll" role="tablist" aria-label="Фильтры">
-                <button class="chip-chip selected" role="tab" aria-selected="true" tabindex="0">Все</button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">Завтра в эфире</button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">Видео</button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">Джемы</button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">Албомы</button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">ТОП
+                <button class="chip-chip selected" role="tab" aria-selected="true" tabindex="0">👣 Все</button>
+                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">🍜 Завтра в эфире</button>
+                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">📽️ Видео</button>
+                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">🎶 Джемы</button>
+                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">💽 Албомы</button>
+                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">🎩 ТОП
                 </button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">Просмотрено</button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">Новое для вас</button>
+                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">👀 Просмотрено</button>
+                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">💥 Новое для вас</button>
             </div>
 
             <button class="chips-arrow chips-arrow-right" aria-label="Следующая страница" tabindex="0">
@@ -72,7 +72,7 @@
         </div>
         <div class="col-12 col-sm-7">
         <p class="margin-chinazes">✌️ Чиназес Гайс.</p>
-            <h2 class="player-title">👨🏻 ДЯДЯ ПЛЕЕР</h2>
+            <h2 class="player-title">👨🏻 ДЯДЯ 🌌 ПЛЕЕР</h2>
             <p class="margin-files">🕒 Вечером среду после обеда ДЯДЯ обновляет список песен.</p>
             <!-- Секция обратного отсчёта -->
             <div class="countdown-container text-center my-4">
@@ -153,13 +153,31 @@
 
             <div class="progress-container d-flex align-items-center gap-2 mb-3">
                 <span id="currentTime">0:00</span>
-                <input type="range" id="progressBar" value="0" min="0" max="100" class="form-range flex-grow-1">
-                <span id="duration">0:00</span>
+
+                <svg class="progress-svg flex-grow-1" viewBox="0 0 300 20" xmlns="http://www.w3.org/2000/svg"
+                     aria-hidden="true" role="img">
+                    <path class="progress-track" d="M10 10 Q 50 0, 90 10 T 170 10 T 270 10" stroke="#444"
+                          stroke-width="6" fill="none"/>
+                    <path class="progress-bar" d="M10 10 Q 50 0, 90 10 T 170 10 T 270 10" stroke="#ffeb3b"
+                          stroke-width="6" fill="none" stroke-linecap="round"/>
+                </svg>
+
+                <span id="duration">3:45</span>
             </div>
+
             <div class="volume-container d-flex align-items-center gap-2 mb-3">
-                <input type="range" id="volumeBar" min="0" max="1" step="0.01" value="1" class="form-range w-50">
+                <svg class="volume-svg" viewBox="0 0 300 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                     role="img">
+                    <path class="volume-track" d="M10 10 Q 50 0, 90 10 T 170 10 T 270 10" stroke="#444" stroke-width="6"
+                          fill="none"/>
+                    <path class="volume-bar" d="M10 10 Q 50 0, 90 10 T 170 10 T 270 10" stroke="#ede69d"
+                          stroke-width="6" fill="none" stroke-linecap="round"/>
+                    <circle class="volume-thumb" cx="10" cy="10" r="10" fill="#ede69d"
+                            filter="drop-shadow(0 0 6px #ede69d)"/>
+                </svg>
                 <span id="volumeIcon">🔊</span>
             </div>
+
             <div class="track-list bg-secondary bg-opacity-25 rounded p-2" style="max-height: 200px; overflow-y: auto;">
                 <ul id="trackList" class="list-unstyled d-flex flex-wrap gap-2 justify-content-start">
                     {% for track in tracks %}
