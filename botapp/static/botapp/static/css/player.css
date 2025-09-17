@@ -26,9 +26,9 @@ body::before {
 .player-container {
     width: 85%;
     margin: 40px auto;
-    background: var(--panel, #0f3143bf);
+    background: var(--panel, #0a2b3c96);
     border-radius: 20px;
-    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 25px 25px -13px rgb(162 188 139);
     padding: 30px 20px;
     text-align: center;
 }
@@ -106,8 +106,14 @@ body::before {
 
 .margin-files {
     position: relative;
-    top: 55px;
+    top: 17px;
     left: 55px;
+}
+
+.margin-chinazes {
+    position: relative;
+    top: 4px;
+    left: 50px;
 }
 
 .progress-container {
@@ -287,9 +293,111 @@ body::before {
     animation-play-state: paused;
     box-shadow: 0 0 30px 15px rgb(53, 106, 220);
 }
+.alien-craft {
+  position: fixed;
+  bottom: -60px; /* начинает снизу за экраном */
+  left: calc(50% + 30px); /* сдвиг немного правее центра */
+  transform: translateX(-50%);
+  display: inline-block;
+  width: 64px;
+  cursor: pointer;
+  user-select: none;
+  pointer-events: auto;
+  z-index: 10000;
+  animation: craftFlyIn 10s ease forwards, craftFlyAcross 20s ease 60s forwards;
+}
+
+.alien-body {
+  position: relative;
+  width: 64px;
+  height: 32px;
+  filter:
+    drop-shadow(0 0 5px rgba(255, 255, 0, 0.7));
+}
+
+.alien-tooltip {
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0e3041;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 20;
+}
+
+.alien-craft:hover .alien-tooltip,
+.alien-craft:focus .alien-tooltip {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Анимация вылета снизу к центру с маленьким покачиванием */
+@keyframes craftFlyIn {
+  0% {
+    bottom: -60px;
+    opacity: 0;
+    transform: translateX(-50%) translateY(0) scale(1) rotate(0deg);
+    left: calc(50% + 30px);
+  }
+  40% {
+    bottom: 50%;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1.1) rotate(5deg);
+    left: calc(50% + 30px);
+  }
+  70% {
+    bottom: 50%;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1.1) rotate(-5deg);
+    left: calc(50% + 30px);
+  }
+  90% {
+    bottom: 50%;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1) rotate(0deg);
+    left: calc(50% + 30px);
+  }
+  100% {
+    bottom: 50%;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-40px) scale(0.7) rotate(0deg);
+    left: calc(50% + 30px);
+  }
+}
+
+/* Анимация появления в левом верхнем углу и пролета через весь экран */
+@keyframes craftFlyAcross {
+  0% {
+    bottom: 20px;
+    left: -80px; /* слева за экраном */
+    opacity: 0;
+    transform: scale(1) rotate(0deg) translateX(0);
+  }
+  5% {
+    opacity: 1;
+    left: 20px; /* появляется слева */
+  }
+  95% {
+    opacity: 1;
+    left: calc(100% + 80px); /* летит до правого края и чуть за экран */
+    transform: scale(1) rotate(0deg) translateX(0);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
 .ufo-link {
   position: absolute;
-  right: 74px;
+  right: 84px;
   top: 84px;
   display: inline-block;
   width: 44px;
@@ -303,10 +411,10 @@ body::before {
   bottom: 110%;
   left: 50%;
   transform: translateX(-50%);
-  background: #222;
+  background: #0e3041;
   color: white;
   padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  border-radius: 44px;
   font-size: 0.75rem;
   white-space: nowrap;
   opacity: 0;
@@ -446,9 +554,9 @@ body::before {
     width: 100%;
     height: auto;
     pointer-events: none; /* контейнер не мешает клику */
-    filter: drop-shadow(0 0 5px rgba(163, 154, 86, 0.7))
-            drop-shadow(0 0 8px rgba(197, 183, 121, 0.5))
-            drop-shadow(0 0 15px rgba(197, 183, 121, 0.3));
+    filter: drop-shadow(0 0 4px rgba(163, 154, 86, 0.7))
+            drop-shadow(0 0 7px rgba(197, 183, 121, 0.5))
+            drop-shadow(0 0 14px rgba(197, 183, 121, 0.3));
     animation: omuamuaFlight 57s ease-in-out infinite;
     animation-fill-mode: forwards;
     transform-origin: center center;
@@ -551,10 +659,10 @@ body::before {
     bottom: 110%;
     left: 50%;
     transform: translateX(-50%);
-    background: #222;
+    background: #0e3041;
     color: white;
     padding: 0.25rem 0.5rem;
-    border-radius: 4px;
+    border-radius: 44px;
     font-size: 0.75rem;
     white-space: nowrap;
     opacity: 0;
@@ -624,6 +732,303 @@ body::before {
     }
 }
 
+
+.black-hole-link {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 340px;
+  height: 340px;
+  pointer-events: none;
+  z-index: 1000;
+  font-family: monospace, monospace;
+}
+
+.black-hole-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: blackHoleCycle 306s linear infinite;
+  transform-origin: center center;
+  overflow: visible;
+}
+
+/* Черная дыра */
+.black-hole {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  width: 220px;
+  height: 220px;
+  background: black;
+  border-radius: 50%;
+  border: 10px solid transparent;
+  box-shadow:
+    0 6px 32px rgba(0, 0, 0, 0.4);
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-size: 1.25rem;
+  color: #8a2be2;
+}
+.typing-text {
+  position: relative;
+  width: 100%;
+  height: 1.5em;
+  overflow: visible;
+  font-family: monospace, monospace;
+  color: #8a2be2;
+}
+
+.typing-text span {
+  position: absolute;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #8a2be2;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  width: 0;
+  max-width: 100%;
+}
+
+.typing-text span:first-child {
+  animation:
+    fadeIn 1s forwards 12s,
+    typing1 8s steps(16, end) forwards 12s,
+    fadeOut 2s ease forwards 20s;
+  opacity: 1;
+}
+
+.typing-text span:nth-child(2) {
+  animation:
+    fadeIn 1s ease forwards 22s,
+    typing2 8s steps(17, end) forwards 22s,
+    fadeOut 2s ease forwards 32s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes typing1 {
+  from { width: 0; opacity: 1; }
+  to { width: 16ch; opacity: 1; }
+}
+
+@keyframes typing2 {
+  from { width: 0; opacity: 1; }
+  to { width: 17ch; opacity: 1; }
+}
+
+/* Ореол черной дыры */
+.purple-shadow {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(128, 0, 128, 0.2), transparent 70%);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: shadowPulse 15s ease-in-out infinite;
+  z-index: 9;
+}
+
+/* Планеты */
+.planet {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #f90, #c60);
+  opacity: 1;
+  transform-origin: -150px center;
+  animation-timing-function: linear;
+  z-index: 20;
+}
+
+.planet1 {
+  width: 30px;
+  height: 30px;
+  animation-name: planetOrbit1, planetSwallow1;
+  animation-duration: 60s, 60s;
+  animation-delay: 0s, 60s; /* поглощение начинается после 60 секунд */
+  animation-fill-mode: forwards;
+  animation-timing-function: linear, ease-in-out;
+}
+
+.planet2 {
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle at 40% 40%, #5ad, #036);
+  animation-name: planetOrbit2, planetSwallow2;
+  animation-duration: 70s, 70s;
+  animation-delay: 0s, 70s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear, ease-in-out;
+}
+
+.planet3 {
+  width: 25px;
+  height: 25px;
+  background: radial-gradient(circle at 40% 40%, #ada, #070);
+  animation-name: planetOrbit3, planetSwallow3;
+  animation-duration: 80s, 80s;
+  animation-delay: 0s, 80s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear, ease-in-out;
+}
+
+.planet4 {
+  width: 25px;
+  height: 25px;
+  background: radial-gradient(circle at 40% 40%, #c9aadd, #770067);
+  animation-name: planetOrbit3, planetSwallow3;
+  animation-duration: 80s, 80s;
+  animation-delay: 0s, 80s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear, ease-in-out;
+}
+
+/* Полный цикл анимации черной дыры */
+@keyframes blackHoleCycle {
+  0% {
+    opacity: 0;
+    transform: scale(0.1) translate(-50%, -50%);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1) translate(-50%, -50%);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1) translate(-50%, -50%);
+  }
+  80% {
+    opacity: 0;
+    transform: scale(0.1) translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.1) translate(-50%, -50%);
+  }
+}
+
+/* Пульсация ореола */
+@keyframes shadowPulse {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+    background: radial-gradient(circle, rgba(128, 0, 128, 0.2), transparent 70%);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.1);
+    background: radial-gradient(circle, rgba(170, 0, 170, 0.4), transparent 70%);
+  }
+}
+
+/* Планеты вращаются рядом с начальным появлением */
+@keyframes planetOrbit1 {
+  0% {
+    opacity: 1;
+    transform: rotate(0deg) translateX(150px) rotate(0deg);
+  }
+  60% {
+    opacity: 1;
+    transform: rotate(360deg) translateX(150px) rotate(-360deg);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes planetOrbit2 {
+  0% {
+    opacity: 1;
+    transform: rotate(0deg) translateX(180px) rotate(0deg);
+  }
+  70% {
+    opacity: 1;
+    transform: rotate(420deg) translateX(180px) rotate(-420deg);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes planetOrbit3 {
+  0% {
+    opacity: 1;
+    transform: rotate(0deg) translateX(130px) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(300deg) translateX(130px) rotate(-300deg);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+@keyframes planetOrbit4 {
+  0% {
+    opacity: 1;
+    transform: rotate(0deg) translateX(140px) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(330deg) translateX(130px) rotate(-330deg);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Планеты затягиваются в черную дыру */
+@keyframes planetSwallow1 {
+  0% {
+    transform: rotate(360deg) translateX(150px) rotate(-360deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(390deg) translateX(0) rotate(-390deg);
+    opacity: 0;
+  }
+}
+
+@keyframes planetSwallow2 {
+  0% {
+    transform: rotate(420deg) translateX(180px) rotate(-420deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(460deg) translateX(0) rotate(-460deg);
+    opacity: 0;
+  }
+}
+
+@keyframes planetSwallow3 {
+  0% {
+    transform: rotate(300deg) translateX(130px) rotate(-300deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(350deg) translateX(0) rotate(-350deg);
+    opacity: 0;
+  }
+}
+
 .theme-switcher {
     position: absolute !important;
     top: 4px !important;
@@ -649,7 +1054,7 @@ body::before {
 :root {
     --bg: #0a2b3c;
     --fg: #fff;
-    --panel: rgba(15, 49, 67, 0.75);
+    --panel: rgba(10, 43, 60, 0.59);
     --panel2: #181818;
 }
 
@@ -906,6 +1311,36 @@ body.light {
         position: relative;
         top: 5px;
         left: 0;
+    }
+
+    .margin-chinazes {
+        position: relative;
+        top: 4px;
+        left: 0;
+    }
+
+    .black-hole-link {
+        position: absolute;
+        left: 90%;
+        top: 60%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 300px;
+        pointer-events: none;
+        z-index: 1000;
+        font-family: monospace, monospace;
+    }
+
+    .omuamua-link {
+        position: absolute;
+        left: 25px;
+        top: 0;
+        display: inline-block;
+        width: 120px;
+        user-select: none;
+        pointer-events: auto;
+        text-decoration: none;
+        z-index: 1000;
     }
 }
 
