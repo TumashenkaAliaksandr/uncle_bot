@@ -84,7 +84,7 @@ body::before {
     box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
     position: relative;
     right: 90%;
-    top: 63%;
+    top: 57%;
 }
 
 
@@ -115,6 +115,42 @@ body::before {
     top: 4px;
     left: 50px;
 }
+
+.margin-citate {
+    font-style: italic;
+    font-weight: 500;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: #434141;
+    background: #f0f0f08a;
+    border-left: 6px solid #ffb347; /* акцентная цветная полоса слева */
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    border-radius: 9px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    max-width: fit-content;
+    user-select: text;
+    position: relative;
+    top: 40%;
+    right: 74%;
+}
+
+.margin-citate::before {
+  content: "📡";
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+}
+
+.margin-citate:hover {
+  background: #fff8e1;
+  border-left-color: #ff9800;
+  box-shadow: 2px 2px 10px rgba(255, 152, 0, 0.2);
+  cursor: default;
+}
+
 
 .progress-container {
   display: flex;
@@ -627,7 +663,7 @@ body::before {
 .omuamua-link {
     position: absolute;
     left: 60px;
-    top: 460px;
+    top: 505px;
     display: inline-block;
     width: 120px;
     user-select: none;
@@ -822,8 +858,8 @@ body::before {
 
 .black-hole-link {
   position: absolute;
-  left: 45%;
-  top: 50%;
+  left: 55%;
+  top: 45%;
   transform: translate(-50%, -50%);
   width: 340px;
   height: 340px;
