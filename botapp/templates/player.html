@@ -16,15 +16,14 @@
 <body>
 
 <section>
-  <div class="theme-switcher position-absolute top-0 end-0 m-3">
-      <!-- Здесь сам плеер или другой контент -->
-    <button id="themeToggle" class="btn btn-outline-light">
-      <span class="icon">🌗</span>
-      <span class="text">Сменить тему</span>
-    </button>
-  </div>
+    <div class="theme-switcher position-absolute top-0 end-0 m-3">
+        <!-- Здесь сам плеер или другой контент -->
+        <button id="themeToggle" class="btn btn-outline-light">
+            <span class="icon">🌗</span>
+            <span class="text">Сменить тему</span>
+        </button>
+    </div>
 </section>
-
 
 
 <div class="player-container mx-auto mt-4 p-4">
@@ -44,66 +43,86 @@
             </div>
         </div>
         <div class="col-12 col-sm-7">
-        <h2 class="player-title">👨🏻 ДЯДЯ ПЛЕЕР</h2>
-        <p class="margin-files">🕒 Вечером среду после обеда ДЯДЯ обновляет список песен.</p>
-        <!-- Секция обратного отсчёта -->
+            <h2 class="player-title">👨🏻 ДЯДЯ ПЛЕЕР</h2>
+            <p class="margin-files">🕒 Вечером среду после обеда ДЯДЯ обновляет список песен.</p>
+            <!-- Секция обратного отсчёта -->
             <div class="countdown-container text-center my-4">
                 <h3>{{ countdown.name|default:"Обратный отсчёт" }}</h3>
                 <div id="countdown" style="font-size: 2em; font-weight: bold; color: #ff4d4d;">Загрузка...</div>
             </div>
 
+{#            <div class="ufo-container">#}
+{#                <img src="{% static 'botapp/static/svg/ufo.svg' %}" alt="UFO Icon"/>#}
+{#            </div>#}
+
+            <a href="#" class="ufo-link" target="_blank" rel="noopener noreferrer"
+               aria-label="Запрыгни в делижанс">
+                <div class="ufo-container">
+                    <img src="{% static 'botapp/static/svg/ufo.svg' %}" alt="UFO Icon"/>
+                    <span class="ufo-tooltip">Запрыгни в делижанс</span>
+                </div>
+            </a>
+
+
+
+
             <audio id="audioPlayer" src="{{ current_track.audio_file.url }}" preload="auto" class="w-100 mb-3"></audio>
             <canvas id="visualizer" width="100%" height="80"></canvas>
             <div class="controls d-flex justify-content-center my-3 flex-wrap gap-3">
-  <button id="prevBtn" class="btn btn-outline-light btn-sm" aria-label="Previous">
-    <!-- Иконка Previous -->
-    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-      <polygon points="19 20 9 12 19 4 19 20"></polygon>
-      <line x1="5" y1="19" x2="5" y2="5"></line>
-    </svg>
-  </button>
+                <button id="prevBtn" class="btn btn-outline-light btn-sm" aria-label="Previous">
+                    <!-- Иконка Previous -->
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <polygon points="19 20 9 12 19 4 19 20"></polygon>
+                        <line x1="5" y1="19" x2="5" y2="5"></line>
+                    </svg>
+                </button>
+                <button id="playPauseBtn" class="btn btn-outline-light btn-sm" aria-label="Play/Pause">
+                    <!-- Иконка Play (показывается по умолчанию) -->
+                    <svg id="playIcon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    <!-- Иконка Pause (скрыта по умолчанию) -->
+                    <svg id="pauseIcon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display:none;">
+                        <rect x="6" y="4" width="4" height="16"></rect>
+                        <rect x="14" y="4" width="4" height="16"></rect>
+                    </svg>
+                </button>
 
-  <button id="playPauseBtn" class="btn btn-outline-light btn-sm" aria-label="Play/Pause">
-    <!-- Иконка Play (показывается по умолчанию) -->
-    <svg id="playIcon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-      <polygon points="5 3 19 12 5 21 5 3"></polygon>
-    </svg>
-    <!-- Иконка Pause (скрыта по умолчанию) -->
-    <svg id="pauseIcon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display:none;">
-      <rect x="6" y="4" width="4" height="16"></rect>
-      <rect x="14" y="4" width="4" height="16"></rect>
-    </svg>
-  </button>
+                <button id="nextBtn" class="btn btn-outline-light btn-sm" aria-label="Next">
+                    <!-- Иконка Next -->
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <polygon points="5 4 15 12 5 20 5 4"></polygon>
+                        <line x1="19" y1="5" x2="19" y2="19"></line>
+                    </svg>
+                </button>
 
-  <button id="nextBtn" class="btn btn-outline-light btn-sm" aria-label="Next">
-    <!-- Иконка Next -->
-    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-      <polygon points="5 4 15 12 5 20 5 4"></polygon>
-      <line x1="19" y1="5" x2="19" y2="19"></line>
-    </svg>
-  </button>
+                <button id="loopBtn" class="btn btn-outline-light btn-sm" aria-label="Loop">
+                    <!-- Иконка Loop -->
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <polyline points="17 1 21 5 17 9"></polyline>
+                        <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                        <polyline points="7 23 3 19 7 15"></polyline>
+                        <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                    </svg>
+                </button>
 
-  <button id="loopBtn" class="btn btn-outline-light btn-sm" aria-label="Loop">
-    <!-- Иконка Loop -->
-    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-      <polyline points="17 1 21 5 17 9"></polyline>
-      <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
-      <polyline points="7 23 3 19 7 15"></polyline>
-      <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
-    </svg>
-  </button>
-
-  <button id="shuffleBtn" class="btn btn-outline-light btn-sm" aria-label="Shuffle">
-    <!-- Иконка Shuffle -->
-    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-      <polyline points="16 3 21 3 21 8"></polyline>
-      <line x1="4" y1="20" x2="21" y2="3"></line>
-      <polyline points="21 16 21 21 16 21"></polyline>
-      <line x1="15" y1="15" x2="21" y2="21"></line>
-      <line x1="4" y1="4" x2="9" y2="9"></line>
-    </svg>
-  </button>
-</div>
+                <button id="shuffleBtn" class="btn btn-outline-light btn-sm" aria-label="Shuffle">
+                    <!-- Иконка Shuffle -->
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <polyline points="16 3 21 3 21 8"></polyline>
+                        <line x1="4" y1="20" x2="21" y2="3"></line>
+                        <polyline points="21 16 21 21 16 21"></polyline>
+                        <line x1="15" y1="15" x2="21" y2="21"></line>
+                        <line x1="4" y1="4" x2="9" y2="9"></line>
+                    </svg>
+                </button>
+            </div>
 
             <div class="progress-container d-flex align-items-center gap-2 mb-3">
                 <span id="currentTime">0:00</span>
@@ -133,6 +152,16 @@
             </div>
         </div>
     </div>
+    <a href="#" class="omuamua-link" target="_blank" rel="noopener noreferrer"
+       aria-label="Где не был..">
+        <div class="omuamua-container">
+            <img src="{% static 'botapp/static/svg/omuamua_ufo.svg' %}" alt="Oumuamua UFO Icon"/>
+            <span class="ufo-tooltip">Астероид Гуманоид</span>
+            <span class="particle1"></span>
+            <span class="particle2"></span>
+            <span class="particle3"></span>
+        </div>
+    </a>
 </div>
 <section class="conteiner">
     <div class="d-flex justify-content-center my-4">
@@ -172,39 +201,39 @@
 
 
 <footer class="text-center" style="font-size: 0.85rem; opacity: 0.5; margin-top: 2rem;">
-  © 2025 ДЯДЯПлеер &mdash; by @ultavioletpartyeyes
+    © 2025 ДЯДЯПлеер &mdash; by @ultavioletpartyeyes
 </footer>
 
 
 <script>
-  // Проверяем, что переменная countdown.end_time передана из вью
-  {% if countdown %}
-    const endTime = new Date("{{ countdown.end_time|date:'Y-m-d\\TH:i:s' }}").getTime();
+    // Проверяем, что переменная countdown.end_time передана из вью
+    {% if countdown %}
+        const endTime = new Date("{{ countdown.end_time|date:'Y-m-d\\TH:i:s' }}").getTime();
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = endTime - now;
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = endTime - now;
 
-      if (distance < 0) {
-        document.getElementById("countdown").innerHTML = "Время истекло!";
-        clearInterval(timer);
-        return;
-      }
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "Время истекло!";
+                clearInterval(timer);
+                return;
+            }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      document.getElementById("countdown").innerHTML =
-        days + " дн " + hours + " ч " + minutes + " мин " + seconds + " сек";
-    }
+            document.getElementById("countdown").innerHTML =
+                days + " дн " + hours + " ч " + minutes + " мин " + seconds + " сек";
+        }
 
-    updateCountdown();  // Запуск сразу
-    const timer = setInterval(updateCountdown, 1000);  // Обновлять каждую секунду
-  {% else %}
-    document.getElementById("countdown").innerHTML = "Отсчёт не настроен";
-  {% endif %}
+        updateCountdown();  // Запуск сразу
+        const timer = setInterval(updateCountdown, 1000);  // Обновлять каждую секунду
+    {% else %}
+        document.getElementById("countdown").innerHTML = "Отсчёт не настроен";
+    {% endif %}
 </script>
 
 

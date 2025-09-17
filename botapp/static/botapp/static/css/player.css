@@ -42,7 +42,7 @@ body::before {
     /*box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);*/
     right: 125px;
     position: relative;
-    box-shadow: rgba(255, 77, 77, 0.2) 0px 4px 8px;
+    box-shadow: rgba(255, 77, 77, 0.2) 0 4px 8px;
 }
 
 .track-info {
@@ -76,7 +76,7 @@ body::before {
 }
 
 .countdown-container {
-    max-width: 469px;
+    max-width: 400px;
     margin: 2rem auto;
     background-color: var(--panel, #2642518f);
     padding: 1.5rem 2rem;
@@ -96,7 +96,7 @@ body::before {
 }
 
 #countdown {
-    font-size: 2.5rem;
+    font-size: 1.1rem!important;
     font-weight: 900;
     color: #ff4d4d;
     letter-spacing: 1.2px;
@@ -115,6 +115,10 @@ body::before {
     align-items: center;
     gap: 8px;
     margin: 16px 0;
+    background: var(--panel, #2642518f);
+    padding: 6px;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(255, 77, 77, 0.15);
 }
 
 #progressBar {
@@ -132,6 +136,10 @@ body::before {
 #volumeBar {
     width: 100px;
     accent-color: #1db954;
+    background: var(--panel, #2642518f);
+    padding: 6px;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(255, 77, 77, 0.15);
 }
 
 .track-list {
@@ -279,11 +287,346 @@ body::before {
     animation-play-state: paused;
     box-shadow: 0 0 30px 15px rgb(53, 106, 220);
 }
+.ufo-link {
+  position: absolute;
+  right: 74px;
+  top: 84px;
+  display: inline-block;
+  width: 44px;
+  user-select: none;
+  pointer-events: auto; /* ссылка кликабельна */
+  text-decoration: none;
+}
 
+.ufo-tooltip {
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 20;
+}
+
+.ufo-link:hover .ufo-tooltip,
+.ufo-link:focus .ufo-tooltip {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Стрелочка к тултипу */
+.ufo-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #222 transparent transparent transparent;
+  transform: translateX(-50%);
+}
+
+.ufo-container {
+  position: relative;
+  width: 74px;
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+  margin: 1rem;
+
+  filter: drop-shadow(0 0 3px rgba(255, 183, 0, 0.7))
+          drop-shadow(0 0 5px rgba(255, 183, 0, 0.5))
+          drop-shadow(0 0 9px rgba(255, 183, 0, 0.3));
+
+  animation: ufoFlightCycle 57s ease-in-out infinite;
+  animation-fill-mode: forwards;
+  transform-origin: center bottom;
+  z-index: 10;
+}
+
+.ufo-container::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 40px; /* хвост слева от НЛО */
+  width: 44px;
+  height: 22px;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
+  border-radius: 10px;
+  opacity: 0.7;
+  filter: blur(6px);
+  animation: tailGlow 3s ease-in-out infinite;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.ufo-container img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes ufoFlightCycle {
+  0% {
+    opacity: 0;
+    transform: translateX(100%) rotate(0deg);
+  }
+  5% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(0) rotate(5deg);
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(0) rotate(-5deg);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(0) rotate(5deg);
+  }
+  25% {
+    opacity: 1;
+    transform: translateX(0) rotate(-5deg);
+  }
+  30% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+  85% {
+    opacity: 0;
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%) rotate(0deg);
+  }
+}
+
+@keyframes tailGlow {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+
+.omuamua-link {
+    position: absolute;
+    left: 60px;
+    top: 355px;
+    display: inline-block;
+    width: 120px;
+    user-select: none;
+    pointer-events: auto;
+    text-decoration: none;
+    z-index: 1000;
+
+}
+
+.omuamua-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    pointer-events: none; /* контейнер не мешает клику */
+    filter: drop-shadow(0 0 5px rgba(163, 154, 86, 0.7))
+            drop-shadow(0 0 8px rgba(197, 183, 121, 0.5))
+            drop-shadow(0 0 15px rgba(197, 183, 121, 0.3));
+    animation: omuamuaFlight 57s ease-in-out infinite;
+    animation-fill-mode: forwards;
+    transform-origin: center center;
+    z-index: 15;
+}
+
+/* Разлетающиеся камни в виде нескольких рандомных точек */
+.omuamua-container::after,
+.omuamua-container::before,
+.omuamua-container .particle1,
+.omuamua-container .particle2,
+.omuamua-container .particle3 {
+    content: '';
+    position: absolute;
+    background: #7D753B;
+    border-radius: 50%;
+    opacity: 0.8;
+    filter: blur(1.2px);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.omuamua-container::after {
+    width: 6px;
+    height: 6px;
+    top: 45%;
+    left: -10px;
+    animation-name: stoneFly1;
+    animation-duration: 2.8s;
+}
+
+.omuamua-container::before {
+    width: 4px;
+    height: 4px;
+    top: 55%;
+    left: -15px;
+    animation-name: stoneFly2;
+    animation-duration: 3.4s;
+}
+
+.omuamua-container .particle1 {
+    width: 5px;
+    height: 5px;
+    top: 40%;
+    left: -8px;
+    animation-name: stoneFly3;
+    animation-duration: 2s;
+}
+
+.omuamua-container .particle2 {
+    width: 3px;
+    height: 3px;
+    top: 50%;
+    left: -13px;
+    animation-name: stoneFly4;
+    animation-duration: 3.8s;
+}
+
+.omuamua-container .particle3 {
+    width: 4px;
+    height: 4px;
+    top: 60%;
+    left: -12px;
+    animation-name: stoneFly1;
+    animation-duration: 3.1s;
+}
+
+/* Ключевые кадры для разных частиц */
+@keyframes stoneFly1 {
+    0% { transform: translate(0,0) scale(1); opacity:0.8; }
+    100% { transform: translate(-30px, -10px) scale(0.8); opacity:0; }
+}
+
+@keyframes stoneFly2 {
+    0% { transform: translate(0,0) scale(1); opacity:0.8; }
+    100% { transform: translate(-25px, 15px) scale(0.7); opacity:0; }
+}
+
+@keyframes stoneFly3 {
+    0% { transform: translate(0,0) scale(1); opacity:0.8; }
+    100% { transform: translate(-20px, -20px) scale(0.6); opacity:0; }
+}
+
+@keyframes stoneFly4 {
+    0% { transform: translate(0,0) scale(1); opacity:0.8; }
+    100% { transform: translate(-35px, 5px) scale(0.75); opacity:0; }
+}
+
+/* Стили для изображения и тултипа без изменений */
+
+.omuamua-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.ufo-tooltip {
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 20;
+}
+
+.omuamua-link:hover .ufo-tooltip,
+.omuamua-link:focus .ufo-tooltip {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Стрелочка тултипа */
+.ufo-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #222 transparent transparent transparent;
+    transform: translateX(-50%);
+}
+
+@keyframes omuamuaFlight {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%) rotate(0deg);
+    }
+    5% {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+        transform: translateX(0) rotate(3deg);
+    }
+    15% {
+        opacity: 1;
+        transform: translateX(0) rotate(-3deg);
+    }
+    20% {
+        opacity: 1;
+        transform: translateX(0) rotate(3deg);
+    }
+    25% {
+        opacity: 1;
+        transform: translateX(0) rotate(-3deg);
+    }
+    30% {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+    80% {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+    85% {
+        opacity: 0;
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-100%) rotate(0deg);
+    }
+}
 
 .theme-switcher {
     position: absolute !important;
-    top: 18px !important;
+    top: 4px !important;
     right: 110px !important;
 }
 

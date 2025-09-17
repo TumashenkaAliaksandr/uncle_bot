@@ -1,0 +1,32 @@
+<svg width="280" height="160" viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg" fill="none" >
+
+  <!-- Нижняя часть тарелки -->
+  <ellipse cx="140" cy="120" rx="120" ry="40" fill="#3f5361" stroke="#273745" stroke-width="4"/>
+
+  <!-- Верхняя часть тарелки с легким градиентом -->
+  <ellipse cx="140" cy="120" rx="95" ry="30" fill="#5d6d7a" />
+
+  <!-- Купол тарелки -->
+  <ellipse cx="140" cy="70" rx="75" ry="50" fill="url(#gradDome)" stroke="#486073" stroke-width="4"/>
+
+  <!-- Градиент купола -->
+  <defs>
+    <linearGradient id="gradDome" x1="65" y1="20" x2="215" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9dc9d9" offset="0%"/>
+      <stop stop-color="#77a0b0" offset="100%"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Блики на куполе -->
+  <ellipse cx="110" cy="55" rx="25" ry="14" fill="white" opacity="0.3"/>
+  <ellipse cx="170" cy="65" rx="30" ry="18" fill="white" opacity="0.2"/>
+
+  <!-- Световые окна тарелки -->
+  <circle cx="60" cy="120" r="15" fill="#c7deb3" stroke="#a1b081" stroke-width="3"/>
+  <circle cx="110" cy="125" r="12" fill="#c7deb3" stroke="#a1b081" stroke-width="3"/>
+  <circle cx="165" cy="125" r="12" fill="#c7deb3" stroke="#a1b081" stroke-width="3"/>
+  <circle cx="215" cy="120" r="15" fill="#c7deb3" stroke="#a1b081" stroke-width="3"/>
+
+  <!-- Контур тарелки -->
+  <ellipse cx="140" cy="120" rx="120" ry="40" fill="none" stroke="#1c2c38" stroke-width="2"/>
+</svg>
