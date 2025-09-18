@@ -23,10 +23,17 @@ body::before {
     z-index: -1; /* позади всего содержимого */
 }
 
+.player-title img {
+  width: 33px;   /* ширина логотипа */
+  height: 33px;  /* высота логотипа */
+  vertical-align: middle; /* выравнивание по центру текста */
+}
+
+
 .player-container {
     width: 85%;
     margin: 40px auto;
-    background: var(--panel, #0a2b3c96);
+    background: var(--panel, #DAE9F2);
     border-radius: 20px;
     box-shadow: 0 25px 25px -13px rgb(162 188 139);
     padding: 30px 20px;
@@ -34,20 +41,20 @@ body::before {
 }
 
 .cover img {
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
     border-radius: 16px;
     object-fit: cover;
     margin-bottom: 15px;
     /*box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);*/
-    right: 125px;
+    right: 115px;
     position: relative;
     box-shadow: rgba(255, 77, 77, 0.2) 0 4px 8px;
 }
 
 .track-info {
     position: relative;
-    right: 125px;
+    right: 120px;
 }
 
 .track-info h2 {
@@ -106,14 +113,14 @@ body::before {
 
 .margin-files {
     position: relative;
-    top: 17px;
-    left: 55px;
+    bottom: 39px;
+    right: 0;
 }
 
 .margin-chinazes {
     position: relative;
-    top: 4px;
-    left: 50px;
+    top: 0;
+    right: 70%;
 }
 
 .margin-citate {
@@ -860,8 +867,8 @@ body::before {
 
 .black-hole-link {
   position: absolute;
-  left: 57%;
-  top: 45%;
+  left: 58%;
+  top: 46%;
   transform: translate(-50%, -50%);
   width: 340px;
   height: 340px;
@@ -1299,14 +1306,14 @@ body::before {
 :root {
     --bg: #0a2b3c;
     --fg: #fff;
-    --panel: rgba(10, 43, 60, 0.59);
+    --panel: rgba(15, 49, 67, 0.91);
     --panel2: #181818;
 }
 
 body.light {
     --bg: #fff;
     --fg: #222;
-    --panel: rgba(157, 187, 175, 0.48);
+    --panel: #dae9f2;
     --panel2: #eaeaea;
 }
 
@@ -1456,11 +1463,11 @@ body.light {
 
 .player-title {
     position: absolute;
-    top: 12%;
-    left: 44%;
+    top: 4%;
+    left: 8%;
     transform: translate(-50%, -50%);
     /*color: white;*/
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     pointer-events: none; /* чтобы не мешал кликам */
     user-select: none;
     white-space: nowrap;
@@ -1619,9 +1626,9 @@ body.light {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: #0a4564a6;
+    background: var(--panel, #DAE9F2);
     padding: 8px 12px;
-    border-radius: 8px;
+    border-radius: 0 0 8px 8px;
     box-shadow: 0 25px 25px -17px rgb(162 188 139);
 }
 

@@ -1,0 +1,39 @@
+<svg width="44" height="44" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    /* Вращение пластинки */
+    .vinyl {
+      transform-origin: 100px 100px;
+      animation: spin 5s linear infinite;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg);}
+      to { transform: rotate(360deg);}
+    }
+
+    /* Легкое покачивание пластинки - эффект игры */
+    .player {
+      transform-origin: 100px 100px;
+      animation: dance 1.5s ease-in-out infinite alternate;
+    }
+    @keyframes dance {
+      0% { transform: rotate(-2deg);}
+      50% { transform: rotate(2deg);}
+      100% { transform: rotate(-2deg);}
+    }
+  </style>
+
+  <g class="player">
+    <circle cx="100" cy="100" r="90" fill="#000" />
+    <g class="vinyl">
+      <circle cx="100" cy="100" r="60" fill="url(#vinylGradient)" />
+      <circle cx="100" cy="100" r="15" fill="#222" />
+    </g>
+  </g>
+
+  <defs>
+    <radialGradient id="vinylGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#333" />
+      <stop offset="100%" stop-color="#000" />
+    </radialGradient>
+  </defs>
+</svg>
