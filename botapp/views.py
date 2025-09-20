@@ -33,7 +33,7 @@ def player(request, album_id=None, track_id=None):
 
         current_track = tracks.first() if tracks.exists() else None
 
-    return render(request, 'music_movies.html', {
+    return render(request, 'player.html', {
         'albums': albums,
         'album': album,
         'tracks': tracks,
