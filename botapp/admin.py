@@ -32,9 +32,9 @@ class AlbumAdmin(admin.ModelAdmin):
 
 @admin.register(Track)
 class TrackAdmin(admin.ModelAdmin):
-    list_display = ("title", "album", "audio_player")
+    list_display = ("title", "album", "audio_player", "is_main", "is_popular", "is_movies", "is_tomorrow")
     search_fields = ("title",)
-    list_filter = ("album",)
+    list_filter = ("album", "is_popular", "is_movies", "is_tomorrow")
     readonly_fields = ("audio_player",)
 
     def audio_player(self, obj):

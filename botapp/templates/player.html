@@ -1,59 +1,8 @@
+{% extends 'index.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>💿 ДЯДЯПлеер (﹙˓ ‍🎧 ˒﹚)</title>
-    <!-- Bootstrap CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Ваш кастомный CSS -->
-    <link rel="stylesheet" href="{% static 'botapp/static/css/player.css' %}">
-    <!-- Фавиконка -->
-    <link rel="icon" type="image/png" href="{% static 'botapp/static/img/favicon.jpg' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
 
-<section>
-    <div class="theme-switcher position-absolute top-0 end-0 m-3">
-        <!-- Здесь сам плеер или другой контент -->
-        <button id="themeToggle" class="btn btn-outline-light">
-            <span class="icon">🌗</span>
-            <span class="text">Сменить тему</span>
-        </button>
-    </div>
-</section>
-
-<div class="chips-wrapper">
-        <div class="chips-header">
-            <button class="chips-arrow chips-arrow-left" aria-label="Предыдущая страница" tabindex="0">
-                <!-- SVG иконка стрелки влево -->
-                <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="M14.96 18.96 8 12l6.96-6.96.71.71L9.41 12l6.25 6.25-.7.71z" fill="currentColor"/>
-                </svg>
-            </button>
-
-            <div class="chips-scroll" role="tablist" aria-label="Фильтры">
-                <button class="chip-chip selected" role="tab" aria-selected="true" tabindex="0">👣 Все</button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">🍜 Завтра в эфире</button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">📽️ Видео</button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">🎶 Джемы</button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">💽 Албомы</button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">🎩 ТОП
-                </button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">👀 Просмотрено</button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">💥 Новое для вас</button>
-            </div>
-
-            <button class="chips-arrow chips-arrow-right" aria-label="Следующая страница" tabindex="0">
-                <!-- SVG иконка стрелки вправо -->
-                <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="m9.4 18.4-.7-.7 5.6-5.6-5.7-5.7.7-.7 6.4 6.4-6.3 6.3z" fill="currentColor"/>
-                </svg>
-            </button>
-        </div>
-    </div>
+{% block content %}
 <div class="player-container mx-auto mt-4 p-4">
     <div class="row justify-content-center">
         <div class="col-12 col-sm-5 text-center">
@@ -237,6 +186,16 @@
 <div class="comet comet2" role="img" aria-label="Комета"></div>
 <div class="comet comet3" role="img" aria-label="Комета"></div>
 
+<div class="animated-stars">
+  <svg style="display:none;" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="star" viewBox="0 0 22 22">
+      <path fill="whitesmoke" stroke="whitesmoke" stroke-width="0.4" d="M12 2 L15 9 L22 9 L16 14 L18 21 L12 17 L6 21 L8 14 L2 9 L9 9 Z"/>
+    </symbol>
+  </svg>
+</div>
+
+
+
 <div id="cosmic-wind-overlay" style="position: fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; overflow:hidden; z-index:9999; opacity:0; transition: opacity 2s ease-in-out;">
   <svg viewBox="0 0 800 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
     <defs>
@@ -290,87 +249,5 @@
 
 
 </div>
-<section class="conteiner">
-    <div class="d-flex justify-content-center my-4">
-        <a id="desperateButton"
-           class="btn btn-danger btn-lg"
-           href="https://t.me/ВАШ_ТЕЛЕГРАММ" target="_blank"
-           rel="noopener noreferrer">На ДЯДЮ! 👨🏻‍🔧</a>
-        <div id="clouds" class="cloud-cloud cloud1"></div>
-        <div id="clouds" class="cloud-cloud cloud2"></div>
-        <div class="ufo"></div>
-    </div>
 
-</section>
-
-<div id="skyContainer">
-    <div class="pulse-dot"
-         style="width: 60px; height: 20px; top: 10%; left: 15%; background-color: #ff4d4d; animation-delay: 0s;"></div>
-    <div class="pulse-dot"
-         style="width: 15px; height: 15px; top: 30%; left: 40%; background-color: #4dff88; animation-delay: 0.5s;"></div>
-    <div class="pulse-dot"
-         style="width: 25px; height: 25px; top: 60%; left: 50%; background-color: #4d88ff; animation-delay: 1s;"></div>
-    <div class="pulse-dot"
-         style="width: 18px; height: 18px; top: 80%; left: 20%; background-color: #ffdb4d; animation-delay: 1.5s;"></div>
-    <div class="pulse-dot"
-         style="width: 22px; height: 22px; top: 50%; left: 85%; background-color: #ff4da6; animation-delay: 2s;"></div>
-    <div class="pulse-dot"
-         style="width: 20px; height: 20px; top: 10%; left: 15%; background-color: #ff4d4d; animation-delay: 0s;"></div>
-    <div class="pulse-dot"
-         style="width: 15px; height: 15px; top: 30%; left: 40%; background-color: #4dff88; animation-delay: 0.5s;"></div>
-    <div class="pulse-dot"
-         style="width: 25px; height: 25px; top: 60%; left: 70%; background-color: #4d88ff; animation-delay: 1s;"></div>
-    <div class="pulse-dot"
-         style="width: 18px; height: 18px; top: 40%; left: 20%; background-color: #ffdb4d; animation-delay: 1.5s;"></div>
-    <div class="pulse-dot"
-         style="width: 29px; height: 22px; top: 50%; left: 96%; background-color: #ff4da6; animation-delay: 2s;"></div>
-    <!-- Добавьте сколько угодно -->
-</div>
-
-
-<footer class="text-center" style="font-size: 0.85rem; opacity: 0.5; margin-top: 2rem;">
-    © 2025 ДЯДЯПлеер &mdash; by @ultavioletpartyeyes
-</footer>
-
-
-<script>
-    // Проверяем, что переменная countdown.end_time передана из вью
-    {% if countdown %}
-        const endTime = new Date("{{ countdown.end_time|date:'Y-m-d\\TH:i:s' }}").getTime();
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = endTime - now;
-
-            if (distance < 0) {
-                document.getElementById("countdown").innerHTML = "Время истекло!";
-                clearInterval(timer);
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("countdown").innerHTML =
-                days + " дн " + hours + " ч " + minutes + " мин " + seconds + " сек";
-        }
-
-        updateCountdown();  // Запуск сразу
-        const timer = setInterval(updateCountdown, 1000);  // Обновлять каждую секунду
-    {% else %}
-        document.getElementById("countdown").innerHTML = "Отсчёт не настроен";
-    {% endif %}
-</script>
-
-
-<!-- Bootstrap JS Bundle (Popper + Bootstrap JS) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Ваш кастомный JS -->
-<script src="{% static 'botapp/static/js/player.js' %}"></script>
-<script src="{% static 'botapp/static/js/comet.js' %}"></script>
-<script src="{% static 'botapp/static/js/mail_osel.js' %}"></script>
-<script src="{% static 'botapp/static/js/animation_wind.js' %}"></script>
-</body>
-</html>
+{% endblock %}

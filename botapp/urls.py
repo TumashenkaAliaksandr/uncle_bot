@@ -9,6 +9,7 @@ urlpatterns = [
     path('', views.player, name='player'),
     path('album/<int:album_id>/', views.player, name='album_player'),
     path('track/<int:track_id>/', views.player, name='track_player'),
+    path('music-movies/', views.music_movies, name='music_movies'),
 ]
 
 if settings.DEBUG:

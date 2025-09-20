@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.db import models
 
 class Album(models.Model):
@@ -11,8 +13,13 @@ class Album(models.Model):
         verbose_name = '💽 Альбом'
         verbose_name_plural = '💽 Альбомы'
 
+    def __init__(self, *args: Any, **kwargs: Any):
+        super().__init__(*args, **kwargs)
+        self.tracks_movies = None
+
     def __str__(self):
         return self.name
+
 
 class Track(models.Model):
     album = models.ForeignKey('botapp.Album', on_delete=models.CASCADE, related_name='tracks', verbose_name="Альбом")
@@ -20,6 +27,10 @@ class Track(models.Model):
     description = models.TextField(blank=True, verbose_name="Описание")
     cover = models.ImageField(upload_to='tracks/covers/', blank=True, null=True, verbose_name="Обложка")
     audio_file = models.FileField(upload_to='tracks/audio/', blank=True, null=True, verbose_name="Аудиофайл (MP3)")
+    is_main = models.BooleanField(default=True, verbose_name='На главную', blank=True)
+    is_popular = models.BooleanField(verbose_name='Популярные', default=False, blank=True)
+    is_movies = models.BooleanField(verbose_name='В Кино', default=False, blank=True)
+    is_tomorrow = models.BooleanField(verbose_name='Завтра в эфире', default=False, blank=True)
 
     class Meta:
         verbose_name = '🎼 Трек'

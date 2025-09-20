@@ -1,6 +1,6 @@
 body {
     position: relative;
-    background: var(--bg, #0a2b3c);
+    background: var(--bg, #032435);
     color: var(--fg, #fff);
     font-family: 'Igra Sans', 'Rubik', 'Segoe UI', Arial, sans-serif;
     transition: background 0.3s, color 0.3s;
@@ -50,6 +50,7 @@ body::before {
     right: 115px;
     position: relative;
     box-shadow: rgba(255, 77, 77, 0.2) 0 4px 8px;
+    top: 5px;
 }
 
 .track-info {
@@ -426,6 +427,30 @@ body::before {
     animation-play-state: paused;
     box-shadow: 0 0 30px 15px rgb(53, 106, 220);
 }
+
+.star {
+    position: fixed;
+    width: 13px;
+    height: 13px;
+    opacity: 0;
+    animation: fadeInOut 3s ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: scale(0.4);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.4);
+    }
+}
+
 .alien-craft {
   position: fixed;
   bottom: -60px; /* начинает снизу за экраном */
@@ -1284,7 +1309,7 @@ body::before {
 .theme-switcher {
     position: absolute !important;
     top: 4px !important;
-    right: 110px !important;
+    right: 100px !important;
 }
 
 .theme-switcher button {
@@ -1304,7 +1329,7 @@ body::before {
 
 
 :root {
-    --bg: #0a2b3c;
+    --bg: #032435;
     --fg: #fff;
     --panel: rgba(15, 49, 67, 0.91);
     --panel2: #181818;
@@ -1509,9 +1534,9 @@ body.light {
 
 .btn:hover,
 .btn:active {
-    color: darkgreen !important;
+    color: #baf6ba !important;
     background-color: #222222 !important;
-    border-color: darkgreen !important;
+    border-color: whitesmoke !important;
 }
 
 @media (max-width: 768px) {
