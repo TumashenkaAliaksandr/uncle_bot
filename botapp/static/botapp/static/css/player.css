@@ -38,6 +38,7 @@ body::before {
     box-shadow: 0 25px 25px -13px rgb(162 188 139);
     padding: 30px 20px;
     text-align: center;
+    overflow: hidden;
 }
 
 .cover img {
@@ -95,6 +96,18 @@ body::before {
     top: 57%;
 }
 
+.countdown-container-videos {
+    max-width: 400px;
+    margin: 2rem auto;
+    background-color: var(--panel, #2642518f);
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
+    position: absolute;
+    right: 70%;
+    top: 57%;
+}
+
 
 .countdown-container h3 {
     font-size: 1.8rem;
@@ -114,14 +127,21 @@ body::before {
 
 .margin-files {
     position: relative;
-    bottom: 39px;
+    bottom: 47px;
     right: 0;
+    background: #244e865e;
+    border-radius: 8px;
+    padding: 4px;
 }
 
 .margin-chinazes {
     position: relative;
     top: 0;
-    right: 70%;
+    right: 35%;
+    background: #244e865e;
+    width: 220px;
+    border-radius: 8px;
+    padding: 4px;
 }
 
 .margin-citate {
@@ -1499,6 +1519,15 @@ body.light {
     white-space: nowrap;
 }
 
+.player-title a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  pointer-events: auto; /* чтобы ссылка кликабельна была */
+  user-select: auto;
+}
+
+
 /* Контейнер на весь экран */
 #skyContainer {
     position: fixed;
@@ -1732,7 +1761,7 @@ body.light {
     text-align: center;
     position: absolute;
     box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
-    right: 161px;
+    right: 168px;
     overflow: visible;
     top: 15%;
     height: 100px;
@@ -1772,6 +1801,102 @@ body.light {
 
 .advantage-text {
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: #e4dfdf;
 }
+
+
+.video-block {
+  max-width: 900px;
+  margin: 44px auto;
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 16px;
+    margin-top: 140px;
+}
+
+/* Большие видео - 2 в строке */
+
+.main-videos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.main-videos video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  background: #000;
+}
+
+/* Маленькие видео слайдер */
+
+.small-videos-slider {
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none; /* Firefox */
+}
+
+.small-videos-slider::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.small-videos {
+  display: flex;
+  gap: 12px;
+}
+
+.small-videos video {
+  flex: 0 0 auto;
+  width: 140px;
+  height: 80px;
+  border-radius: 6px;
+  background: #000;
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+    margin-bottom: 24px;
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: grayscale(1);
+  transition: filter 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.social-icon:hover {
+  filter: none;
+  transform: scale(1.1);
+}
+
+.instagram {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg');
+}
+
+.vk {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg');
+}
+
+.youtube {
+  background-image: url('../svg/youtube.svg');
+}
+
+
+.spotify {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg');
+}
+
+.yandex-music {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/83/Yandex_Music_logo.svg');
+}
+

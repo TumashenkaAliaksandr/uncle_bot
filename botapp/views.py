@@ -72,4 +72,33 @@ def music_movies(request, album_id=None, track_id=None):
     })
 
 
+def videos(request, album_id=None, track_id=None):
+    albums = Album.objects.all()
+    countdown = Countdown.objects.first()
+
+    # Получаем треки с is_movies=True
+    tracks = Track.objects.filter(is_movies=True)
+
+    # Если передан трек по id, выбираем его
+    if track_id:
+        current_track = get_object_or_404(tracks, id=track_id)
+        album = current_track.album
+    else:
+        # Если передан album_id, пытаемся выбрать первый трек из этого альбома
+        if album_id:
+            album = get_object_or_404(Album, id=album_id)
+            # Из всех треков фильтруем те что в кино и относятся к альбому
+            tracks = tracks.filter(album=album)
+        else:
+            album = None
+
+        current_track = tracks.first() if tracks.exists() else None
+
+    return render(request, 'video.html', {
+        'albums': albums,
+        'album': album,
+        'tracks': tracks,
+        'current_track': current_track,
+        'countdown': countdown,
+    })
 

@@ -1,6 +1,7 @@
 {% load static %}
 {% url 'player' as player_url %}
 {% url 'music_movies' as music_movies_url %}
+{% url 'videos' as videos_url %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -28,6 +29,14 @@
     </div>
 </section>
 
+<h2 class="player-title">
+  <a href="{% url 'player' %}">
+    <img src="{% static 'botapp/static/img/logo.png' %}" alt="logo" />
+    ДЯДЯ
+  </a>
+</h2>
+
+
 <div class="chips-wrapper">
         <div class="chips-header">
             <button class="chips-arrow chips-arrow-left" aria-label="Предыдущая страница" tabindex="0">
@@ -46,7 +55,9 @@
                     </button>
                 </a>
                 <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">🍜 Завтра в эфире</button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">📽️ Видео</button>
+                <a href="{{ videos_url }}">
+                <button class="chip-chip {% if request.path == videos_url %}selected{% endif %}" role="tab" aria-selected="{% if request.path == videos_url %}true{% else %}false{% endif %}" tabindex="{% if request.path == videos_url %}0{% else %}-1{% endif %}">📽️ Видео</button>
+                </a>
                 <a href="{{ music_movies_url }}">
                     <button class="chip-chip {% if request.path == music_movies_url %}selected{% endif %}" role="tab"
                             aria-selected="{% if request.path == music_movies_url %}true{% else %}false{% endif %}"
@@ -56,7 +67,7 @@
                 </a>
                 <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">💽 Албомы</button>
                 <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">🎩 ТОП</button>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">👀 Просмотрено</button>
+{#                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">👀 Просмотрено</button>#}
                 <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">💥 Новое для вас</button>
             </div>
 

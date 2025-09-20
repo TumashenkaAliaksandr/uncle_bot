@@ -1,0 +1,196 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <div class="player-container mx-auto mt-4 p-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-5 text-center">
+                <div class="cover mb-3">
+                    {% if current_track.cover %}
+                        <img id="trackCover" src="{{ current_track.cover.url }}" alt="Обложка"
+                             class="img-fluid rounded">
+                    {% else %}
+                        <img id="trackCover" src="{% static 'botapp/static/img/no_images.png' %}" alt="Обложка"
+                             class="img-fluid rounded">
+                    {% endif %}
+                </div>
+                <div class="track-info mb-3">
+                    <h2 id="trackTitle" class="h5">𝄞 {{ current_track.title }}</h2>
+                    <p id="trackAlbum" class="">💽 Альбом: {{ current_track.album.name }}</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-7">
+                <p class="margin-chinazes">🎞️ Видео Дядя.</p>
+                <p class="margin-files">🎬 Мы в процессе</p>
+                <p class="margin-citate">📡 Поступил сигнал от Космического Осла - сигнал N72 - ама мама банки ...</p>
+
+                <div class="advantages-block">
+                    <p class="margin-emodzi">📌</p>
+                    <ul class="advantages-list">
+                        <li class="advantage-item">
+                              <span class="icon-movie melodrama">
+                                <img src="{% static 'botapp/static/svg/supawork-b482b3a346a94413ba98bf03e45f936f.webp' %}"/>
+                              </span>
+                            <span class="advantage-text">Новое</span>
+                        </li>
+                        <li class="advantage-item">
+                          <span class="icon-movie thriller">
+                           <span class="icon-movie melodrama">
+                                <img src="{% static 'botapp/static/svg/supawork-40ec86cf22fc465081b1cc9256cb9def.webp' %}"/>
+                              </span>
+                          </span>
+                            <span class="advantage-text">Шортс</span>
+                        </li>
+                        <li class="advantage-item">
+                          <span class="icon-movie action">
+                              <span class="icon-movie melodrama">
+                                <img src="{% static 'botapp/static/svg/supawork-d0b429169ddb487789c0ceba163c9aed.webp' %}"/>
+                              </span>
+                          </span>
+                            <span class="advantage-text">Концерты</span>
+                        </li>
+                        <li class="advantage-item">
+                          <span class="icon-movie tarantino">
+                                <span class="icon-movie melodrama">
+                                <img src="{% static 'botapp/static/svg/supawork-7f73670fa4fd4c029654dd5643b56d1a.webp' %}"/>
+                              </span>
+                          </span>
+                            <span class="advantage-text">Приключения</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="video-block">
+                    <div class="main-videos">
+                        <video src="video1.mp4" controls></video>
+                        <video src="video2.mp4" controls></video>
+                    </div>
+                    <div class="small-videos-slider">
+                        <div class="small-videos">
+                            <video src="video3.mp4" controls></video>
+                            <video src="video4.mp4" controls></video>
+                            <video src="video5.mp4" controls></video>
+                            <video src="video6.mp4" controls></video>
+                            <video src="video7.mp4" controls></video>
+                            <video src="video8.mp4" controls></video>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-icons">
+                    <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"
+                       class="social-icon instagram" rel="noopener noreferrer"></a>
+                    <a href="https://vk.com" target="_blank" aria-label="ВКонтакте" class="social-icon vk"
+                       rel="noopener noreferrer"></a>
+                    <a href="https://www.youtube.com" target="_blank" aria-label="YouTube" class="social-icon youtube"
+                       rel="noopener noreferrer"></a>
+                    <a href="https://www.spotify.com" target="_blank" aria-label="Spotify" class="social-icon spotify"
+                       rel="noopener noreferrer"></a>
+                    <a href="https://music.yandex.ru" target="_blank" aria-label="Яндекс Музыка"
+                       class="social-icon yandex-music" rel="noopener noreferrer"></a>
+                </div>
+
+
+                <!-- Секция обратного отсчёта -->
+                <div class="countdown-container-videos text-center my-4">
+                    <h3>{{ countdown.name|default:"Обратный отсчёт" }}</h3>
+                    <div id="countdown" style="font-size: 2em; font-weight: bold; color: #ff4d4d;">Загрузка...</div>
+                </div>
+
+                {#            <div class="ufo-container">#}
+                {#                <img src="{% static 'botapp/static/svg/ufo.svg' %}" alt="UFO Icon"/>#}
+                {#            </div>#}
+
+                <a href="#" class="ufo-link" target="_blank" rel="noopener noreferrer"
+                   aria-label="Запрыгни в делижанс">
+                    <div class="ufo-container">
+                        <img src="{% static 'botapp/static/svg/ufo.svg' %}" alt="UFO Icon"/>
+                        <span class="ufo-tooltip">👽 Запрыгни в делижанс..</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <a href="#" class="omuamua-link" target="_blank" rel="noopener noreferrer"
+           aria-label="Где не был..">
+            <div class="omuamua-container">
+                <img src="{% static 'botapp/static/svg/omuamua_ufo.svg' %}" alt="Oumuamua UFO Icon"/>
+                <span class="ufo-tooltip">☄️ Астероид Картошка</span>
+                <span class="particle1"></span>
+                <span class="particle2"></span>
+                <span class="particle3"></span>
+            </div>
+        </a>
+
+        <div class="comet comet1" role="img" aria-label="Комета"></div>
+        <div class="comet comet2" role="img" aria-label="Комета"></div>
+        <div class="comet comet3" role="img" aria-label="Комета"></div>
+
+        <div class="animated-stars">
+            <svg style="display:none;" xmlns="http://www.w3.org/2000/svg">
+                <symbol id="star" viewBox="0 0 22 22">
+                    <path fill="whitesmoke" stroke="whitesmoke" stroke-width="0.4"
+                          d="M12 2 L15 9 L22 9 L16 14 L18 21 L12 17 L6 21 L8 14 L2 9 L9 9 Z"/>
+                </symbol>
+            </svg>
+        </div>
+
+
+        <div id="cosmic-wind-overlay"
+             style="position: fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; overflow:hidden; z-index:9999; opacity:0; transition: opacity 2s ease-in-out;">
+            <svg viewBox="0 0 800 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
+                 style="width: 100%; height: 100%;">
+                <defs>
+                    <linearGradient id="grad1" x1="0" x2="1" y1="0" y2="0">
+                        <stop offset="0%" stop-color="rgba(255,255,255,0.4)"/>
+                        <stop offset="50%" stop-color="rgba(255,255,255,0.1)"/>
+                        <stop offset="100%" stop-color="rgba(255,255,255,0.4)"/>
+                    </linearGradient>
+                </defs>
+
+                <g class="wind-glitch" stroke="url(#grad1)" stroke-width="4" stroke-linecap="round">
+
+                    <line x1="0" y1="40" x2="200" y2="40"/>
+                    <line x1="250" y1="80" x2="450" y2="80"/>
+                    <line x1="500" y1="120" x2="700" y2="120"/>
+                    <line x1="750" y1="160" x2="880" y2="160"/>
+
+                    <line x1="50" y1="35" x2="50" y2="45"/>
+                    <line x1="160" y1="35" x2="160" y2="45"/>
+                    <line x1="300" y1="75" x2="300" y2="85"/>
+                    <line x1="520" y1="115" x2="520" y2="125"/>
+                    <line x1="740" y1="155" x2="740" y2="165"/>
+
+                </g>
+
+                <style>
+                    .wind-glitch {
+                        animation: glitchMove 6s ease-in-out infinite alternate;
+                        opacity: 1;
+                        will-change: transform, opacity;
+                    }
+
+                    @keyframes glitchMove {
+                        0% {
+                            opacity: 0.3;
+                            transform: translateX(0);
+                        }
+                        50% {
+                            opacity: 0.6;
+                            transform: translateX(20px);
+                        }
+                        100% {
+                            opacity: 0.3;
+                            transform: translateX(0);
+                        }
+                    }
+                </style>
+
+            </svg>
+        </div>
+
+
+    </div>
+
+{% endblock %}
