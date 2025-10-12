@@ -195,12 +195,19 @@ function formatTime(seconds) {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    const blackHoleContainer = document.querySelector('.black-hole-container');
-    if (blackHoleContainer) {
-      blackHoleContainer.classList.add('animate');
-    }
-  }, 300000); // 5 минут в миллисекундах
+  const blackHoleContainer = document.querySelector('.black-hole-container');
+  if (blackHoleContainer) {
+    // Показываем и запускаем анимацию при загрузке страницы
+    blackHoleContainer.classList.add('animate');
+    blackHoleContainer.style.display = 'block';
+
+    // Через 5 минут скрываем элемент и убираем анимацию
+    setTimeout(() => {
+      blackHoleContainer.classList.remove('animate');
+      blackHoleContainer.style.display = 'none';
+    }, 300000); // 300000 мс = 5 минут
+  }
 });
+
 
 

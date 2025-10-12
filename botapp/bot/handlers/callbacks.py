@@ -21,7 +21,7 @@ router = Router()
 MAX_MEDIA_PER_MSG = 5  # Максимум элементов в одной медиагруппе
 sent_messages = {}  # Словарь для хранения ID отправленных сообщений
 nice_listening = "Приятного прослушивания!"  # Сообщение после альбома
-keyboard = None  # Подставьте сюда вашу главную клавиатуру
+keyboard = keyboard  # Подставьте сюда вашу главную клавиатуру
 
 # Функция отправки сообщений с возможным сохранением ID
 async def send_and_store(chat_id, text, **kwargs):
@@ -46,6 +46,7 @@ async def safe_send_media_group(bot, chat_id, media_chunks, **kwargs):
                 except Exception as e:
                     logger.error(f"Ошибка при отправке медиа: {e}")
         await asyncio.sleep(1)  # Пауза между чанками
+
 
 @router.callback_query(lambda c: c.data and c.data.startswith('album_'))
 async def process_album_callback(callback_query: types.CallbackQuery):
