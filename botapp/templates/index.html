@@ -54,7 +54,8 @@
                         👣 Все
                     </button>
                 </a>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">🍜 Завтра в эфире</button>
+                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">💽 Албомы</button>
+                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">🎶 Jingle</button>
                 <a href="{{ videos_url }}">
                 <button class="chip-chip {% if request.path == videos_url %}selected{% endif %}" role="tab" aria-selected="{% if request.path == videos_url %}true{% else %}false{% endif %}" tabindex="{% if request.path == videos_url %}0{% else %}-1{% endif %}">📽️ Видео</button>
                 </a>
@@ -65,7 +66,6 @@
                         🎞️ Музыка для Кино
                     </button>
                 </a>
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">💽 Албомы</button>
                 <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">🎩 ТОП</button>
 {#                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">👀 Просмотрено</button>#}
                 <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">💥 Новое для вас</button>

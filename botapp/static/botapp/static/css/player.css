@@ -1636,7 +1636,7 @@ body.light {
 
     .ufo-link {
         position: absolute;
-        right: 50px;
+        right: 30px;
         top: 84px;
         display: inline-block;
         width: 54px;
@@ -1827,20 +1827,25 @@ body.light {
 
 
 .video-block {
-  max-width: 900px;
-  margin: 44px auto;
-  display: grid;
-  grid-template-rows: auto auto;
-  gap: 16px;
-    margin-top: 140px;
+  max-width: 750px;
+    margin: 0 auto 0;
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    right: 135px;
+    bottom: 30%;
 }
 
 /* Большие видео - 2 в строке */
-
 .main-videos {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* чтобы адаптировано */
   gap: 16px;
+  width: 100%;
 }
 
 .main-videos video {
@@ -1848,23 +1853,26 @@ body.light {
   height: auto;
   border-radius: 8px;
   background: #000;
+  max-height: 360px; /* ограничение высоты */
+  object-fit: cover;
 }
 
 /* Маленькие видео слайдер */
-
 .small-videos-slider {
   overflow-x: auto;
   padding-bottom: 8px;
   scrollbar-width: none; /* Firefox */
+  width: 100%;
 }
 
 .small-videos-slider::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none;
 }
 
 .small-videos {
   display: flex;
   gap: 12px;
+  width: max-content; /* Контролируем ширину, чтобы не ломало */
 }
 
 .small-videos video {
@@ -1873,6 +1881,8 @@ body.light {
   height: 80px;
   border-radius: 6px;
   background: #000;
+  object-fit: cover;
+  max-height: 90px;
 }
 
 .social-icons {

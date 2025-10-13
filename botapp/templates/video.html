@@ -17,50 +17,14 @@
                     {% endif %}
                 </div>
                 <div class="track-info mb-3">
-                    <h2 id="trackTitle" class="h5">𝄞 {{ current_track.title }}</h2>
-                    <p id="trackAlbum" class="">💽 Альбом: {{ current_track.album.name }}</p>
+                    <h2 id="trackTitle" class="h5">🎬 All Videos</h2>
+                    <p id="trackAlbum" class="">🎞️ Видео Дядя.</p>
                 </div>
             </div>
             <div class="col-12 col-sm-7">
                 <p class="margin-chinazes">🎞️ Видео Дядя.</p>
                 <p class="margin-files">🎬 Мы в процессе</p>
                 <p class="margin-citate">📡 Поступил сигнал от Космического Осла - сигнал N72 - ама мама банки ...</p>
-
-                <div class="advantages-block">
-                    <p class="margin-emodzi">📌</p>
-                    <ul class="advantages-list">
-                        <li class="advantage-item">
-                              <span class="icon-movie melodrama">
-                                <img src="{% static 'botapp/static/svg/supawork-b482b3a346a94413ba98bf03e45f936f.webp' %}"/>
-                              </span>
-                            <span class="advantage-text">Новое</span>
-                        </li>
-                        <li class="advantage-item">
-                          <span class="icon-movie thriller">
-                           <span class="icon-movie melodrama">
-                                <img src="{% static 'botapp/static/svg/supawork-40ec86cf22fc465081b1cc9256cb9def.webp' %}"/>
-                              </span>
-                          </span>
-                            <span class="advantage-text">Шортс</span>
-                        </li>
-                        <li class="advantage-item">
-                          <span class="icon-movie action">
-                              <span class="icon-movie melodrama">
-                                <img src="{% static 'botapp/static/svg/supawork-d0b429169ddb487789c0ceba163c9aed.webp' %}"/>
-                              </span>
-                          </span>
-                            <span class="advantage-text">Концерты</span>
-                        </li>
-                        <li class="advantage-item">
-                          <span class="icon-movie tarantino">
-                                <span class="icon-movie melodrama">
-                                <img src="{% static 'botapp/static/svg/supawork-7f73670fa4fd4c029654dd5643b56d1a.webp' %}"/>
-                              </span>
-                          </span>
-                            <span class="advantage-text">Приключения</span>
-                        </li>
-                    </ul>
-                </div>
 
                 <div class="video-block">
                     <div class="main-videos">
@@ -74,30 +38,10 @@
                             <video src="video5.mp4" controls></video>
                             <video src="video6.mp4" controls></video>
                             <video src="video7.mp4" controls></video>
-                            <video src="video8.mp4" controls></video>
                         </div>
                     </div>
                 </div>
 
-                <div class="social-icons">
-                    <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"
-                       class="social-icon instagram" rel="noopener noreferrer"></a>
-                    <a href="https://vk.com" target="_blank" aria-label="ВКонтакте" class="social-icon vk"
-                       rel="noopener noreferrer"></a>
-                    <a href="https://www.youtube.com" target="_blank" aria-label="YouTube" class="social-icon youtube"
-                       rel="noopener noreferrer"></a>
-                    <a href="https://www.spotify.com" target="_blank" aria-label="Spotify" class="social-icon spotify"
-                       rel="noopener noreferrer"></a>
-                    <a href="https://music.yandex.ru" target="_blank" aria-label="Яндекс Музыка"
-                       class="social-icon yandex-music" rel="noopener noreferrer"></a>
-                </div>
-
-
-                <!-- Секция обратного отсчёта -->
-                <div class="countdown-container-videos text-center my-4">
-                    <h3>{{ countdown.name|default:"Обратный отсчёт" }}</h3>
-                    <div id="countdown" style="font-size: 2em; font-weight: bold; color: #ff4d4d;">Загрузка...</div>
-                </div>
 
                 {#            <div class="ufo-container">#}
                 {#                <img src="{% static 'botapp/static/svg/ufo.svg' %}" alt="UFO Icon"/>#}
@@ -110,6 +54,11 @@
                         <span class="ufo-tooltip">👽 Запрыгни в делижанс..</span>
                     </div>
                 </a>
+
+
+                <audio id="audioPlayer" src="{{ current_track.audio_file.url }}" preload="auto"
+                       class="w-100 mb-3"></audio>
+                <canvas id="visualizer" width="100%" height="80"></canvas>
             </div>
         </div>
         <a href="#" class="omuamua-link" target="_blank" rel="noopener noreferrer"
