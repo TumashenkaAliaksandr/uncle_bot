@@ -102,3 +102,20 @@ def videos(request, album_id=None, track_id=None):
         'countdown': countdown,
     })
 
+
+def jingle(request):
+
+    album = Album.objects.prefetch_related('tracks').first()
+    return render(request, 'jingle.html', {'album': album})
+
+
+def top(request):
+
+    album = Album.objects.prefetch_related('tracks').first()
+    return render(request, 'top.html', {'album': album})
+
+
+def new_the_day(request):
+
+    album = Album.objects.prefetch_related('tracks').first()
+    return render(request, 'new_the_day.html', {'album': album})

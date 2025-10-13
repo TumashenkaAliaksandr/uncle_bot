@@ -11,6 +11,9 @@ urlpatterns = [
     path('track/<int:track_id>/', views.player, name='track_player'),
     path('music-movies/', views.music_movies, name='music_movies'),
     path('videos/', views.videos, name='videos'),
+    path('jingle/', views.jingle, name='jingle'),
+    path('top/', views.top, name='top'),
+    path('new-the-day/', views.new_the_day, name='new_the day'),
 ]
 
 if settings.DEBUG:
