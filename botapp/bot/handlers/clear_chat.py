@@ -12,6 +12,7 @@ async def clear_chat(chat_id: int, delay_seconds: int = 5):
         try:
             await bot.delete_message(chat_id, message_id)
             logger.info(f"✔️ Удалено сообщение {message_id} в чате {chat_id}")
+            await asyncio.sleep(0.2)  # задержка, чтобы не спамить API
         except Exception as e:
             logger.warning(f"❌ Не удалось удалить сообщение {message_id}: {e}")
 

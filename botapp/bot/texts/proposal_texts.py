@@ -34,7 +34,7 @@ cleaning_chat_txt = (
     "<b><i>Чищу чат 🧹</i></b>"
 )
 
-your_settings_txt = (
+YOUR_SETTINGS_TXT = (
     "<i>Вы в настройках 🛠️:</i>"
 )
 
