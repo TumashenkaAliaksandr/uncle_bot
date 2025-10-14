@@ -4,7 +4,7 @@ import asyncio
 from aiogram import Router, types
 from aiogram.exceptions import TelegramEntityTooLarge
 from aiogram.types.input_file import FSInputFile
-from aiogram.types import InputMediaAudio, InputMediaPhoto
+from aiogram.types import InputMediaAudio, InputMediaPhoto, Message
 from asgiref.sync import sync_to_async
 from botapp.models import Album
 from botapp.bot.config import logger
@@ -22,6 +22,7 @@ MAX_MEDIA_PER_MSG = 5  # Максимум элементов в одной ме�
 sent_messages = {}  # Словарь для хранения ID отправленных сообщений
 nice_listening = "Приятного прослушивания!"  # Сообщение после альбома
 keyboard = keyboard  # Подставьте сюда вашу главную клавиатуру
+
 
 
 # Безопасная отправка медиагрупп с разбиением на части и обработкой ошибок
@@ -111,87 +112,7 @@ async def process_album_callback(callback_query: types.CallbackQuery):
     await send_and_store(callback_query.message.chat.id, nice_listening, parse_mode="HTML", reply_markup=keyboard)
 
 
-@router.message(lambda message: message.text == "🎧 Слушать веб версию")
-async def show_settings(message: types.Message):
-    sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    # Текст с HTML-ссылкой
-    sing_answer_txt = (
-        'Вы можете слушать веб-версию по ссылке: '
-        '<a href="https://phoenixpegasus.pythonanywhere.com/" target="_blank">Открыть сайт</a>'
-    )
-    await send_and_store(
-        message.chat.id,
-        sing_answer_txt,
-        parse_mode="HTML",
-        reply_markup=keyboard
-    )
 
 
-@router.message(lambda message: message.text == "⚙️")
-async def show_settings(message: types.Message):
-    logger.info(f"👤 Пользователь {message.from_user.id} запросил ⚙️ или нажал кнопку ⚙️")
-    sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    await send_and_store(message.chat.id, YOUR_SETTINGS_TXT, parse_mode="HTML", reply_markup=settings_keyboard)
-
-
-@router.message(lambda message: message.text == "🧹 Почистить чат")
-async def clear_chat_handler(message: types.Message):
-    logger.info(f"👤 Пользователь {message.from_user.id} запросил 🧹 Почистить чат")
-    sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    await send_and_store(message.chat.id, cleaning_chat_txt, parse_mode="HTML")
-
-    async def clear_and_send_menu():
-        logger.info(f"БОТ {message.from_user.id} 🧹 Чистит чат")
-        await clear_chat(message.chat.id)
-        await send_and_store(message.chat.id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=keyboard)
-
-    asyncio.create_task(clear_and_send_menu())
-
-
-@router.message(lambda message: message.text == "⬅️ Назад")
-async def back_to_main_menu(message: types.Message):
-    sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    await send_and_store(message.chat.id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=keyboard)
-
-@router.message(lambda message: message.text == "⬅️")
-async def back_to_main_menu(message: types.Message):
-    sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    await send_and_store(message.chat.id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=keyboard)
-
-
-@router.message(lambda message: message.text == "💰 Донаты")
-async def donate_handler(message: types.Message):
-    # Сохраняем ID входящего сообщения пользователя для удаления
-    sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    await send_and_store(
-        message.chat.id,
-        DONATE_TEXT,
-        reply_markup=donate_keyboard,
-        parse_mode="HTML"
-    )
-
-
-@router.message(lambda message: message.text == "🎸 Табы")
-async def tab_handler(message: types.Message):
-    keyboard = await get_songs_keyboard()
-    await message.answer("✅ Выберите песню что бы получить текст и аккорды:", reply_markup=keyboard)
-
-
-@router.message(lambda message: message.text == "📺 Видео")
-async def video_handler(message: types.Message):
-    await message.answer("🤷‍♂ Сорян, видосов пока нет..")
-
-
-@router.message(lambda message: message.text == "📰 Новости")
-async def news_handler(message: types.Message):
-    # Сохраняем ID входящего сообщения пользователя для последующего удаления
-    sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-
-    # Отправляем ответ и сохраняем ID сообщения бота
-    sent_message = await send_and_store(
-        message.chat.id,
-        "🤷‍♂ Сорян, Новостей пока нет.."
-    )
-    sent_messages[message.chat.id].append(sent_message.message_id)
 
 
