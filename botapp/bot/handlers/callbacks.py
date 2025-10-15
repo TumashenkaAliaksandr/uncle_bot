@@ -4,14 +4,12 @@ import asyncio
 from aiogram import Router, types
 from aiogram.exceptions import TelegramEntityTooLarge
 from aiogram.types.input_file import FSInputFile
-from aiogram.types import InputMediaAudio, InputMediaPhoto, Message
+from aiogram.types import InputMediaAudio, InputMediaPhoto
 from asgiref.sync import sync_to_async
 from botapp.models import Album
 from botapp.bot.config import logger
-from botapp.bot.handlers.clear_chat import clear_chat
-from botapp.bot.keyboards import settings_keyboard, keyboard, donate_keyboard, get_songs_keyboard
-from botapp.bot.texts.proposal_texts import DONATE_TEXT, cleaning_chat_txt, \
-    MAIN_MENU_ANSWER, nice_listening, YOUR_SETTINGS_TXT
+from botapp.bot.keyboards import keyboard
+from botapp.bot.texts.proposal_texts import nice_listening
 from botapp.bot.utils.message_utils import send_and_store
 from botapp.bot.loader import sent_messages, bot
 

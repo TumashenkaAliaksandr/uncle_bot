@@ -133,3 +133,19 @@ async def show_settings(message: Message):
         parse_mode="HTML",
         reply_markup=keyboard
     )
+
+
+@router.message(lambda message: message.text == "📣 Канал")
+async def show_settings(message: Message):
+    sent_messages.setdefault(message.chat.id, []).append(message.message_id)
+    # Текст с HTML-ссылкой
+    sing_answer_txt = (
+        '<strong>Перейти в телеграмм канал ДЯДЯ?</strong> 🚶 ˋ°•*⁀➷'
+        '<a href="https://t.me/+M-LokUWMIaBmYTFi" target="_blank">Перейти в канaл</a>'
+    )
+    await send_and_store(
+        message.chat.id,
+        sing_answer_txt,
+        parse_mode="HTML",
+        reply_markup=keyboard
+    )
