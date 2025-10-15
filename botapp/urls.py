@@ -13,7 +13,7 @@ urlpatterns = [
     path('videos/', views.videos, name='videos'),
     path('jingle/', views.jingle, name='jingle'),
     path('top/', views.top, name='top'),
-    path('new-the-day/', views.new_the_day, name='new_the day'),
+    path('new-the-day/', views.new_the_day, name='new_the_day'),
 ]
 
 if settings.DEBUG:

@@ -68,7 +68,14 @@
                 </a>
                 <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">🎩 ТОП</button>
 {#                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">👀 Просмотрено</button>#}
-                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">💥 Новое для вас</button>
+                <a href="{% url 'new_the_day' %}">
+                    <button class="chip-chip {% if request.path == '/new-the-day/' %}selected{% endif %}" role="tab"
+                            aria-selected="{% if request.path == '/new-the-day/' %}true{% else %}false{% endif %}"
+                            tabindex="{% if request.path == '/new-the-day/' %}0{% else %}-1{% endif %}">
+                        💥 Новое для вас
+                    </button>
+                </a>
+
             </div>
 
             <button class="chips-arrow chips-arrow-right" aria-label="Следующая страница" tabindex="0">

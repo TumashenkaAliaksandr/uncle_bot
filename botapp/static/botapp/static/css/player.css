@@ -1351,7 +1351,7 @@ body::before {
 :root {
     --bg: #032435;
     --fg: #fff;
-    --panel: rgba(15, 49, 67, 0.91);
+    --panel: rgba(12, 69, 99, 0.91);
     --panel2: #181818;
 }
 
@@ -1656,6 +1656,7 @@ body.light {
         z-index: 1000;
         font-family: monospace, monospace;
         margin-left: 0;
+        display: none;
     }
 
     .omuamua-link {

@@ -3,7 +3,6 @@
 
 
 {% block content %}
-
     <div class="player-container mx-auto mt-4 p-4">
         <div class="row justify-content-center">
             <div class="col-12 col-sm-5 text-center">
@@ -17,31 +16,19 @@
                     {% endif %}
                 </div>
                 <div class="track-info mb-3">
-                    <h2 id="trackTitle" class="h5">🎬 All Videos</h2>
-                    <p id="trackAlbum" class="">🎞️ Видео Дядя.</p>
+                    <h2 id="trackTitle" class="h5">𝄞 {{ current_track.title }}</h2>
+                    <p id="trackAlbum" class="">💽 Альбом: {{ current_track.album.name }}</p>
                 </div>
             </div>
             <div class="col-12 col-sm-7">
-                <p class="margin-chinazes">🎞️ Видео Дядя.</p>
-                <p class="margin-files">🎬 Мы в процессе</p>
+                <p class="margin-chinazes">🤖 Чиназес Гайс.</p>
+                <p class="margin-files">🕒 Вечером среду после обеда ДЯДЯ 📋 обновляет список песен.</p>
                 <p class="margin-citate">📡 Поступил сигнал от Космического Осла - сигнал N72 - ама мама банки ...</p>
-
-                <div class="video-block">
-                    <div class="main-videos">
-                        <video src="video1.mp4" controls></video>
-                        <video src="video2.mp4" controls></video>
-                    </div>
-                    <div class="small-videos-slider">
-                        <div class="small-videos">
-                            <video src="video3.mp4" controls></video>
-                            <video src="video4.mp4" controls></video>
-                            <video src="video5.mp4" controls></video>
-                            <video src="video6.mp4" controls></video>
-                            <video src="video7.mp4" controls></video>
-                        </div>
-                    </div>
+                <!-- Секция обратного отсчёта -->
+                <div class="countdown-container text-center my-4">
+                    <h3>{{ countdown.name|default:"Обратный отсчёт" }}</h3>
+                    <div id="countdown" style="font-size: 2em; font-weight: bold; color: #ff4d4d;">Загрузка...</div>
                 </div>
-
 
                 {#            <div class="ufo-container">#}
                 {#                <img src="{% static 'botapp/static/svg/ufo.svg' %}" alt="UFO Icon"/>#}
@@ -59,6 +46,108 @@
                 <audio id="audioPlayer" src="{{ current_track.audio_file.url }}" preload="auto"
                        class="w-100 mb-3"></audio>
                 <canvas id="visualizer" width="100%" height="80"></canvas>
+                <div class="controls d-flex justify-content-center my-3 flex-wrap gap-3">
+                    <button id="prevBtn" class="btn btn-outline-light btn-sm" aria-label="Previous">
+                        <!-- Иконка Previous -->
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <polygon points="19 20 9 12 19 4 19 20"></polygon>
+                            <line x1="5" y1="19" x2="5" y2="5"></line>
+                        </svg>
+                    </button>
+                    <button id="playPauseBtn" class="btn btn-outline-light btn-sm" aria-label="Play/Pause">
+                        <!-- Иконка Play (показывается по умолчанию) -->
+                        <svg id="playIcon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        <!-- Иконка Pause (скрыта по умолчанию) -->
+                        <svg id="pauseIcon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display:none;">
+                            <rect x="6" y="4" width="4" height="16"></rect>
+                            <rect x="14" y="4" width="4" height="16"></rect>
+                        </svg>
+                    </button>
+
+                    <button id="nextBtn" class="btn btn-outline-light btn-sm" aria-label="Next">
+                        <!-- Иконка Next -->
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <polygon points="5 4 15 12 5 20 5 4"></polygon>
+                            <line x1="19" y1="5" x2="19" y2="19"></line>
+                        </svg>
+                    </button>
+
+                    <button id="loopBtn" class="btn btn-outline-light btn-sm" aria-label="Loop">
+                        <!-- Иконка Loop -->
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <polyline points="17 1 21 5 17 9"></polyline>
+                            <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                            <polyline points="7 23 3 19 7 15"></polyline>
+                            <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                        </svg>
+                    </button>
+
+                    <button id="shuffleBtn" class="btn btn-outline-light btn-sm" aria-label="Shuffle">
+                        <!-- Иконка Shuffle -->
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <polyline points="16 3 21 3 21 8"></polyline>
+                            <line x1="4" y1="20" x2="21" y2="3"></line>
+                            <polyline points="21 16 21 21 16 21"></polyline>
+                            <line x1="15" y1="15" x2="21" y2="21"></line>
+                            <line x1="4" y1="4" x2="9" y2="9"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="progress-container d-flex align-items-center gap-2 mb-3">
+                    <span id="currentTime">0:00</span>
+
+                    <svg class="progress-svg flex-grow-1" viewBox="0 0 300 20" xmlns="http://www.w3.org/2000/svg"
+                         aria-hidden="true" role="img">
+                        <path class="progress-track" d="M10 10 Q 50 0, 90 10 T 170 10 T 270 10" stroke="#444"
+                              stroke-width="6" fill="none"/>
+                        <path class="progress-bar" d="M10 10 Q 50 0, 90 10 T 170 10 T 270 10" stroke="#ffeb3b"
+                              stroke-width="6" fill="none" stroke-linecap="round"/>
+                    </svg>
+
+                    <span id="duration">3:45</span>
+                </div>
+
+                <div class="volume-container d-flex align-items-center gap-2 mb-3">
+                    <svg class="volume-svg" viewBox="0 0 300 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                         role="img">
+                        <path class="volume-track" d="M10 10 Q 50 0, 90 10 T 170 10 T 270 10" stroke="#444"
+                              stroke-width="6"
+                              fill="none"/>
+                        <path class="volume-bar" d="M10 10 Q 50 0, 90 10 T 170 10 T 270 10" stroke="#ede69d"
+                              stroke-width="6" fill="none" stroke-linecap="round"/>
+                        <circle class="volume-thumb" cx="10" cy="10" r="10" fill="#ede69d"
+                                filter="drop-shadow(0 0 6px #ede69d)"/>
+                    </svg>
+                    <span id="volumeIcon">🔊</span>
+                </div>
+
+                <div class="track-list bg-secondary bg-opacity-25 rounded p-2"
+                     style="max-height: 200px; overflow-y: auto;">
+                    <ul id="trackList" class="list-unstyled d-flex flex-wrap gap-2 justify-content-start">
+                        {% for track in tracks %}
+                            <li data-id="{{ track.id }}"
+                                class="d-flex align-items-center gap-2 p-2 rounded {% if track.id == current_track.id %}active bg-success bg-opacity-25{% endif %}"
+                                style="cursor:pointer;">
+                                {% if track.cover %}
+                                    <img src="{{ track.cover.url }}" alt="Обложка" class="mini-cover rounded">
+                                {% else %}
+                                    <img src="{% static 'botapp/static/img/no_images.png' %}" alt="Обложка"
+                                         class="mini-cover rounded">
+                                {% endif %}
+                                <span class="text-truncate" style="max-width: 150px;">{{ track.title }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
         <a href="#" class="omuamua-link" target="_blank" rel="noopener noreferrer"
@@ -71,6 +160,30 @@
                 <span class="particle3"></span>
             </div>
         </a>
+
+        <div class="alien-craft" tabindex="0" aria-label="Летающий НЛО">
+            <div class="alien-body">
+                <img src="{% static 'botapp/static/svg/flight_ufo.svg' %}" alt="Flight UFO Icon"/>
+            </div>
+            <div class="alien-tooltip">👽 чё те надда?</div>
+        </div>
+
+        <div class="black-hole-link" aria-label="Черная дыра с поглощением планет и приветствием" role="img">
+            <div class="black-hole-container">
+                <div class="black-hole">
+                    <div class="typing-text" aria-live="polite"><span>Добро пожаловать...</span>
+                        <span class="text2">во вселенную дядя</span>
+                    </div>
+                </div>
+                <div class="purple-shadow"></div>
+
+                <!-- Планеты -->
+                <div class="planet planet1" aria-hidden="true"></div>
+                <div class="planet planet2" aria-hidden="true"></div>
+                <div class="planet planet3" aria-hidden="true"></div>
+                <div class="planet planet4" aria-hidden="true"></div>
+            </div>
+        </div>
 
         <div class="comet comet1" role="img" aria-label="Комета"></div>
         <div class="comet comet2" role="img" aria-label="Комета"></div>
