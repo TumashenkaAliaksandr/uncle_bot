@@ -21,7 +21,7 @@
         </div>
         <div class="col-12 col-sm-7">
         <p class="margin-chinazes">🤖 Чиназес Гайс.</p>
-            <p class="margin-files">🕒 Вечером среду после обеда ДЯДЯ 📋 обновляет список песен.</p>
+            <p class="margin-files">🍹 гр.ДЯДЯ — это уникальный музыкальный коктейль, сочетающий Альтернативу, Поп-рок, Регги, R’n’B, Soul, New Wave и Retro Wave.</p>
             <p class="margin-citate">📡 Поступил сигнал от Космического Осла - сигнал N72 - ама мама банки ...</p>
             <!-- Секция обратного отсчёта -->
             <div class="countdown-container text-center my-4">
@@ -127,12 +127,20 @@
                 <span id="volumeIcon">🔊</span>
             </div>
 
-            <div class="track-list bg-secondary bg-opacity-25 rounded p-2" style="max-height: 200px; overflow-y: auto;">
-                <ul id="trackList" class="list-unstyled d-flex flex-wrap gap-2 justify-content-start">
+            <div class="track-list-wrapper position-relative bg-secondary bg-opacity-25 rounded p-2"
+                 style="overflow-x: auto; white-space: nowrap; -ms-overflow-style: none; scrollbar-width: none;">
+                <!-- Подсказка с эмодзи / символом для прокрутки -->
+                <div class="scroll-hint position-absolute"
+                     style="right: 10px; top: 70%; transform: translateY(-50%); pointer-events: none; user-select: none; font-size: 1.5rem; color: #555;">
+                    👉
+                </div>
+
+                <ul id="trackList" class="list-unstyled d-flex flex-nowrap gap-2 justify-content-start"
+                    style="width: max-content;">
                     {% for track in tracks %}
                         <li data-id="{{ track.id }}"
                             class="d-flex align-items-center gap-2 p-2 rounded {% if track.id == current_track.id %}active bg-success bg-opacity-25{% endif %}"
-                            style="cursor:pointer;">
+                            style="cursor:pointer; white-space: normal;">
                             {% if track.cover %}
                                 <img src="{{ track.cover.url }}" alt="Обложка" class="mini-cover rounded">
                             {% else %}

@@ -1,6 +1,6 @@
 body {
     position: relative;
-    background: var(--bg, #032435);
+    background: var(--bg, #010f17);
     color: var(--fg, #fff);
     font-family: 'Igra Sans', 'Rubik', 'Segoe UI', Arial, sans-serif;
     transition: background 0.3s, color 0.3s;
@@ -29,13 +29,21 @@ body::before {
   vertical-align: middle; /* выравнивание по центру текста */
 }
 
+.track-list::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in WebKit browsers */
+}
+
+.track-list-wrapper {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 
 .player-container {
-    width: 85%;
+    width: 94%;
     margin: 40px auto;
     background: var(--panel, #DAE9F2);
-    border-radius: 20px;
-    box-shadow: 0 25px 25px -13px rgb(162 188 139);
+    border-radius: 13px;
+    box-shadow: 0 17px 22px -13px rgb(29, 185, 84);
     padding: 30px 20px;
     text-align: center;
     overflow: hidden;
@@ -85,7 +93,7 @@ body::before {
 }
 
 .countdown-container {
-    max-width: 400px;
+    max-width: 500px;
     margin: 2rem auto;
     background-color: var(--panel, #2642518f);
     padding: 1.5rem 2rem;
@@ -129,8 +137,8 @@ body::before {
     position: relative;
     bottom: 47px;
     right: 0;
-    background: #244e865e;
-    border-radius: 8px;
+    background: #06f8b23b;
+    border-radius: 4px;
     padding: 4px;
 }
 
@@ -138,9 +146,9 @@ body::before {
     position: relative;
     top: 0;
     right: 35%;
-    background: #244e865e;
+    background: #06f8b23b;
     width: 220px;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 4px;
 }
 
@@ -575,8 +583,8 @@ body::before {
 
 .ufo-link {
   position: absolute;
-  right: 84px;
-  top: 84px;
+  right: 77px;
+  top: 180px;
   display: inline-block;
   width: 54px;
   user-select: none;
@@ -1329,7 +1337,7 @@ body::before {
 .theme-switcher {
     position: absolute !important;
     top: 4px !important;
-    right: 100px !important;
+    right: 44px !important;
 }
 
 .theme-switcher button {
@@ -1349,9 +1357,9 @@ body::before {
 
 
 :root {
-    --bg: #032435;
+    --bg: #010f17;
     --fg: #fff;
-    --panel: rgba(12, 69, 99, 0.91);
+    --panel: rgba(1, 24, 37, 0.91);
     --panel2: #181818;
 }
 
@@ -1767,7 +1775,7 @@ body.light {
 .chip-chip.selected,
 .chip-chip:hover,
 .chip-chip:focus {
-  background-color: #244e86;
+  background-color: #195cb6;
   color: white;
   box-shadow: 0 0 6px rgb(6 95 212 / 0.6);
   outline: none;

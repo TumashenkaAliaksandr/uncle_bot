@@ -31,6 +31,7 @@ class Track(models.Model):
     is_popular = models.BooleanField(verbose_name='Популярные', default=False, blank=True)
     is_movies = models.BooleanField(verbose_name='В Кино', default=False, blank=True)
     is_tomorrow = models.BooleanField(verbose_name='Завтра в эфире', default=False, blank=True)
+    is_tonight = models.BooleanField(verbose_name='Сегодня в эфире', default=False, blank=True)
 
     class Meta:
         verbose_name = '🎼 Трек'
