@@ -43,7 +43,7 @@ body::before {
     margin: 40px auto;
     background: var(--panel, #DAE9F2);
     border-radius: 13px;
-    box-shadow: 0 17px 22px -13px rgb(29, 185, 84);
+    box-shadow: 0 17px 22px -13px rgb(6 102 40);
     padding: 30px 20px;
     text-align: center;
     overflow: hidden;
@@ -134,12 +134,33 @@ body::before {
 }
 
 .margin-files {
-    position: relative;
-    bottom: 47px;
-    right: 0;
+    position: absolute;
+    bottom: 80%;
+    right: 90px;
     background: #06f8b23b;
     border-radius: 4px;
     padding: 4px;
+    width: 790px;
+}
+
+.margin-files-evening {
+    position: absolute;
+    bottom: 82%;
+    right: 90px;
+    background: #06f8b23b;
+    border-radius: 4px;
+    padding: 4px;
+    width: 790px;
+}
+
+.margin-files-process {
+    position: absolute;
+    bottom: 75%;
+    right: 90px;
+    background: #06f8b23b;
+    border-radius: 4px;
+    padding: 4px;
+    width: 790px;
 }
 
 .margin-chinazes {
@@ -921,7 +942,7 @@ body::before {
 .black-hole-link {
   position: absolute;
   left: 58%;
-  top: 46%;
+  top: 50%;
   transform: translate(-50%, -50%);
   width: 340px;
   height: 340px;
@@ -1713,7 +1734,7 @@ body.light {
     background: var(--panel, #DAE9F2);
     padding: 8px 12px;
     border-radius: 0 0 8px 8px;
-    box-shadow: 0 25px 25px -17px rgb(162 188 139);
+    box-shadow: 0 13px 22px -17px rgb(162 188 139);
 }
 
 .chips-arrow {

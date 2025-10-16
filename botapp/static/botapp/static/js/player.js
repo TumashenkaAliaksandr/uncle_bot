@@ -48,7 +48,7 @@ function formatTime(timeSec) {
   return `${Math.floor(t / 60)}:${('0' + (t % 60)).slice(-2)}`;
 }
 
-// Обновление прогрессбара (пустой сначала, заполняется по времени)
+// Обновление прогрессбара
 function updateProgressBar(currentTime, duration) {
   if (!progressBarSvg || !duration) return;
   const percent = currentTime / duration;
@@ -57,7 +57,7 @@ function updateProgressBar(currentTime, duration) {
   progressBarSvg.style.strokeDashoffset = offset;
 }
 
-// Смягчаем громкость, плавно обновляя ползунок на SVG
+// Плавное обновление громкости
 function updateVolumeBar(volume) {
   if (!volumeBarSvg || !volumeThumb) return;
   const offset = volumeBarLength * (1 - volume);
@@ -79,8 +79,11 @@ function selectTrack(idx, resetProgress = true) {
   if (idx >= tracks.length) idx = 0;
   currentTrackIdx = idx;
   if (resetProgress) audio.currentTime = 0;
-  tracks.forEach(t => t.element.classList.remove('active'));
-  tracks[idx].element.classList.add('active');
+
+  // Обновляем активный класс у треков
+  tracks.forEach(t => t.element.classList.remove('active', 'bg-success', 'bg-opacity-25'));
+  tracks[idx].element.classList.add('active', 'bg-success', 'bg-opacity-25');
+
   fetch(`/track/${tracks[idx].id}/`)
     .then(resp => {
       if (!resp.ok) throw new Error('Network response was not ok');
@@ -103,7 +106,7 @@ function selectTrack(idx, resetProgress = true) {
     .catch(err => console.error('Error loading track:', err));
 }
 
-// Play/Pause
+// События кнопок Play/Pause
 playPauseBtn && playPauseBtn.addEventListener('click', () => {
   if (audio.paused) {
     audio.play();
@@ -113,7 +116,6 @@ playPauseBtn && playPauseBtn.addEventListener('click', () => {
   }
 });
 
-// Обновление кнопки
 audio.addEventListener('play', () => {
   if (playPauseBtn) playPauseBtn.textContent = '⏸️';
 });
@@ -129,7 +131,7 @@ audio.addEventListener('timeupdate', () => {
   updateProgressBar(audio.currentTime, audio.duration);
 });
 
-// Клик по полоске прогресса
+// Клик по прогрессбару
 const progressContainer = document.querySelector('.progress-svg');
 if (progressContainer) {
   progressContainer.addEventListener('click', e => {
@@ -141,28 +143,30 @@ if (progressContainer) {
   });
 }
 
+// Кнопки переключения треков
 prevBtn && prevBtn.addEventListener('click', () => selectTrack(currentTrackIdx - 1));
 nextBtn && nextBtn.addEventListener('click', () => {
   if (isShuffle) selectTrack(Math.floor(Math.random() * tracks.length));
   else selectTrack(currentTrackIdx + 1);
 });
 
+// Луп и шифл
 loopBtn && loopBtn.addEventListener('click', () => {
   isLoop = !isLoop;
   audio.loop = isLoop;
-  if (loopBtn) loopBtn.classList.toggle('active', isLoop);
+  loopBtn.classList.toggle('active', isLoop);
 });
 
 shuffleBtn && shuffleBtn.addEventListener('click', () => {
   isShuffle = !isShuffle;
-  if (shuffleBtn) shuffleBtn.classList.toggle('active', isShuffle);
+  shuffleBtn.classList.toggle('active', isShuffle);
 });
 
 audio.addEventListener('ended', () => {
   if (!isLoop) nextBtn && nextBtn.click();
 });
 
-// Плавное управление громкостью SVG с исправленным расчетом клика
+// Управление громкостью
 const volumeContainer = document.querySelector('.volume-svg');
 let isVolumeDragging = false;
 
@@ -170,7 +174,6 @@ function volumeSetByClick(clientX) {
   if (!volumeContainer) return;
   const rect = volumeContainer.getBoundingClientRect();
   let clickX = clientX - rect.left;
-  // Паддинг-границы полосы громкости (точки)
   const paddingLeft = 10;
   const paddingRight = 270;
   clickX = Math.max(paddingLeft, Math.min(clickX, paddingRight));
@@ -201,7 +204,7 @@ themeToggle && themeToggle.addEventListener('click', () => {
   document.body.classList.toggle('light');
 });
 
-// Визуализатор
+// Визуализатор аудио
 const canvas = document.getElementById('visualizer');
 const ctx = canvas ? canvas.getContext('2d') : null;
 let audioCtx, analyser, src, dataArray;

@@ -22,7 +22,7 @@
             </div>
             <div class="col-12 col-sm-7">
                 <p class="margin-chinazes">🤖 Чиназес Гайс.</p>
-                <p class="margin-files">🕒 Вечером среду после обеда ДЯДЯ 📋 обновляет список песен.</p>
+                <p class="margin-files-evening">🕒 Вечером среду после обеда ДЯДЯ 📋 обновляет список песен.</p>
                 <p class="margin-citate">📡 Поступил сигнал от Космического Осла - сигнал N72 - ама мама банки ...</p>
                 <!-- Секция обратного отсчёта -->
                 <div class="countdown-container text-center my-4">
@@ -42,8 +42,7 @@
                     </div>
                 </a>
 
-
-                <audio id="audioPlayer" src="{{ current_track.audio_file.url }}" preload="auto"
+                <audio id="audioPlayer" src="{{ current_tracks.audio_file.url }}" preload="auto"
                        class="w-100 mb-3"></audio>
                 <canvas id="visualizer" width="100%" height="80"></canvas>
                 <div class="controls d-flex justify-content-center my-3 flex-wrap gap-3">
