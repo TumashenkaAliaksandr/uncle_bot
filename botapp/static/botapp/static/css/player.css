@@ -24,9 +24,9 @@ body::before {
 }
 
 .player-title img {
-  width: 33px;   /* ширина логотипа */
-  height: 33px;  /* высота логотипа */
-  vertical-align: middle; /* выравнивание по центру текста */
+    width: 33px; /* ширина логотипа */
+    height: 33px; /* высота логотипа */
+    vertical-align: middle; /* выравнивание по центру текста */
 }
 
 .track-list::-webkit-scrollbar {
@@ -34,8 +34,8 @@ body::before {
 }
 
 .track-list-wrapper {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 .player-container {
@@ -125,7 +125,7 @@ body::before {
 }
 
 #countdown {
-    font-size: 1.1rem!important;
+    font-size: 1.1rem !important;
     font-weight: 900;
     color: #ff4d4d;
     letter-spacing: 1.2px;
@@ -135,9 +135,9 @@ body::before {
 
 .margin-files {
     position: absolute;
-    bottom: 80%;
+    bottom: 82%;
     right: 90px;
-    background: #06f8b23b;
+    background: #3169593b;
     border-radius: 4px;
     padding: 4px;
     width: 790px;
@@ -147,17 +147,16 @@ body::before {
     position: absolute;
     bottom: 82%;
     right: 90px;
-    background: #06f8b23b;
+    background: #3169593b;
     border-radius: 4px;
     padding: 4px;
     width: 790px;
 }
 
 .margin-files-process {
-    position: absolute;
-    bottom: 75%;
+    bottom: 83%;
     right: 90px;
-    background: #06f8b23b;
+    background: #3169593b;
     border-radius: 4px;
     padding: 4px;
     width: 790px;
@@ -167,112 +166,105 @@ body::before {
     position: relative;
     top: 0;
     right: 35%;
-    background: #06f8b23b;
+    background: #3169593b;
     width: 220px;
     border-radius: 4px;
     padding: 4px;
 }
 
 .margin-citate {
-  display: none; /* скрываем по умолчанию */
-  font-style: italic;
-  font-weight: 500;
-  font-size: 0.88rem;
-  line-height: 1.4;
-  color: #434141;
-  background: #f0f0f08a;
-  border-left: 6px solid #ffb347;
-  padding: 0.5rem 1rem;
-  margin: 1rem 0;
-  border-radius: 9px;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-  max-width: fit-content;
-  user-select: text;
-  position: relative;
-  top: 40%;
-  right: 74%;
+    display: none; /* скрываем по умолчанию */
+    font-style: italic;
+    font-weight: 500;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: #434141;
+    background: #f0f0f08a;
+    border-left: 6px solid #ffb347;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    border-radius: 9px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    max-width: fit-content;
+    user-select: text;
+    position: relative;
+    top: 44%;
+    right: 74%;
     z-index: 9999;
 }
 
 .margin-citate::before {
-  content: "📡";
-  position: absolute;
-  left: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.2rem;
+    content: "📡";
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
 }
 
 .margin-citate:hover {
-  background: #fff8e1;
-  border-left-color: #ff9800;
-  box-shadow: 2px 2px 10px rgba(255, 152, 0, 0.2);
-  cursor: default;
+    background: #fff8e1;
+    border-left-color: #ff9800;
+    box-shadow: 2px 2px 10px rgba(255, 152, 0, 0.2);
+    cursor: default;
 }
 
 
 .progress-container {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 #currentTime, #duration {
-  width: 35px;
-  text-align: center;
-  color: #eee;
-  user-select: none;
+    width: 35px;
+    text-align: center;
+    color: #eee;
+    user-select: none;
     margin-right: 10px;
 }
 
 .progress-svg {
-  width: 100%;
-  height: 30px;
-  overflow: hidden;
-  filter: drop-shadow(0 0 3px #ccc);
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    filter: drop-shadow(0 0 3px #ccc);
 }
 
 /* Трек прогрессбара - темно-серый */
 .progress-track {
-  stroke: #444;
-  stroke-width: 6;
-  fill: none;
-  opacity: 0.8;
-  stroke-linejoin: bevel;
-  /* Ломаная молниевидная линия */
-  stroke-dasharray: 15 10;
+    stroke: #444;
+    stroke-width: 6;
+    fill: none;
+    opacity: 0.8;
+    stroke-linejoin: bevel;
+    /* Ломаная молниевидная линия */
+    stroke-dasharray: 15 10;
 }
 
 /* Заполняемый прогрессбар (меньше желтого и мягче) */
 .progress-bar {
-  stroke: #ede69d;
-  stroke-width: 6;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: bevel;
-  stroke-dasharray: 500; /* длина пути */
-  stroke-dashoffset: 500; /* старт - скрыт */
-  transition: stroke-dashoffset 0.4s ease;
-  filter:
-    drop-shadow(0 0 6px #ede69d)
-    drop-shadow(0 0 12px #d6d273);
-  animation: lightningGlow 3s ease-in-out infinite;
+    stroke: #ede69d;
+    stroke-width: 6;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: bevel;
+    stroke-dasharray: 500; /* длина пути */
+    stroke-dashoffset: 500; /* старт - скрыт */
+    transition: stroke-dashoffset 0.4s ease;
+    filter: drop-shadow(0 0 6px #ede69d) drop-shadow(0 0 12px #d6d273);
+    animation: lightningGlow 3s ease-in-out infinite;
 }
 
 /* Мягкая анимация свечения */
 @keyframes lightningGlow {
-  0%, 100% {
-    filter:
-      drop-shadow(0 0 6px #ede69d)
-      drop-shadow(0 0 12px #d6d273);
-  }
-  50% {
-    filter:
-      drop-shadow(0 0 9px #fffec7)
-      drop-shadow(0 0 18px #fffec7);
-  }
+    0%, 100% {
+        filter: drop-shadow(0 0 6px #ede69d) drop-shadow(0 0 12px #d6d273);
+    }
+    50% {
+        filter: drop-shadow(0 0 9px #fffec7) drop-shadow(0 0 18px #fffec7);
+    }
 }
-
 
 
 #progressBar {
@@ -281,44 +273,45 @@ body::before {
 }
 
 .volume-container {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  width: 100%;
-  max-width: 400px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 400px;
 }
 
 .volume-svg {
-  flex-grow: 1;
-  height: 30px;
-  overflow: visible;
-  cursor: pointer;
+    flex-grow: 1;
+    height: 30px;
+    overflow: visible;
+    cursor: pointer;
     overflow: hidden;
 }
 
 .volume-track {
-  stroke: #444;
-  stroke-width: 6;
-  fill: none;
-  opacity: 0.8;
-  stroke-linejoin: bevel;
-  stroke-dasharray: 15 10;
+    stroke: #444;
+    stroke-width: 6;
+    fill: none;
+    opacity: 0.8;
+    stroke-linejoin: bevel;
+    stroke-dasharray: 15 10;
 }
+
 .volume-bar {
-  stroke: #bfbf60; /* менее яркий желтый */
-  stroke-width: 6;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: bevel;
-  stroke-dasharray: 500;
-  stroke-dashoffset: 500;
-  filter: none; /* отключаем сильное свечение */
-  transition: stroke-dashoffset 0.4s ease;
+    stroke: #bfbf60; /* менее яркий желтый */
+    stroke-width: 6;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: bevel;
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    filter: none; /* отключаем сильное свечение */
+    transition: stroke-dashoffset 0.4s ease;
 }
 
 .volume-thumb {
-  fill: #bfbf60; /* более мягкий цвет */
-  filter: drop-shadow(0 0 3px #d0d062); /* мягкое свечение */
+    fill: #bfbf60; /* более мягкий цвет */
+    filter: drop-shadow(0 0 3px #d0d062); /* мягкое свечение */
 }
 
 
@@ -501,245 +494,242 @@ body::before {
 }
 
 .alien-craft {
-  position: fixed;
-  bottom: -60px; /* начинает снизу за экраном */
-  left: calc(50% + 40px); /* сдвиг немного правее центра */
-  transform: translateX(-50%);
-  display: inline-block;
-  width: 64px;
-  cursor: pointer;
-  user-select: none;
-  pointer-events: auto;
-  z-index: 10000;
-  animation: craftFlyIn 10s ease forwards, craftFlyAcross 20s ease 60s forwards;
+    position: fixed;
+    bottom: -60px; /* начинает снизу за экраном */
+    left: calc(50% + 40px); /* сдвиг немного правее центра */
+    transform: translateX(-50%);
+    display: inline-block;
+    width: 64px;
+    cursor: pointer;
+    user-select: none;
+    pointer-events: auto;
+    z-index: 10000;
+    animation: craftFlyIn 10s ease forwards, craftFlyAcross 20s ease 60s forwards;
 }
 
 .alien-body {
-  position: relative;
-  width: 64px;
-  height: 32px;
-  filter:
-    drop-shadow(0 0 5px rgba(255, 255, 0, 0.7));
+    position: relative;
+    width: 64px;
+    height: 32px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 0, 0.7));
 }
 
 .alien-tooltip {
-  position: absolute;
-  bottom: 110%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #0e3041;
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease-in-out;
-  z-index: 20;
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0e3041;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 20;
 }
 
 .alien-craft:hover .alien-tooltip,
 .alien-craft:focus .alien-tooltip {
-  opacity: 1;
-  pointer-events: auto;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* Анимация вылета снизу к центру с маленьким покачиванием */
 @keyframes craftFlyIn {
-  0% {
-    bottom: -60px;
-    opacity: 0;
-    transform: translateX(-50%) translateY(0) scale(1) rotate(0deg);
-    left: calc(50% + 20px);
-  }
-  40% {
-    bottom: 50%;
-    opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1.1) rotate(5deg);
-    left: calc(50% + 20px);
-  }
-  70% {
-    bottom: 50%;
-    opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1.1) rotate(-5deg);
-    left: calc(50% + 20px);
-  }
-  90% {
-    bottom: 50%;
-    opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1) rotate(0deg);
-    left: calc(50% + 20px);
-  }
-  100% {
-    bottom: 50%;
-    opacity: 0;
-    transform: translateX(-50%) translateY(-40px) scale(0.7) rotate(0deg);
-    left: calc(50% + 20px);
-  }
+    0% {
+        bottom: -60px;
+        opacity: 0;
+        transform: translateX(-50%) translateY(0) scale(1) rotate(0deg);
+        left: calc(50% + 20px);
+    }
+    40% {
+        bottom: 50%;
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1.1) rotate(5deg);
+        left: calc(50% + 20px);
+    }
+    70% {
+        bottom: 50%;
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1.1) rotate(-5deg);
+        left: calc(50% + 20px);
+    }
+    90% {
+        bottom: 50%;
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1) rotate(0deg);
+        left: calc(50% + 20px);
+    }
+    100% {
+        bottom: 50%;
+        opacity: 0;
+        transform: translateX(-50%) translateY(-40px) scale(0.7) rotate(0deg);
+        left: calc(50% + 20px);
+    }
 }
 
 /* Анимация появления в левом верхнем углу и пролета через весь экран */
 @keyframes craftFlyAcross {
-  0% {
-    bottom: 20px;
-    left: -80px; /* слева за экраном */
-    opacity: 0;
-    transform: scale(1) rotate(0deg) translateX(0);
-  }
-  5% {
-    opacity: 1;
-    left: 20px; /* появляется слева */
-  }
-  95% {
-    opacity: 1;
-    left: calc(100% + 80px); /* летит до правого края и чуть за экран */
-    transform: scale(1) rotate(0deg) translateX(0);
-  }
-  100% {
-    opacity: 0;
-  }
+    0% {
+        bottom: 20px;
+        left: -80px; /* слева за экраном */
+        opacity: 0;
+        transform: scale(1) rotate(0deg) translateX(0);
+    }
+    5% {
+        opacity: 1;
+        left: 20px; /* появляется слева */
+    }
+    95% {
+        opacity: 1;
+        left: calc(100% + 80px); /* летит до правого края и чуть за экран */
+        transform: scale(1) rotate(0deg) translateX(0);
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 
 .ufo-link {
-  position: absolute;
-  right: 77px;
-  top: 180px;
-  display: inline-block;
-  width: 54px;
-  user-select: none;
-  pointer-events: auto; /* ссылка кликабельна */
-  text-decoration: none;
+    position: absolute;
+    right: 77px;
+    top: 180px;
+    display: inline-block;
+    width: 54px;
+    user-select: none;
+    pointer-events: auto; /* ссылка кликабельна */
+    text-decoration: none;
 }
 
 .ufo-tooltip {
-  position: absolute;
-  bottom: 110%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #0e3041;
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 44px;
-  font-size: 0.75rem;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease-in-out;
-  z-index: 20;
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0e3041;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 44px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 20;
 }
 
 .ufo-link:hover .ufo-tooltip,
 .ufo-link:focus .ufo-tooltip {
-  opacity: 1;
-  pointer-events: auto;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* Стрелочка к тултипу */
 .ufo-tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #222 transparent transparent transparent;
-  transform: translateX(-50%);
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #222 transparent transparent transparent;
+    transform: translateX(-50%);
 }
 
 .ufo-container {
-  position: relative;
-  width: 74px;
-  display: inline-block;
-  max-width: 100%;
-  height: auto;
-  user-select: none;
-  pointer-events: none;
-  margin: 1rem;
+    position: relative;
+    width: 74px;
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    user-select: none;
+    pointer-events: none;
+    margin: 1rem;
 
-  filter: drop-shadow(0 0 3px rgba(255, 183, 0, 0.7))
-          drop-shadow(0 0 5px rgba(255, 183, 0, 0.5))
-          drop-shadow(0 0 9px rgba(255, 183, 0, 0.3));
+    filter: drop-shadow(0 0 3px rgba(255, 183, 0, 0.7)) drop-shadow(0 0 5px rgba(255, 183, 0, 0.5)) drop-shadow(0 0 9px rgba(255, 183, 0, 0.3));
 
-  animation: ufoFlightCycle 57s ease-in-out infinite;
-  animation-fill-mode: forwards;
-  transform-origin: center bottom;
-  z-index: 10;
+    animation: ufoFlightCycle 57s ease-in-out infinite;
+    animation-fill-mode: forwards;
+    transform-origin: center bottom;
+    z-index: 10;
 }
 
 .ufo-container::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 40px; /* хвост слева от НЛО */
-  width: 44px;
-  height: 22px;
-  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
-  border-radius: 10px;
-  opacity: 0.7;
-  filter: blur(6px);
-  animation: tailGlow 3s ease-in-out infinite;
-  transform: translateY(-50%);
-  pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 40px; /* хвост слева от НЛО */
+    width: 44px;
+    height: 22px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 10px;
+    opacity: 0.7;
+    filter: blur(6px);
+    animation: tailGlow 3s ease-in-out infinite;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
 .ufo-container img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 @keyframes ufoFlightCycle {
-  0% {
-    opacity: 0;
-    transform: translateX(100%) rotate(0deg);
-  }
-  5% {
-    opacity: 1;
-    transform: translateX(0) rotate(0deg);
-  }
-  10% {
-    opacity: 1;
-    transform: translateX(0) rotate(5deg);
-  }
-  15% {
-    opacity: 1;
-    transform: translateX(0) rotate(-5deg);
-  }
-  20% {
-    opacity: 1;
-    transform: translateX(0) rotate(5deg);
-  }
-  25% {
-    opacity: 1;
-    transform: translateX(0) rotate(-5deg);
-  }
-  30% {
-    opacity: 1;
-    transform: translateX(0) rotate(0deg);
-  }
-  80% {
-    opacity: 1;
-    transform: translateX(0) rotate(0deg);
-  }
-  85% {
-    opacity: 0;
-    transform: translateX(0) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(100%) rotate(0deg);
-  }
+    0% {
+        opacity: 0;
+        transform: translateX(100%) rotate(0deg);
+    }
+    5% {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+        transform: translateX(0) rotate(5deg);
+    }
+    15% {
+        opacity: 1;
+        transform: translateX(0) rotate(-5deg);
+    }
+    20% {
+        opacity: 1;
+        transform: translateX(0) rotate(5deg);
+    }
+    25% {
+        opacity: 1;
+        transform: translateX(0) rotate(-5deg);
+    }
+    30% {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+    80% {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg);
+    }
+    85% {
+        opacity: 0;
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100%) rotate(0deg);
+    }
 }
 
 @keyframes tailGlow {
-  0%, 100% {
-    opacity: 0.7;
-  }
-  50% {
-    opacity: 0.3;
-  }
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 0.3;
+    }
 }
 
 
@@ -761,9 +751,7 @@ body::before {
     width: 100%;
     height: auto;
     pointer-events: none; /* контейнер не мешает клику */
-    filter: drop-shadow(0 0 4px rgba(163, 154, 86, 0.7))
-            drop-shadow(0 0 7px rgba(197, 183, 121, 0.5))
-            drop-shadow(0 0 14px rgba(197, 183, 121, 0.3));
+    filter: drop-shadow(0 0 4px rgba(163, 154, 86, 0.7)) drop-shadow(0 0 7px rgba(197, 183, 121, 0.5)) drop-shadow(0 0 14px rgba(197, 183, 121, 0.3));
     animation: omuamuaFlight 57s ease-in-out infinite;
     animation-fill-mode: forwards;
     transform-origin: center center;
@@ -834,23 +822,47 @@ body::before {
 
 /* Ключевые кадры для разных частиц */
 @keyframes stoneFly1 {
-    0% { transform: translate(0,0) scale(1); opacity:0.8; }
-    100% { transform: translate(-30px, -10px) scale(0.8); opacity:0; }
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-30px, -10px) scale(0.8);
+        opacity: 0;
+    }
 }
 
 @keyframes stoneFly2 {
-    0% { transform: translate(0,0) scale(1); opacity:0.8; }
-    100% { transform: translate(-25px, 15px) scale(0.7); opacity:0; }
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-25px, 15px) scale(0.7);
+        opacity: 0;
+    }
 }
 
 @keyframes stoneFly3 {
-    0% { transform: translate(0,0) scale(1); opacity:0.8; }
-    100% { transform: translate(-20px, -20px) scale(0.6); opacity:0; }
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-20px, -20px) scale(0.6);
+        opacity: 0;
+    }
 }
 
 @keyframes stoneFly4 {
-    0% { transform: translate(0,0) scale(1); opacity:0.8; }
-    100% { transform: translate(-35px, 5px) scale(0.75); opacity:0; }
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-35px, 5px) scale(0.75);
+        opacity: 0;
+    }
 }
 
 /* Стили для изображения и тултипа без изменений */
@@ -940,419 +952,437 @@ body::before {
 }
 
 .black-hole-link {
-  position: absolute;
-  left: 58%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 340px;
-  height: 340px;
-  pointer-events: none;
-  z-index: 1000;
-  font-family: monospace, monospace;
+    position: absolute;
+    left: 58%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 340px;
+    height: 340px;
+    pointer-events: none;
+    z-index: 1000;
+    font-family: monospace, monospace;
 }
 
 .black-hole-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  animation: blackHoleCycle 77s linear 1 forwards;
-  transform-origin: center center;
-  overflow: visible;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    animation: blackHoleCycle 77s linear 1 forwards;
+    transform-origin: center center;
+    overflow: visible;
 }
 
 /* Черная дыра */
 .black-hole {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  width: 220px;
-  height: 220px;
-  background: black;
-  border-radius: 50%;
-  border: 10px solid transparent;
-  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.4);
-  transform: translateX(-50%);
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  font-size: 1.25rem;
-  color: #8a2be2;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    width: 220px;
+    height: 220px;
+    background: black;
+    border-radius: 50%;
+    border: 10px solid transparent;
+    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.4);
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-size: 1.25rem;
+    color: #8a2be2;
 }
 
 .typing-text {
-  position: relative;
-  width: 100%;
-  height: 1.5em;
-  overflow: visible;
-  font-family: monospace, monospace;
-  color: #8a2be2;
+    position: relative;
+    width: 100%;
+    height: 1.5em;
+    overflow: visible;
+    font-family: monospace, monospace;
+    color: #8a2be2;
 }
 
 .typing-text span {
-  position: absolute;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 2px solid #8a2be2;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  width: 0;
-  max-width: 100%;
+    position: absolute;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #8a2be2;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    width: 0;
+    max-width: 100%;
 }
 
 .typing-text span:first-child {
-  animation:
-    fadeIn 1s forwards 3s,
+    animation: fadeIn 1s forwards 3s,
     typing1 8s steps(16, end) forwards 3s,
     fadeOut 2s ease forwards 11s;
-  opacity: 1;
+    opacity: 1;
 }
 
 .typing-text span:nth-child(2) {
-  animation:
-    fadeIn 1s ease forwards 17s,
+    animation: fadeIn 1s ease forwards 17s,
     typing2 8s steps(17, end) forwards 17s,
     fadeOut 2s ease forwards 27s;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 @keyframes typing1 {
-  from { width: 0; opacity: 1; }
-  to { width: 16ch; opacity: 1; }
+    from {
+        width: 0;
+        opacity: 1;
+    }
+    to {
+        width: 16ch;
+        opacity: 1;
+    }
 }
 
 @keyframes typing2 {
-  from { width: 0; opacity: 1; }
-  to { width: 17ch; opacity: 1; }
+    from {
+        width: 0;
+        opacity: 1;
+    }
+    to {
+        width: 17ch;
+        opacity: 1;
+    }
 }
 
 /* Ореол черной дыры */
 .purple-shadow {
-  position: absolute;
-  top: 30px;
-  left: 50%;
-  width: 450px;
-  height: 450px;
-  background: radial-gradient(circle, rgba(128, 0, 128, 0.2), transparent 70%);
-  border-radius: 50%;
-  transform: translateX(-50%);
-  animation: shadowPulse 4s ease-in-out infinite;
-  z-index: 9;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(128, 0, 128, 0.2), transparent 70%);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    animation: shadowPulse 4s ease-in-out infinite;
+    z-index: 9;
 }
 
 /* Планеты */
 .planet {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-  background: radial-gradient(circle at 40% 40%, #f90, #c60);
-  opacity: 1;
-  transform-origin: -150px center;
-  animation-timing-function: linear;
-  z-index: 20;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, #f90, #c60);
+    opacity: 1;
+    transform-origin: -150px center;
+    animation-timing-function: linear;
+    z-index: 20;
 }
 
 .planet1 {
-  width: 30px;
-  height: 30px;
-  animation-name: planetOrbit1, planetSwallow1;
-  animation-duration: 15s, 15s;
-  animation-delay: 0s, 15s;
-  animation-fill-mode: forwards;
-  animation-timing-function: linear, ease-in-out;
+    width: 30px;
+    height: 30px;
+    animation-name: planetOrbit1, planetSwallow1;
+    animation-duration: 15s, 15s;
+    animation-delay: 0s, 15s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear, ease-in-out;
 }
 
 .planet2 {
-  width: 40px;
-  height: 40px;
-  background: radial-gradient(circle at 40% 40%, #5ad, #036);
-  animation-name: planetOrbit2, planetSwallow2;
-  animation-duration: 17.5s, 17.5s;
-  animation-delay: 0s, 17.5s;
-  animation-fill-mode: forwards;
-  animation-timing-function: linear, ease-in-out;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at 40% 40%, #5ad, #036);
+    animation-name: planetOrbit2, planetSwallow2;
+    animation-duration: 17.5s, 17.5s;
+    animation-delay: 0s, 17.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear, ease-in-out;
 }
 
 .planet3 {
-  width: 25px;
-  height: 25px;
-  background: radial-gradient(circle at 40% 40%, #ada, #070);
-  animation-name: planetOrbit3, planetSwallow3;
-  animation-duration: 20s, 20s;
-  animation-delay: 0s, 20s;
-  animation-fill-mode: forwards;
-  animation-timing-function: linear, ease-in-out;
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle at 40% 40%, #ada, #070);
+    animation-name: planetOrbit3, planetSwallow3;
+    animation-duration: 20s, 20s;
+    animation-delay: 0s, 20s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear, ease-in-out;
 }
 
 .planet4 {
-  width: 25px;
-  height: 25px;
-  background: radial-gradient(circle at 40% 40%, #c9aadd, #770067);
-  animation-name: planetOrbit4, planetSwallow4;
-  animation-duration: 20s, 20s;
-  animation-delay: 0s, 20s;
-  animation-fill-mode: forwards;
-  animation-timing-function: linear, ease-in-out;
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle at 40% 40%, #c9aadd, #770067);
+    animation-name: planetOrbit4, planetSwallow4;
+    animation-duration: 20s, 20s;
+    animation-delay: 0s, 20s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear, ease-in-out;
 }
 
 @keyframes blackHoleCycle {
-  0% {
-    opacity: 0;
-    transform: scale(0.1) translate(-50%, -50%);
-  }
-  10% {
-    opacity: 1;
-    transform: scale(1) translate(-50%, -50%);
-  }
-  70% {
-    opacity: 1;
-    transform: scale(1) translate(-50%, -50%);
-  }
-  90% {
-    opacity: 0.3;
-    transform: scale(0.4) translate(-50%, -50%);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.1) translate(-50%, -50%);
-  }
+    0% {
+        opacity: 0;
+        transform: scale(0.1) translate(-50%, -50%);
+    }
+    10% {
+        opacity: 1;
+        transform: scale(1) translate(-50%, -50%);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1) translate(-50%, -50%);
+    }
+    90% {
+        opacity: 0.3;
+        transform: scale(0.4) translate(-50%, -50%);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.1) translate(-50%, -50%);
+    }
 }
 
 
 @keyframes shadowPulse {
-  0%, 100% {
-    transform: translateX(-50%) scale(1);
-    background: radial-gradient(circle, rgba(128, 0, 128, 0.2), transparent 70%);
-  }
-  50% {
-    transform: translateX(-50%) scale(1.1);
-    background: radial-gradient(circle, rgba(170, 0, 170, 0.4), transparent 70%);
-  }
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+        background: radial-gradient(circle, rgba(128, 0, 128, 0.2), transparent 70%);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.1);
+        background: radial-gradient(circle, rgba(170, 0, 170, 0.4), transparent 70%);
+    }
 }
 
 @keyframes planetOrbit1 {
-  0% {
-    opacity: 1;
-    transform: rotate(0deg) translateX(150px) rotate(0deg);
-  }
-  60% {
-    opacity: 1;
-    transform: rotate(360deg) translateX(150px) rotate(-360deg);
-  }
-  100% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 1;
+        transform: rotate(0deg) translateX(150px) rotate(0deg);
+    }
+    60% {
+        opacity: 1;
+        transform: rotate(360deg) translateX(150px) rotate(-360deg);
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 @keyframes planetOrbit2 {
-  0% {
-    opacity: 1;
-    transform: rotate(0deg) translateX(180px) rotate(0deg);
-  }
-  70% {
-    opacity: 1;
-    transform: rotate(420deg) translateX(180px) rotate(-420deg);
-  }
-  100% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 1;
+        transform: rotate(0deg) translateX(180px) rotate(0deg);
+    }
+    70% {
+        opacity: 1;
+        transform: rotate(420deg) translateX(180px) rotate(-420deg);
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 @keyframes planetOrbit3 {
-  0% {
-    opacity: 1;
-    transform: rotate(0deg) translateX(130px) rotate(0deg);
-  }
-  50% {
-    opacity: 1;
-    transform: rotate(300deg) translateX(130px) rotate(-300deg);
-  }
-  100% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 1;
+        transform: rotate(0deg) translateX(130px) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: rotate(300deg) translateX(130px) rotate(-300deg);
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 @keyframes planetOrbit4 {
-  0% {
-    opacity: 1;
-    transform: rotate(0deg) translateX(140px) rotate(0deg);
-  }
-  50% {
-    opacity: 1;
-    transform: rotate(330deg) translateX(130px) rotate(-330deg);
-  }
-  100% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 1;
+        transform: rotate(0deg) translateX(140px) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: rotate(330deg) translateX(130px) rotate(-330deg);
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 @keyframes planetSwallow1 {
-  0% {
-    transform: rotate(360deg) translateX(150px) rotate(-360deg);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(390deg) translateX(0) rotate(-390deg);
-    opacity: 0;
-  }
+    0% {
+        transform: rotate(360deg) translateX(150px) rotate(-360deg);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(390deg) translateX(0) rotate(-390deg);
+        opacity: 0;
+    }
 }
 
 @keyframes planetSwallow2 {
-  0% {
-    transform: rotate(420deg) translateX(180px) rotate(-420deg);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(460deg) translateX(0) rotate(-460deg);
-    opacity: 0;
-  }
+    0% {
+        transform: rotate(420deg) translateX(180px) rotate(-420deg);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(460deg) translateX(0) rotate(-460deg);
+        opacity: 0;
+    }
 }
 
 @keyframes planetSwallow3 {
-  0% {
-    transform: rotate(300deg) translateX(130px) rotate(-300deg);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(350deg) translateX(0) rotate(-350deg);
-    opacity: 0;
-  }
+    0% {
+        transform: rotate(300deg) translateX(130px) rotate(-300deg);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(350deg) translateX(0) rotate(-350deg);
+        opacity: 0;
+    }
 }
 
 @keyframes planetSwallow4 {
-  0% {
-    transform: rotate(330deg) translateX(140px) rotate(-330deg);
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(380deg) translateX(0) rotate(-380deg);
-    opacity: 0;
-  }
+    0% {
+        transform: rotate(330deg) translateX(140px) rotate(-330deg);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(380deg) translateX(0) rotate(-380deg);
+        opacity: 0;
+    }
 }
 
 .planet1::before,
 .planet2::before,
 .planet3::before,
 .planet4::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 50%;
-  height: 50%;
-  transform: translate(-50%, -50%);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  pointer-events: none;
-  opacity: 0.7; /* базовая прозрачность */
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    transform: translate(-50%, -50%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    pointer-events: none;
+    opacity: 0.7; /* базовая прозрачность */
 }
 
 /* Разные стили и прозрачность для каждой планеты */
 .planet1::before {
-  background-image: url('../svg/notes.svg');
-  opacity: 0.8;
+    background-image: url('../svg/notes.svg');
+    opacity: 0.8;
 }
 
 .planet2::before {
-  background-image: url('../svg/notes.svg');
-  opacity: 0.7;
+    background-image: url('../svg/notes.svg');
+    opacity: 0.7;
 }
 
 .planet3::before {
-  background-image: url('../svg/notes.svg');
-  opacity: 0.75;
+    background-image: url('../svg/notes.svg');
+    opacity: 0.75;
 }
 
 .planet4::before {
-  background-image: url('../svg/notes.svg');
-  opacity: 0.65;
+    background-image: url('../svg/notes.svg');
+    opacity: 0.65;
 }
 
 .comet {
-  position: fixed;
-  width: 80px;
-  height: 20px;
-  background: url('../svg/comet.svg') no-repeat center/contain;
-  pointer-events: none;
-  opacity: 0;
-  display: none;
+    position: fixed;
+    width: 80px;
+    height: 20px;
+    background: url('../svg/comet.svg') no-repeat center/contain;
+    pointer-events: none;
+    opacity: 0;
+    display: none;
 }
 
 .comet3 {
-  top: 30vh;
-  right: 0;
-  background: url('../svg/corable.svg') no-repeat center/contain;
-  pointer-events: none;
-  opacity: 0;
-  display: none;
+    top: 30vh;
+    right: 0;
+    background: url('../svg/corable.svg') no-repeat center/contain;
+    pointer-events: none;
+    opacity: 0;
+    display: none;
 }
 
 
 /* Первая комета: сверху слева 0,0, летит под углом 45° вниз и вправо */
 .comet1 {
-  top: 0;
-  left: 0;
-  animation: none;
+    top: 0;
+    left: 0;
+    animation: none;
 }
 
 @keyframes comet1Move {
-  from {
-    transform: translate(0, 0) rotate(45deg);
-    opacity: 1;
-  }
-  to {
-    transform: translate(300px, 300px) rotate(45deg);
-    opacity: 0;
-  }
+    from {
+        transform: translate(0, 0) rotate(45deg);
+        opacity: 1;
+    }
+    to {
+        transform: translate(300px, 300px) rotate(45deg);
+        opacity: 0;
+    }
 }
 
 /* Вторая комета: справа сверху 30% вниз */
 .comet2 {
-  top: 30vh;
-  right: 0;
-  animation: none;
+    top: 30vh;
+    right: 0;
+    animation: none;
 }
 
 @keyframes comet2Move {
-  from {
-    transform: translate(0, 0) rotate(135deg);
-    opacity: 1;
-  }
-  to {
-    transform: translate(-250px, 250px) rotate(135deg);
-    opacity: 0;
-  }
+    from {
+        transform: translate(0, 0) rotate(135deg);
+        opacity: 1;
+    }
+    to {
+        transform: translate(-250px, 250px) rotate(135deg);
+        opacity: 0;
+    }
 }
 
 /* Третья комета: справа сверху 20% вниз, летит влево через весь экран */
 .comet3 {
-  top: 20vh;
-  right: 0;
-  animation: none;
+    top: 20vh;
+    right: 0;
+    animation: none;
 }
 
 @keyframes comet3Move {
-  from {
-    transform: translate(0, 0) rotate(-180deg);
-    opacity: 1;
-  }
-  to {
-    transform: translate(-100vw, 0) rotate(-180deg);
-    opacity: 0;
-  }
+    from {
+        transform: translate(0, 0) rotate(-180deg);
+        opacity: 1;
+    }
+    to {
+        transform: translate(-100vw, 0) rotate(-180deg);
+        opacity: 0;
+    }
 }
 
 .theme-switcher {
@@ -1410,6 +1440,10 @@ body.light {
         filter: blur(18px);
     }
 
+    .bg-secondary {
+        background-color: transparent!important;
+    }
+
     /* Можно при необходимости уменьшить амплитуду анимации slideAway */
     @keyframes slideAway {
         0% {
@@ -1459,8 +1493,8 @@ body.light {
         width: 95% !important;
         padding: 15px 10px !important;
         position: relative;
-        margin-left: auto!important;
-        margin-right: auto!important;
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
 
     .advantages-block {
@@ -1513,7 +1547,7 @@ body.light {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        left: 58px;
+        /*left: 58px;*/
         position: absolute;
         top: 38px;
         z-index: 10;
@@ -1557,11 +1591,11 @@ body.light {
 }
 
 .player-title a {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  pointer-events: auto; /* чтобы ссылка кликабельна была */
-  user-select: auto;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    pointer-events: auto; /* чтобы ссылка кликабельна была */
+    user-select: auto;
 }
 
 
@@ -1655,12 +1689,20 @@ body.light {
         position: relative;
         top: 5px;
         left: 0;
+        max-width: 100%;
+        text-align: justify;
+    }
+
+    .chips-arrow {
+        width: 13px !important;
+        height: 13px !important;
     }
 
     .margin-chinazes {
         position: relative;
         top: 4px;
         left: 0;
+        width: 100%;
     }
 
     .ufo-link {
@@ -1720,11 +1762,11 @@ body.light {
 }
 
 .chips-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  user-select: none;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    user-select: none;
 }
 
 .chips-header {
@@ -1738,68 +1780,68 @@ body.light {
 }
 
 .chips-arrow {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  color: #707070;
-  transition: color 0.3s ease;
-  flex-shrink: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: #707070;
+    transition: color 0.3s ease;
+    flex-shrink: 0;
 }
 
 .chips-arrow:hover,
 .chips-arrow:focus {
-  color: #000000;
-  outline: none;
+    color: #000000;
+    outline: none;
 }
 
 .chips-arrow-left {
-  transform: rotate(0deg);
+    transform: rotate(0deg);
 }
 
 .chips-arrow-right {
-  transform: rotate(0deg);
+    transform: rotate(0deg);
 }
 
 .chips-scroll {
-  flex: 1;
-  display: flex;
-  overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
+    flex: 1;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
 }
 
 .chips-scroll::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+    display: none; /* Chrome, Safari, Opera */
 }
 
 .chip-chip {
-  flex: 0 0 auto;
-  white-space: nowrap;
-  background-color: #eeeeee;
-  border: none;
-  border-radius: 18px;
-  padding: 6px 14px;
-  margin: 0 4px;
-  font-size: 14px;
-  color: #333333;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  outline: none;
-  user-select: none;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    background-color: #eeeeee;
+    border: none;
+    border-radius: 18px;
+    padding: 6px 14px;
+    margin: 0 4px;
+    font-size: 14px;
+    color: #333333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+    user-select: none;
 }
 
 .chip-chip.selected,
 .chip-chip:hover,
 .chip-chip:focus {
-  background-color: #195cb6;
-  color: white;
-  box-shadow: 0 0 6px rgb(6 95 212 / 0.6);
-  outline: none;
+    background-color: #195cb6;
+    color: white;
+    box-shadow: 0 0 6px rgb(6 95 212 / 0.6);
+    outline: none;
 }
 
 
@@ -1824,40 +1866,40 @@ body.light {
 }
 
 .advantages-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
     position: relative;
     bottom: 55px;
 }
 
 .advantage-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 140px;
-  margin: 0.5rem;
-  cursor: default;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 140px;
+    margin: 0.5rem;
+    cursor: default;
 }
 
-.icon-movie img{
-  display: block;
-  width: 48px;
-  height: 48px;
-  margin-bottom: 0.5rem;
+.icon-movie img {
+    display: block;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0.5rem;
 }
 
 .advantage-text {
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: #e4dfdf;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #e4dfdf;
 }
 
 
 .video-block {
-  max-width: 750px;
+    max-width: 750px;
     margin: 0 auto 0;
     display: grid;
     grid-template-rows: auto auto;
@@ -1872,91 +1914,186 @@ body.light {
 
 /* Большие видео - 2 в строке */
 .main-videos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* чтобы адаптировано */
-  gap: 16px;
-  width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* чтобы адаптировано */
+    gap: 16px;
+    width: 100%;
 }
 
 .main-videos video {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  background: #000;
-  max-height: 360px; /* ограничение высоты */
-  object-fit: cover;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    background: #000;
+    max-height: 360px; /* ограничение высоты */
+    object-fit: cover;
 }
 
 /* Маленькие видео слайдер */
 .small-videos-slider {
-  overflow-x: auto;
-  padding-bottom: 8px;
-  scrollbar-width: none; /* Firefox */
-  width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: none; /* Firefox */
+    width: 100%;
 }
 
 .small-videos-slider::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .small-videos {
-  display: flex;
-  gap: 12px;
-  width: max-content; /* Контролируем ширину, чтобы не ломало */
+    display: flex;
+    gap: 12px;
+    width: max-content; /* Контролируем ширину, чтобы не ломало */
 }
 
 .small-videos video {
-  flex: 0 0 auto;
-  width: 140px;
-  height: 80px;
-  border-radius: 6px;
-  background: #000;
-  object-fit: cover;
-  max-height: 90px;
+    flex: 0 0 auto;
+    width: 140px;
+    height: 80px;
+    border-radius: 6px;
+    background: #000;
+    object-fit: cover;
+    max-height: 90px;
 }
 
 .social-icons {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 24px;
 }
 
 .social-icon {
-  width: 32px;
-  height: 32px;
-  display: inline-block;
-  background-size: contain;
-  background-repeat: no-repeat;
-  filter: grayscale(1);
-  transition: filter 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: grayscale(1);
+    transition: filter 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
 }
 
 .social-icon:hover {
-  filter: none;
-  transform: scale(1.1);
+    filter: none;
+    transform: scale(1.1);
 }
 
 .instagram {
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg');
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg');
 }
 
 .vk {
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg');
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg');
 }
 
 .youtube {
-  background-image: url('../svg/youtube.svg');
+    background-image: url('../svg/youtube.svg');
 }
 
 
 .spotify {
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg');
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg');
 }
 
 .yandex-music {
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/83/Yandex_Music_logo.svg');
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/83/Yandex_Music_logo.svg');
 }
 
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+    /*right: 16px;*/
+}
+
+/* Горизонтальная строка видео как на YouTube */
+.horizontal-line {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scrollbar-color: #aaa #eee;
+    padding-bottom: 10px;
+    scroll-behavior: smooth;
+}
+
+.horizontal-line::-webkit-scrollbar {
+    height: 8px;
+}
+
+.horizontal-line::-webkit-scrollbar-track {
+    background: #eee;
+    border-radius: 4px;
+}
+
+.horizontal-line::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 4px;
+}
+
+.video-item {
+    flex: 0 0 auto;
+    width: 320px;
+    height: 180px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.video-item iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* Вертикальная строка для Shorts (с видео в вертикальном формате 9:16) */
+.vertical-line {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #aaa #eee;
+    padding-bottom: 10px;
+    scroll-behavior: smooth;
+}
+
+.vertical-line::-webkit-scrollbar {
+    height: 8px;
+}
+
+.vertical-line::-webkit-scrollbar-track {
+    background: #eee;
+    border-radius: 4px;
+}
+
+.vertical-line::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 4px;
+}
+
+.shorts-item {
+    flex: 0 0 auto;
+    width: 120px;
+    height: 213px; /* Пропорции 9:16 */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.shorts-item iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+.vertical-line::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
