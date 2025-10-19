@@ -5,7 +5,8 @@ from aiogram.filters import Command
 from aiogram.types import Message
 
 from botapp.bot.handlers.clear_chat import clear_chat
-from botapp.bot.keyboards import keyboard, albums_keyboard, donate_keyboard, settings_keyboard, get_songs_keyboard
+from botapp.bot.keyboards import keyboard, albums_keyboard, donate_keyboard, settings_keyboard, get_songs_keyboard, \
+    platforms_keyboard
 from botapp.bot.config import logger
 from botapp.bot.texts.proposal_texts import thanks_donate_command_txt, HELLO_TXT_FIRST, sending_album_txt, \
     YOUR_SETTINGS_TXT, news_txt, DONATE_TEXT, tabs_txt, MAIN_MENU_ANSWER, cleaning_chat_txt
@@ -119,19 +120,16 @@ async def clear_chat_handler(message: Message):
 
     asyncio.create_task(clear_and_send_menu())
 
-@router.message(lambda message: message.text == "🎧 Слушать веб версию")
+
+@router.message(lambda message: message.text == "🧬 Платформы")
 async def show_settings(message: Message):
+    # Сохраняем ID входящего сообщения пользователя для удаления
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    # Текст с HTML-ссылкой
-    sing_answer_txt = (
-        'Вы можете слушать веб-версию по ссылке: '
-        '<a href="https://phoenixpegasus.pythonanywhere.com/" target="_blank">Открыть сайт</a>'
-    )
     await send_and_store(
         message.chat.id,
-        sing_answer_txt,
-        parse_mode="HTML",
-        reply_markup=keyboard
+        DONATE_TEXT,
+        reply_markup=platforms_keyboard,
+        parse_mode="HTML"
     )
 
 

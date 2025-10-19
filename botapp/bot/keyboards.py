@@ -9,7 +9,7 @@ from botapp.models import SongInfo
 keyboard = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text="🎵 Музыка"), KeyboardButton(text="📰 Новости"), KeyboardButton(text="📣 Канал")],
-        [KeyboardButton(text="🎧 Слушать веб версию"), KeyboardButton(text="📺 Видео"), KeyboardButton(text="💰 Донаты")],
+        [KeyboardButton(text="🧬 Платформы"), KeyboardButton(text="📺 Видео"), KeyboardButton(text="💰 Донаты")],
         [KeyboardButton(text="🎸 Табы"), KeyboardButton(text="✒️ Написать"), KeyboardButton(text="⚙️")],
     ],
     resize_keyboard=True
@@ -54,3 +54,9 @@ async def get_songs_keyboard():
     return keyboard
 
 
+platforms_keyboard = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text="📨 Телеграмм канал", url="https://t.me/+M-LokUWMIaBmYTFi")],
+    [InlineKeyboardButton(text="📷 Инстаграмм", url="https://www.instagram.com/dyadya_44/")],
+    [InlineKeyboardButton(text="🎥 Ютуб", url="https://www.youtube.com/@juniorpegasus6871")],
+    [InlineKeyboardButton(text="🌐 Слушать веб версию", url="http://164.92.218.63/")],
+])

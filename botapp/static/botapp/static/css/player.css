@@ -1,6 +1,6 @@
 body {
     position: relative;
-    background: var(--bg, #010f17);
+    background: var(--bg, #000c12);
     color: var(--fg, #fff);
     font-family: 'Igra Sans', 'Rubik', 'Segoe UI', Arial, sans-serif;
     transition: background 0.3s, color 0.3s;
@@ -38,10 +38,15 @@ body::before {
     scrollbar-width: none; /* Firefox */
 }
 
+.bg-secondary {
+    background-color: rgba(0, 119, 0, 0.11) !important;
+    height: 66px;
+}
+
 .player-container {
     width: 94%;
     margin: 40px auto;
-    background: var(--panel, #DAE9F2);
+    background: var(--panel, #000E17F5);
     border-radius: 13px;
     box-shadow: 0 17px 22px -13px rgb(6 102 40);
     padding: 30px 20px;
@@ -135,7 +140,7 @@ body::before {
 
 .margin-files {
     position: absolute;
-    bottom: 82%;
+    bottom: 80%;
     right: 90px;
     background: #3169593b;
     border-radius: 4px;
@@ -1024,7 +1029,7 @@ body::before {
 .typing-text span:nth-child(2) {
     animation: fadeIn 1s ease forwards 17s,
     typing2 8s steps(17, end) forwards 17s,
-    fadeOut 2s ease forwards 27s;
+    fadeOut 2s ease forwards 26s;
 }
 
 @keyframes fadeIn {
@@ -1410,7 +1415,7 @@ body::before {
 :root {
     --bg: #010f17;
     --fg: #fff;
-    --panel: rgba(1, 24, 37, 0.91);
+    --panel: rgba(0, 14, 23, 0.96);
     --panel2: #181818;
 }
 
@@ -1432,6 +1437,10 @@ body.light {
         width: 30px;
         height: 30px;
         box-shadow: 0 0 8px rgba(135, 206, 250, 0.7);
+    }
+
+    .margin-files-evening {
+        display: none;
     }
 
     #desperateButton::after {
@@ -1764,7 +1773,7 @@ body.light {
 .chips-wrapper {
     position: relative;
     width: 100%;
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
     user-select: none;
 }
@@ -1855,7 +1864,7 @@ body.light {
     box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
     right: 168px;
     overflow: visible;
-    top: 15%;
+    top: 8%;
     height: 100px;
 }
 
