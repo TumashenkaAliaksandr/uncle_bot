@@ -164,7 +164,7 @@ body::before {
     background: #3169593b;
     border-radius: 4px;
     padding: 4px;
-    width: 790px;
+    width: 800px;
 }
 
 .margin-chinazes {
@@ -1774,7 +1774,7 @@ body.light {
 .chips-wrapper {
     position: relative;
     width: 100%;
-    max-width: 800px;
+    max-width: fit-content;
     margin: 0 auto;
     user-select: none;
 }
