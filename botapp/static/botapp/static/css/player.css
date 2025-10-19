@@ -39,7 +39,7 @@ body::before {
 }
 
 .bg-secondary {
-    background-color: rgba(0, 119, 0, 0.11) !important;
+    background-color: #3169593b !important;
     height: 66px;
 }
 
@@ -1413,7 +1413,7 @@ body::before {
 
 
 :root {
-    --bg: #010f17;
+    --bg: #000c12;
     --fg: #fff;
     --panel: rgba(0, 14, 23, 0.96);
     --panel2: #181818;
@@ -1451,6 +1451,7 @@ body.light {
 
     .bg-secondary {
         background-color: transparent!important;
+        height: auto;
     }
 
     /* Можно при необходимости уменьшить амплитуду анимации slideAway */
@@ -1857,8 +1858,8 @@ body.light {
 .advantages-block {
     margin: 2rem auto;
     padding: 1rem;
-    background: #283e5b59;
-    border-radius: 12px;
+    background: #3169593b;
+    border-radius: 8px;
     text-align: center;
     position: absolute;
     box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);

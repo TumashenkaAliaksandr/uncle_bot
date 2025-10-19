@@ -138,8 +138,8 @@
                 <ul id="trackList" class="list-unstyled d-flex flex-nowrap gap-2 justify-content-start"
                     style="width: max-content;">
                     {% for track in tracks %}
-                        <li data-id="{{ track.id }}"
-                            class="d-flex align-items-center gap-2 p-2 rounded {% if track.id == current_track.id %}active bg-success bg-opacity-25{% endif %}"
+                        <li data-id="{{ track.id }}" data-url="{{ track.audio_file.url }}"
+                            class="d-flex align-items-center gap-2 p-2 rounded {% if track.id == current_track.id %} active bg-success bg-opacity-25{% endif %}"
                             style="cursor:pointer; white-space: normal;">
                             {% if track.cover %}
                                 <img src="{{ track.cover.url }}" alt="Обложка" class="mini-cover rounded">

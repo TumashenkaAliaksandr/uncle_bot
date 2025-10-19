@@ -55,7 +55,6 @@ async def get_songs_keyboard():
 
 
 platforms_keyboard = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text="📨 Телеграмм канал", url="https://t.me/+M-LokUWMIaBmYTFi")],
     [InlineKeyboardButton(text="📷 Инстаграмм", url="https://www.instagram.com/dyadya_44/")],
     [InlineKeyboardButton(text="🎥 Ютуб", url="https://www.youtube.com/@juniorpegasus6871")],
     [InlineKeyboardButton(text="🌐 Слушать веб версию", url="http://164.92.218.63/")],

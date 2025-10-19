@@ -166,24 +166,31 @@
                     <span id="volumeIcon">🔊</span>
                 </div>
 
-                <div class="track-list bg-secondary bg-opacity-25 rounded p-2"
-                     style="max-height: 200px; overflow-y: auto;">
-                    <ul id="trackList" class="list-unstyled d-flex flex-wrap gap-2 justify-content-start">
-                        {% for track in tracks %}
-                            <li data-id="{{ track.id }}"
-                                class="d-flex align-items-center gap-2 p-2 rounded {% if track.id == current_track.id %}active bg-success bg-opacity-25{% endif %}"
-                                style="cursor:pointer;">
-                                {% if track.cover %}
-                                    <img src="{{ track.cover.url }}" alt="Обложка" class="mini-cover rounded">
-                                {% else %}
-                                    <img src="{% static 'botapp/static/img/no_images.png' %}" alt="Обложка"
-                                         class="mini-cover rounded">
-                                {% endif %}
-                                <span class="text-truncate" style="max-width: 150px;">{{ track.title }}</span>
-                            </li>
-                        {% endfor %}
-                    </ul>
+               <div class="track-list-wrapper position-relative bg-secondary bg-opacity-25 rounded p-2"
+                 style="overflow-x: auto; white-space: nowrap; -ms-overflow-style: none; scrollbar-width: none;">
+                <!-- Подсказка с эмодзи / символом для прокрутки -->
+                <div class="scroll-hint position-absolute"
+                     style="right: 10px; top: 70%; transform: translateY(-50%); pointer-events: none; user-select: none; font-size: 1.5rem; color: #555;">
+                    👉
                 </div>
+
+                <ul id="trackList" class="list-unstyled d-flex flex-nowrap gap-2 justify-content-start"
+                    style="width: max-content;">
+                    {% for track in tracks %}
+                        <li data-id="{{ track.id }}" data-url="{{ track.audio_file.url }}"
+                            class="d-flex align-items-center gap-2 p-2 rounded {% if track.id == current_track.id %} active bg-success bg-opacity-25{% endif %}"
+                            style="cursor:pointer; white-space: normal;">
+                            {% if track.cover %}
+                                <img src="{{ track.cover.url }}" alt="Обложка" class="mini-cover rounded">
+                            {% else %}
+                                <img src="{% static 'botapp/static/img/no_images.png' %}" alt="Обложка"
+                                     class="mini-cover rounded">
+                            {% endif %}
+                            <span class="text-truncate" style="max-width: 150px;">{{ track.title }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
             </div>
         </div>
         <a href="#" class="omuamua-link" target="_blank" rel="noopener noreferrer"

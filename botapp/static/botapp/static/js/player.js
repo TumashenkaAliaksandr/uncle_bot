@@ -84,26 +84,23 @@ function selectTrack(idx, resetProgress = true) {
   tracks.forEach(t => t.element.classList.remove('active', 'bg-success', 'bg-opacity-25'));
   tracks[idx].element.classList.add('active', 'bg-success', 'bg-opacity-25');
 
-  fetch(`/track/${tracks[idx].id}/`)
-    .then(resp => {
-      if (!resp.ok) throw new Error('Network response was not ok');
-      return resp.text();
-    })
-    .then(html => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      const newAudio = doc.getElementById('audioPlayer');
-      const newCover = doc.getElementById('trackCover');
-      const newTitle = doc.getElementById('trackTitle');
-      const newAlbum = doc.getElementById('trackAlbum');
-      if (newAudio && newAudio.src) audio.src = newAudio.src;
-      if (newCover && newCover.src) trackCover.src = newCover.src;
-      if (newTitle) trackTitle.textContent = newTitle.textContent;
-      if (newAlbum) trackAlbum.textContent = newAlbum.textContent;
-      audio.load();
-      if (playedOnce) audio.play();
-    })
-    .catch(err => console.error('Error loading track:', err));
+  // Получаем URL аудиофайла из data-url атрибута li
+  const audioUrl = tracks[idx].element.dataset.url;
+  if (audioUrl) {
+    audio.src = audioUrl;
+    audio.load();
+    if (playedOnce) audio.play();
+  } else {
+    console.error('Audio URL not found for track id:', tracks[idx].id);
+  }
+
+  // Обновляем обложку, название и альбом из текущего li или по данным внутри страницы
+  // Предполагается, что эти данные доступны в li, либо надо подгружать из другого источника
+  const coverImg = tracks[idx].element.querySelector('img');
+  if (coverImg && trackCover) trackCover.src = coverImg.src;
+  // Для названия и альбома можно хранить в data-атрибутах или в отдельном объекте JS
+  if (trackTitle) trackTitle.textContent = tracks[idx].title;
+  // trackAlbum нужно дополнительно реализовать, например через data-атрибут
 }
 
 // События кнопок Play/Pause

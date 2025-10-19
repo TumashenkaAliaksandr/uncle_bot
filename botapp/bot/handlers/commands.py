@@ -122,7 +122,7 @@ async def clear_chat_handler(message: Message):
 
 
 @router.message(lambda message: message.text == "🧬 Платформы")
-async def show_settings(message: Message):
+async def show_platforms(message: Message):
     # Сохраняем ID входящего сообщения пользователя для удаления
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
     await send_and_store(
