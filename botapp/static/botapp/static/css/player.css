@@ -1741,10 +1741,11 @@ body.light {
     }
 
     .omuamua-link {
+        display: none;
         position: absolute;
         left: 0;
-        top: 69px;
-        display: inline-block;
+        top: 50%;
+        /*display: inline-block;*/
         width: 120px;
         user-select: none;
         pointer-events: auto;
@@ -2106,4 +2107,52 @@ body.light {
 
 .vertical-line::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
+}
+.babuino-jan {
+  position: absolute;
+  bottom: 55%;
+  right: 61.4%;
+  width: 200px;
+  height: 220px;
+  z-index: 9999;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.babuino-jan.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.babuino-jan video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 📱 Мобильная адаптация */
+@media (max-width: 768px) {
+  .babuino-jan {
+    position: fixed;            /* фиксируем, чтобы не уехало при скролле */
+    bottom: 15%;                /* сместим немного вверх */
+    right: 10%;                 /* ближе к центру */
+    width: 140px;               /* меньше размер */
+    height: 160px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+}
+
+/* 📱 Очень маленькие экраны (например, iPhone SE) */
+@media (max-width: 480px) {
+    .babuino-jan {
+        bottom: 75%;
+        right: 82%;
+        transform: translateX(50%);
+        width: 125px;
+        height: 140px;
+    }
 }

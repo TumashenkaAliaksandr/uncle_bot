@@ -27,6 +27,11 @@ let isLoop = false;
 let isShuffle = false;
 let playedOnce = false;
 
+// Переменные для отслеживания фокуса и таймера возврата
+let focusTimeoutId = null;
+const FOCUS_RETURN_DELAY = 4000; // 4 секунды
+let lastScrollTime = 0;
+
 // Инициализация треков и навешивание событий
 if (trackList) {
   for (let li of trackList.children) {
@@ -42,13 +47,11 @@ if (trackList) {
   }
 }
 
-// Формат времени MM:SS
 function formatTime(timeSec) {
   const t = Math.floor(timeSec);
   return `${Math.floor(t / 60)}:${('0' + (t % 60)).slice(-2)}`;
 }
 
-// Обновление прогрессбара
 function updateProgressBar(currentTime, duration) {
   if (!progressBarSvg || !duration) return;
   const percent = currentTime / duration;
@@ -57,7 +60,6 @@ function updateProgressBar(currentTime, duration) {
   progressBarSvg.style.strokeDashoffset = offset;
 }
 
-// Плавное обновление громкости
 function updateVolumeBar(volume) {
   if (!volumeBarSvg || !volumeThumb) return;
   const offset = volumeBarLength * (1 - volume);
@@ -72,7 +74,37 @@ function updateVolumeBar(volume) {
   }
 }
 
-// Выбор и подгрузка трека
+function scrollTrackIntoView(idx) {
+  const container = trackList.parentElement; // контейнер с overflow-x:auto
+  const element = tracks[idx].element;
+
+  const elementLeft = element.offsetLeft;
+  const elementWidth = element.offsetWidth;
+  const containerScrollLeft = container.scrollLeft;
+  const containerWidth = container.offsetWidth;
+
+  if (elementLeft < containerScrollLeft) {
+    container.scrollTo({ left: elementLeft, behavior: 'smooth' });
+  } else if (elementLeft + elementWidth > containerScrollLeft + containerWidth) {
+    container.scrollTo({ left: elementLeft + elementWidth - containerWidth, behavior: 'smooth' });
+  }
+}
+
+// Функция возврата прокрутки к активному треку
+function returnScrollToActiveTrack() {
+  scrollTrackIntoView(currentTrackIdx);
+  focusActiveTrack();
+}
+
+// Установка фокуса на активный трек
+function focusActiveTrack() {
+  if (!tracks.length) return;
+  const element = tracks[currentTrackIdx].element;
+  if (element) {
+    element.focus();
+  }
+}
+
 function selectTrack(idx, resetProgress = true) {
   if (tracks.length === 0) return;
   if (idx < 0) idx = tracks.length - 1;
@@ -80,11 +112,18 @@ function selectTrack(idx, resetProgress = true) {
   currentTrackIdx = idx;
   if (resetProgress) audio.currentTime = 0;
 
-  // Обновляем активный класс у треков
   tracks.forEach(t => t.element.classList.remove('active', 'bg-success', 'bg-opacity-25'));
   tracks[idx].element.classList.add('active', 'bg-success', 'bg-opacity-25');
 
-  // Получаем URL аудиофайла из data-url атрибута li
+  scrollTrackIntoView(idx);
+  focusActiveTrack();
+
+  // Сброс таймера возврата прокрутки
+  if (focusTimeoutId) {
+    clearTimeout(focusTimeoutId);
+    focusTimeoutId = null;
+  }
+
   const audioUrl = tracks[idx].element.dataset.url;
   if (audioUrl) {
     audio.src = audioUrl;
@@ -94,16 +133,37 @@ function selectTrack(idx, resetProgress = true) {
     console.error('Audio URL not found for track id:', tracks[idx].id);
   }
 
-  // Обновляем обложку, название и альбом из текущего li или по данным внутри страницы
-  // Предполагается, что эти данные доступны в li, либо надо подгружать из другого источника
   const coverImg = tracks[idx].element.querySelector('img');
   if (coverImg && trackCover) trackCover.src = coverImg.src;
-  // Для названия и альбома можно хранить в data-атрибутах или в отдельном объекте JS
   if (trackTitle) trackTitle.textContent = tracks[idx].title;
-  // trackAlbum нужно дополнительно реализовать, например через data-атрибут
+  if (trackAlbum && tracks[idx].element.dataset.album) trackAlbum.textContent = tracks[idx].element.dataset.album;
 }
 
-// События кнопок Play/Pause
+// Обработка скролла в контейнере треков
+if (trackList.parentElement) {
+  trackList.parentElement.addEventListener('scroll', () => {
+    lastScrollTime = Date.now();
+    if (focusTimeoutId) {
+      clearTimeout(focusTimeoutId);
+    }
+    focusTimeoutId = setTimeout(() => {
+      // Проверяем, прокручен ли контейнер далеко от активного трека
+      const container = trackList.parentElement;
+      const element = tracks[currentTrackIdx].element;
+      const containerScrollLeft = container.scrollLeft;
+      const containerWidth = container.offsetWidth;
+      const elementLeft = element.offsetLeft;
+      const elementWidth = element.offsetWidth;
+
+      const isElementVisible = elementLeft >= containerScrollLeft && (elementLeft + elementWidth) <= (containerScrollLeft + containerWidth);
+      if (!isElementVisible) {
+        returnScrollToActiveTrack();
+      }
+    }, FOCUS_RETURN_DELAY);
+  });
+}
+
+// Управление воспроизведением
 playPauseBtn && playPauseBtn.addEventListener('click', () => {
   if (audio.paused) {
     audio.play();
@@ -120,7 +180,6 @@ audio.addEventListener('pause', () => {
   if (playPauseBtn) playPauseBtn.textContent = '▶️';
 });
 
-// Обновление времени и прогресса
 audio.addEventListener('timeupdate', () => {
   if (!audio.duration || isNaN(audio.duration) || audio.duration === 0) return;
   if (currentTimeEl) currentTimeEl.textContent = formatTime(audio.currentTime);
@@ -128,7 +187,42 @@ audio.addEventListener('timeupdate', () => {
   updateProgressBar(audio.currentTime, audio.duration);
 });
 
-// Клик по прогрессбару
+const babuinoContainer = document.getElementById('babuinoContainer');
+const babuinoVideo = document.getElementById('babuinoVideo');
+let babuinoTimeout;
+
+// При начале воспроизведения аудио
+audio.addEventListener('play', () => {
+  if (!babuinoContainer || !babuinoVideo) return;
+
+  // если уже запущен таймер — сбрасываем
+  if (babuinoTimeout) {
+    clearTimeout(babuinoTimeout);
+    babuinoTimeout = null;
+  }
+
+  // показываем и запускаем видео
+  babuinoContainer.classList.add('active');
+  babuinoVideo.currentTime = 0;
+  babuinoVideo.play();
+
+  // скрываем через 14 секунд
+  babuinoTimeout = setTimeout(() => {
+    babuinoContainer.classList.remove('active');
+    babuinoVideo.pause();
+  }, 14000);
+});
+
+// При паузе — сразу скрываем
+audio.addEventListener('pause', () => {
+  if (babuinoContainer && babuinoVideo) {
+    babuinoContainer.classList.remove('active');
+    babuinoVideo.pause();
+    if (babuinoTimeout) clearTimeout(babuinoTimeout);
+  }
+});
+
+
 const progressContainer = document.querySelector('.progress-svg');
 if (progressContainer) {
   progressContainer.addEventListener('click', e => {
@@ -140,14 +234,12 @@ if (progressContainer) {
   });
 }
 
-// Кнопки переключения треков
 prevBtn && prevBtn.addEventListener('click', () => selectTrack(currentTrackIdx - 1));
 nextBtn && nextBtn.addEventListener('click', () => {
   if (isShuffle) selectTrack(Math.floor(Math.random() * tracks.length));
   else selectTrack(currentTrackIdx + 1);
 });
 
-// Луп и шифл
 loopBtn && loopBtn.addEventListener('click', () => {
   isLoop = !isLoop;
   audio.loop = isLoop;
@@ -163,7 +255,6 @@ audio.addEventListener('ended', () => {
   if (!isLoop) nextBtn && nextBtn.click();
 });
 
-// Управление громкостью
 const volumeContainer = document.querySelector('.volume-svg');
 let isVolumeDragging = false;
 
@@ -192,16 +283,13 @@ if (volumeContainer) {
   });
 }
 
-// Инициализация UI состояния громкости и прогресса
 updateVolumeBar(audio.volume);
 updateProgressBar(0, 1);
 
-// Переключение темы
 themeToggle && themeToggle.addEventListener('click', () => {
   document.body.classList.toggle('light');
 });
 
-// Визуализатор аудио
 const canvas = document.getElementById('visualizer');
 const ctx = canvas ? canvas.getContext('2d') : null;
 let audioCtx, analyser, src, dataArray;
@@ -236,10 +324,8 @@ function drawVisualizer() {
   if (!audio.paused) requestAnimationFrame(drawVisualizer);
 }
 
-// Инициализация — выбираем активный трек или первый
 selectTrack(tracks.findIndex(t => t.element.classList.contains('active')), false);
 
-// Пульсирующие точки
 const container = document.getElementById('skyContainer');
 const colors = ['#ff4d4d','#4dff88','#4d88ff','#ffdb4d','#ff4da6','#66ffff','#ff9966'];
 
