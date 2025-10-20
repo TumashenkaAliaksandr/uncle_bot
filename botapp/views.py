@@ -137,3 +137,6 @@ def new_the_day(request, album_id=None, track_id=None):
         'current_track': current_track,
         'countdown': countdown,
     })
+
+def test (request):
+    return render(request, 'test.html')

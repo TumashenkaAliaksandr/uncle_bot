@@ -140,7 +140,7 @@ body::before {
 
 .margin-files {
     position: absolute;
-    bottom: 80%;
+    bottom: 84%;
     right: 90px;
     background: #3169593b;
     border-radius: 4px;
@@ -150,7 +150,7 @@ body::before {
 
 .margin-files-evening {
     position: absolute;
-    bottom: 82%;
+    bottom: 86%;
     right: 90px;
     background: #3169593b;
     border-radius: 4px;
@@ -1866,7 +1866,7 @@ body.light {
     box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
     right: 168px;
     overflow: visible;
-    top: 8%;
+    top: 6%;
     height: 100px;
 }
 
@@ -2110,7 +2110,7 @@ body.light {
 }
 .babuino-jan {
   position: absolute;
-  bottom: 55%;
+  bottom: 65%;
   right: 61.4%;
   width: 200px;
   height: 220px;
@@ -2137,7 +2137,7 @@ body.light {
 /* 📱 Мобильная адаптация */
 @media (max-width: 768px) {
   .babuino-jan {
-    position: fixed;            /* фиксируем, чтобы не уехало при скролле */
+    position: absolute;            /* фиксируем, чтобы не уехало при скролле */
     bottom: 15%;                /* сместим немного вверх */
     right: 10%;                 /* ближе к центру */
     width: 140px;               /* меньше размер */
@@ -2149,10 +2149,27 @@ body.light {
 /* 📱 Очень маленькие экраны (например, iPhone SE) */
 @media (max-width: 480px) {
     .babuino-jan {
-        bottom: 75%;
-        right: 82%;
+        bottom: 81%;
+        right: 83%;
         transform: translateX(50%);
         width: 125px;
-        height: 140px;
+        height: 137px;
     }
 }
+/* ==== Фоновая анимация галактик ==== */
+/*#galaxyBackground {*/
+/*  position: fixed;*/
+/*  inset: 0;*/
+/*  z-index: 0; !* под всем контентом *!*/
+/*  overflow: hidden;*/
+/*}*/
+
+/*#galaxyBackground canvas,*/
+/*#galaxyBackground svg {*/
+/*  position: absolute;*/
+/*  inset: 0;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  display: block;*/
+/*  pointer-events: none; !* не мешает кликам *!*/
+/*}*/

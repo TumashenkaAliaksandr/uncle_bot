@@ -85,7 +85,7 @@
             </button>
         </div>
     </div>
-
+{#{% include 'test.html' %}#}
 {% block content %}{% endblock %}
 
 <div id="skyContainer">
@@ -126,11 +126,17 @@
 
 </section>
 
+<!-- ==== Фон галактик и созвездий ==== -->
+<div id="galaxyBackground">
+  <canvas id="stage"></canvas>
+  <svg id="svgLayer" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
 
 
 <footer class="text-center" style="font-size: 0.85rem; opacity: 0.5; margin-top: 2rem;">
     © 2025 ДЯДЯПлеер &mdash; by @ultavioletpartyeyes
 </footer>
+
 
 
 <script>
