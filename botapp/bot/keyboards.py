@@ -80,3 +80,9 @@ async def news_keyboard():
 
 
     return builder.as_markup()
+
+
+def get_see_keyboard(news_id: int) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="👁 Посмотреть", callback_data=f"show_news_{news_id}")]
+    ])
