@@ -4,15 +4,17 @@ import asyncio
 from aiogram import Router, F
 from aiogram.filters import Command
 from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
+from asgiref.sync import sync_to_async
 
 from botapp.bot.handlers.clear_chat import clear_chat
 from botapp.bot.keyboards import main_keyboard, albums_keyboard, donate_keyboard, settings_keyboard, \
-    platforms_keyboard, news_keyboard, get_songs_keyboard
+    platforms_keyboard, news_keyboard, get_songs_keyboard, get_video_keyboard
 from botapp.bot.config import logger
 from botapp.bot.texts.proposal_texts import thanks_donate_command_txt, HELLO_TXT_FIRST, sending_album_txt, \
     YOUR_SETTINGS_TXT, news_txt, DONATE_TEXT, tabs_txt, MAIN_MENU_ANSWER, cleaning_chat_txt, PLATFORMS_TEXT
 from botapp.bot.utils.message_utils import send_and_store
 from botapp.bot.loader import sent_messages
+from botapp.models import Video
 
 router = Router()
 
@@ -67,7 +69,21 @@ async def show_settings(message: Message):
 @router.message(lambda message: message.text == "📺 Видео")
 async def video_handler(message: Message):
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    await send_and_store(message.chat.id,"🤷‍♂ Сорян, видосов пока нет..")
+
+    # Получаем список видео из базы
+    videos = await sync_to_async(lambda: list(Video.objects.order_by('-date')))()
+
+    if not videos:
+        await send_and_store(message.chat.id, "💡 Видео не найдены.")
+        return
+
+    # Для примера отправим первый видео с кнопкой "Посмотреть"
+    video = videos[0]
+    text = f"📼 Видео от ДЯДИ:\n\n<b>{video.name}</b>\n📅 {video.date.strftime('%d.%m.%Y %H:%M')}"
+    keyboard = get_video_keyboard(video.id)
+
+    await send_and_store(message.chat.id, text, parse_mode="HTML", reply_markup=keyboard)
+
 
 
 @router.message(lambda message: message.text == "📰 Новости")

@@ -83,3 +83,17 @@ class Countdown(models.Model):  # Явно указать id
     def __str__(self):
         return f"{self.name or 'Отсчёт'} до {self.end_time}"
 
+
+class Video(models.Model):
+    name = models.CharField(max_length=255, verbose_name="Название видео")
+    description = models.TextField(verbose_name="Описание")
+    date = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
+    video_file = models.FileField(upload_to='videos/', verbose_name="Видео файл")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "📹 Видео"
+        verbose_name_plural = "📹 Видео"
+

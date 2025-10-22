@@ -11,9 +11,9 @@ from asgiref.sync import sync_to_async
 from django.templatetags.tz import utc
 from django.utils.timezone import make_aware, get_current_timezone
 
-from botapp.models import Album, News, SongInfo
+from botapp.models import Album, News, SongInfo, Video
 from botapp.bot.config import logger
-from botapp.bot.keyboards import main_keyboard, news_keyboard, get_see_keyboard
+from botapp.bot.keyboards import main_keyboard, news_keyboard, get_see_keyboard, get_video_keyboard
 from botapp.bot.texts.proposal_texts import nice_listening
 from botapp.bot.utils.message_utils import send_and_store
 from botapp.bot.loader import sent_messages, bot
@@ -227,3 +227,63 @@ async def show_song_handler(callback: CallbackQuery):
 
     sent_msg = await callback.message.answer(text, parse_mode="HTML")
     sent_messages.setdefault(callback.message.chat.id, []).append(sent_msg.message_id)
+
+
+
+@router.callback_query(lambda c: c.data == "video_list")
+async def video_list_handler(callback: CallbackQuery):
+    await callback.answer()
+    chat_id = callback.message.chat.id
+
+    videos = await sync_to_async(lambda: list(Video.objects.order_by('-date')))()
+
+    if not videos:
+        sent_msg = await callback.message.answer("💡 Видео не найдены.")
+        sent_messages.setdefault(chat_id, []).append(sent_msg.message_id)
+        return
+
+    for video in videos:
+        date_str = video.date.strftime('%d.%m.%Y %H:%M')
+
+        # Ограниченное описание (например, первые 100 символов)
+        short_desc = (video.description[:100] + "...") if len(video.description) > 100 else video.description
+
+        text = (
+            f"<b>{video.name}</b>\n"
+            f"📅 Дата: {date_str}\n"
+            f"{short_desc}"
+        )
+        keyboard = get_video_keyboard(video.id)
+        sent_msg = await callback.message.answer(text, parse_mode="HTML", reply_markup=keyboard)
+        sent_messages.setdefault(chat_id, []).append(sent_msg.message_id)
+
+@router.callback_query(lambda c: c.data and c.data.startswith("show_video_"))
+async def show_video_handler(callback: CallbackQuery):
+    await callback.answer()
+    video_id = int(callback.data[len("show_video_"):])
+    video_item = await sync_to_async(lambda: Video.objects.filter(id=video_id).first())()
+
+    if not video_item:
+        await callback.message.answer("❌ Видео не найдено.")
+        return
+
+    # Текст с описанием видео
+    text = (
+        f"<b>{video_item.name}</b>\n\n"
+        f"📅 Дата: {video_item.date.strftime('%d.%m.%Y %H:%M')}\n\n"
+        f"{video_item.description}"
+    )
+
+
+    sent_msg = await callback.message.answer(text, parse_mode="HTML")
+    sent_messages.setdefault(callback.message.chat.id, []).append(sent_msg.message_id)
+    # Отправляем сообщение "Загружаю видео..."
+    loading_msg = await callback.message.answer("🎬 Загружаю видео, подождите...")
+
+    # Отправляем видео
+    if video_item.video_file and video_item.video_file.path and os.path.isfile(video_item.video_file.path):
+        sent_video = await callback.message.answer_video(FSInputFile(video_item.video_file.path))
+        sent_messages[callback.message.chat.id].append(sent_video.message_id)
+
+    # Удаляем сообщение "Загружаю видео..."
+    await loading_msg.delete()

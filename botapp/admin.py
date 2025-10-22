@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from urllib.parse import quote
 
-from botapp.models import Track, Album, News, SongInfo, Countdown
+from botapp.models import Track, Album, News, SongInfo, Countdown, Video
 
 
 class TrackInline(admin.TabularInline):
@@ -86,3 +86,15 @@ class SongInfoAdmin(admin.ModelAdmin):
 @admin.register(Countdown)
 class CountdownAdmin(admin.ModelAdmin):
     list_display = ('name', 'end_time',)
+
+
+@admin.register(Video)
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ('name', 'date')
+    search_fields = ('name', 'description')
+    readonly_fields = ('date',)
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'description', 'date', 'video_file')
+        }),
+    )
