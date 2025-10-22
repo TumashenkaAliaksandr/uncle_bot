@@ -4,7 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
 from botapp.bot.handlers.clear_chat import clear_chat
-from botapp.bot.keyboards import keyboard
+from botapp.bot.keyboards import main_keyboard
 from botapp.bot.loader import sent_messages, bot
 from botapp.bot.texts.proposal_texts import ASK_PROPOSAL_TEXT, thanks_by_proposal_txt
 
@@ -50,7 +50,7 @@ async def receive_proposal(message: types.Message, state: FSMContext):
     sent_messages.setdefault(MUSICIAN_ADMIN_ID, []).append(sent.message_id)
 
     # Подтверждаем пользователю отправку и возвращаем главное меню
-    await send_and_store(message.chat.id, thanks_by_proposal_txt, parse_mode="HTML", reply_markup=keyboard)
+    await send_and_store(message.chat.id, thanks_by_proposal_txt, parse_mode="HTML", reply_markup=main_keyboard)
 
     # Сохраняем ID сообщения пользователя для удаления
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)

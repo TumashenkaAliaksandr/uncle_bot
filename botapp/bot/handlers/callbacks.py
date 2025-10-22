@@ -11,9 +11,9 @@ from asgiref.sync import sync_to_async
 from django.templatetags.tz import utc
 from django.utils.timezone import make_aware, get_current_timezone
 
-from botapp.models import Album, News
+from botapp.models import Album, News, SongInfo
 from botapp.bot.config import logger
-from botapp.bot.keyboards import keyboard, news_keyboard, get_see_keyboard
+from botapp.bot.keyboards import main_keyboard, news_keyboard, get_see_keyboard
 from botapp.bot.texts.proposal_texts import nice_listening
 from botapp.bot.utils.message_utils import send_and_store
 from botapp.bot.loader import sent_messages, bot
@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 router = Router()
 MAX_MEDIA_PER_MSG = 5  # Максимум элементов в одной медиагруппе
 nice_listening = "Приятного прослушивания!"  # Сообщение после альбома
-keyboard = keyboard  # Подставьте сюда вашу главную клавиатуру
+keyboard = main_keyboard  # Подставьте сюда вашу главную клавиатуру
 
 
 
@@ -210,3 +210,20 @@ async def show_news_handler(callback: CallbackQuery):
                 caption=news_item.track.title
             )
             sent_messages[callback.message.chat.id].append(sent_audio.message_id)
+
+
+# Обработчик для нажатия на "посмотреть" песню
+@router.callback_query(lambda c: c.data and c.data.startswith("song_"))
+async def show_song_handler(callback: CallbackQuery):
+    await callback.answer()
+    song_id = int(callback.data[len("song_"):])
+    song = await sync_to_async(lambda: SongInfo.objects.filter(id=song_id).first())()
+
+    if not song:
+        await callback.message.answer("🎵 Песня не найдена.")
+        return
+
+    text = f"<b>Песня: {song.title}</b>\n\n🎧💌📖\n<b>Текст:</b>\n────୨ৎ────\n{song.lyrics}\n\n𝄞⨾𓍢⭐໋🎸⋆⭒˚｡⋆ \n<b>Аккорды:</b>\n────୨ৎ────\n{song.chords}"
+
+    sent_msg = await callback.message.answer(text, parse_mode="HTML")
+    sent_messages.setdefault(callback.message.chat.id, []).append(sent_msg.message_id)

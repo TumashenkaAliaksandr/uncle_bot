@@ -9,7 +9,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from botapp.models import SongInfo
 
 # Главная клавиатура с тремя кнопками: Музыка, Донаты, Настройки
-keyboard = ReplyKeyboardMarkup(
+main_keyboard = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text="🎵 Музыка"), KeyboardButton(text="📰 Новости"), KeyboardButton(text="📣 Канал")],
         [KeyboardButton(text="🧬 Платформы"), KeyboardButton(text="📺 Видео"), KeyboardButton(text="💰 Донаты")],

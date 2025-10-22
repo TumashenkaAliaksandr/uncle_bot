@@ -1,3 +1,4 @@
+
 import asyncio
 
 from aiogram import Router, F
@@ -5,8 +6,8 @@ from aiogram.filters import Command
 from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 
 from botapp.bot.handlers.clear_chat import clear_chat
-from botapp.bot.keyboards import keyboard, albums_keyboard, donate_keyboard, settings_keyboard, get_songs_keyboard, \
-    platforms_keyboard, news_keyboard
+from botapp.bot.keyboards import main_keyboard, albums_keyboard, donate_keyboard, settings_keyboard, \
+    platforms_keyboard, news_keyboard, get_songs_keyboard
 from botapp.bot.config import logger
 from botapp.bot.texts.proposal_texts import thanks_donate_command_txt, HELLO_TXT_FIRST, sending_album_txt, \
     YOUR_SETTINGS_TXT, news_txt, DONATE_TEXT, tabs_txt, MAIN_MENU_ANSWER, cleaning_chat_txt, PLATFORMS_TEXT
@@ -23,7 +24,7 @@ async def cmd_start(message: Message):
         message.chat.id,
         HELLO_TXT_FIRST,
         parse_mode="HTML",
-        reply_markup=keyboard
+        reply_markup=main_keyboard
     )
 
 @router.message(Command("help"))
@@ -100,12 +101,12 @@ async def tab_handler(message: Message):
 @router.message(lambda message: message.text == "⬅️ Назад")
 async def back_to_main_menu(message: Message):
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    await send_and_store(message.chat.id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=keyboard)
+    await send_and_store(message.chat.id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=main_keyboard)
 
 @router.message(lambda message: message.text == "⬅️")
 async def back_to_main_menu(message: Message):
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
-    await send_and_store(message.chat.id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=keyboard)
+    await send_and_store(message.chat.id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=main_keyboard)
 
 
 @router.message(lambda message: message.text == "🧹 Почистить чат")
@@ -127,7 +128,7 @@ async def clear_chat_handler(message: Message):
                     logger.warning(f"Ошибка удаления сообщения {msg_id}: {e}")
             sent_messages[chat_id].clear()
 
-        sent_msg = await send_and_store(chat_id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=keyboard)
+        sent_msg = await send_and_store(chat_id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=main_keyboard)
         sent_messages.setdefault(chat_id, []).append(sent_msg.message_id)
 
     asyncio.create_task(clear_and_send_menu())
@@ -158,5 +159,5 @@ async def show_settings(message: Message):
         message.chat.id,
         sing_answer_txt,
         parse_mode="HTML",
-        reply_markup=keyboard
+        reply_markup=main_keyboard
     )
