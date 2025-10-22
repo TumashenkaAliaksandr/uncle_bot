@@ -51,17 +51,30 @@ class TrackAdmin(admin.ModelAdmin):
     audio_player.short_description = "Прослушать трек"
 
 
+
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ('title_news', 'date', 'track')
+    list_display = ('title_news', 'formatted_date', 'track')
     search_fields = ('title_news', 'description')
     list_filter = ('date',)
     readonly_fields = ('date',)
+
     fieldsets = (
         (None, {
-            'fields': ('title_news', 'description', 'photo', 'date', 'track')
+            'fields': ('title_news', 'description', 'photo', 'audio', 'date', 'track')
         }),
     )
+
+    def formatted_date(self, obj):
+        return obj.date.strftime('%d.%m.%Y %H:%M')
+    formatted_date.short_description = 'Дата публикации'
+    formatted_date.admin_order_field = 'date'
+
+    def photo_preview(self, obj):
+        if obj.photo:
+            return format_html('<img src="{}" style="max-height: 100px;" />', obj.photo.url)
+        return ""
+    photo_preview.short_description = 'Фото превью'
 
 
 @admin.register(SongInfo)

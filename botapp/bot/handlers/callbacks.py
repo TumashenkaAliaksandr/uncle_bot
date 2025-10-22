@@ -132,18 +132,31 @@ async def news_today_handler(callback: CallbackQuery):
     for news_item in news_qs:
         text = f"<b>{news_item.title_news}</b>\n\n{news_item.description}"
         if news_item.track:
-            text += f"\n\n🎼 Трек: {news_item.track.title}"
+            text += f"\n\n🎼 <b>Трек:</b> {news_item.track.title}"
             if news_item.track.description:
-                text += f"\n📝 Описание: {news_item.track.description}"
+                text += f"\n\n📝  <b>Описание:</b>\n{news_item.track.description}"
+
+        # Отправка фото новости, если есть и файл существует
+        if news_item.photo and news_item.photo.path and os.path.isfile(news_item.photo.path):
+            sent_photo = await callback.message.answer_photo(
+                photo=FSInputFile(news_item.photo.path),
+                caption=text,
+                parse_mode="HTML"
+            )
+            sent_messages.setdefault(chat_id, []).append(sent_photo.message_id)
+        else:
+            sent_msg = await callback.message.answer(text, parse_mode="HTML")
+            sent_messages.setdefault(chat_id, []).append(sent_msg.message_id)
+
+        # Отправляем аудио, если есть:
+        if news_item.track:
             audio_path = news_item.track.audio_file.path if news_item.track.audio_file else None
             if audio_path and os.path.isfile(audio_path):
-                sent_msg = await callback.message.answer(text, parse_mode="HTML")
-                sent_messages.setdefault(chat_id, []).append(sent_msg.message_id)
-                sent_audio = await callback.message.answer_audio(audio=FSInputFile(audio_path), caption=news_item.track.title)
+                sent_audio = await callback.message.answer_audio(
+                    audio=FSInputFile(audio_path),
+                    caption=news_item.track.title
+                )
                 sent_messages[chat_id].append(sent_audio.message_id)
-                continue
-        sent_msg = await callback.message.answer(text, parse_mode="HTML")
-        sent_messages.setdefault(chat_id, []).append(sent_msg.message_id)
 
 
 @router.callback_query(lambda c: c.data == "news_old")
@@ -158,15 +171,28 @@ async def news_all_handler(callback: CallbackQuery):
     for news_item in news_qs:
         text = f"<b>{news_item.title_news}</b>\n\n{news_item.description}"
         if news_item.track:
-            text += f"\n\n🎼 Трек: {news_item.track.title}"
+            text += f"\n\n🎼 <b>Трек:</b> {news_item.track.title}"
             if news_item.track.description:
-                text += f"\n📝 Описание: {news_item.track.description}"
+                text += f"\n\n📝 <b>Описание:</b>\n{news_item.track.description}"
+
+        # Отправляем фото, если есть и файл существует
+        if news_item.photo and news_item.photo.path and os.path.isfile(news_item.photo.path):
+            sent_photo = await callback.message.answer_photo(
+                photo=FSInputFile(news_item.photo.path),
+                caption=text,
+                parse_mode="HTML"
+            )
+            sent_messages.setdefault(chat_id, []).append(sent_photo.message_id)
+        else:
+            sent_msg = await callback.message.answer(text, parse_mode="HTML")
+            sent_messages.setdefault(chat_id, []).append(sent_msg.message_id)
+
+        # Отправляем аудио трек, если есть и файл существует
+        if news_item.track:
             audio_path = news_item.track.audio_file.path if news_item.track.audio_file else None
             if audio_path and os.path.isfile(audio_path):
-                sent_msg = await callback.message.answer(text, parse_mode="HTML")
-                sent_messages.setdefault(chat_id, []).append(sent_msg.message_id)
-                sent_audio = await callback.message.answer_audio(audio=FSInputFile(audio_path), caption=news_item.track.title)
+                sent_audio = await callback.message.answer_audio(
+                    audio=FSInputFile(audio_path),
+                    caption=news_item.track.title
+                )
                 sent_messages[chat_id].append(sent_audio.message_id)
-                continue
-        sent_msg = await callback.message.answer(text, parse_mode="HTML")
-        sent_messages.setdefault(chat_id, []).append(sent_msg.message_id)
