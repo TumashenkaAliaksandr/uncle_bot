@@ -83,6 +83,7 @@ async def process_album_callback(callback_query: types.CallbackQuery):
                 callback_query.message.chat.id,
                 f"📀 Открываю Альбом:\n ⭐ {album.name} ⭐\n🖼️❌ Обложка не найдена по пути: {cover_path}"
             )
+
     else:
         await send_and_store(callback_query.message.chat.id, f"📀 Альбом: {album.name}\n🖼️❌ Обложка отсутствует")
 
@@ -105,11 +106,14 @@ async def process_album_callback(callback_query: types.CallbackQuery):
     # Отправляем фото чанками
     if photos:
         await safe_send_media_group(bot, callback_query.message.chat.id, photo_chunks)
+    # Отправляем сообщение "Загружаю аудио..."
+    loading_msg = await callback_query.message.answer("🎬 Загружаю аудио, подождите...")
 
     # Отправляем аудио чанками с защитой содержимого
     if audios:
         await safe_send_media_group(bot, callback_query.message.chat.id, audio_chunks, protect_content=True)
-
+    # Удаляем сообщение "Загружаю аудио..."
+    await loading_msg.delete()
     # Отправляем сообщение с клавиатурой
     await send_and_store(callback_query.message.chat.id, nice_listening, parse_mode="HTML", reply_markup=keyboard)
 
@@ -256,6 +260,7 @@ async def video_list_handler(callback: CallbackQuery):
         keyboard = get_video_keyboard(video.id)
         sent_msg = await callback.message.answer(text, parse_mode="HTML", reply_markup=keyboard)
         sent_messages.setdefault(chat_id, []).append(sent_msg.message_id)
+
 
 @router.callback_query(lambda c: c.data and c.data.startswith("show_video_"))
 async def show_video_handler(callback: CallbackQuery):
