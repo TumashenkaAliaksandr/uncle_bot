@@ -2,14 +2,14 @@ import asyncio
 
 from aiogram import Router, F
 from aiogram.filters import Command
-from aiogram.types import Message
+from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 
 from botapp.bot.handlers.clear_chat import clear_chat
 from botapp.bot.keyboards import keyboard, albums_keyboard, donate_keyboard, settings_keyboard, get_songs_keyboard, \
-    platforms_keyboard
+    platforms_keyboard, news_keyboard
 from botapp.bot.config import logger
 from botapp.bot.texts.proposal_texts import thanks_donate_command_txt, HELLO_TXT_FIRST, sending_album_txt, \
-    YOUR_SETTINGS_TXT, news_txt, DONATE_TEXT, tabs_txt, MAIN_MENU_ANSWER, cleaning_chat_txt
+    YOUR_SETTINGS_TXT, news_txt, DONATE_TEXT, tabs_txt, MAIN_MENU_ANSWER, cleaning_chat_txt, PLATFORMS_TEXT
 from botapp.bot.utils.message_utils import send_and_store
 from botapp.bot.loader import sent_messages
 
@@ -55,7 +55,6 @@ async def cmd_donate(message: Message):
     )
 
 
-
 @router.message(lambda message: message.text == "⚙️")
 async def show_settings(message: Message):
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
@@ -71,12 +70,13 @@ async def video_handler(message: Message):
 
 
 @router.message(lambda message: message.text == "📰 Новости")
-async def news_handler(message: Message):
+async def news_command_handler(message: Message):
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
     logger.info(f"👤 Пользователь {message.from_user.id} запросил /news")
-    await send_and_store(
-        message.chat.id, news_txt, parse_mode="HTML"
-    )
+    keyboard_news_answers = await news_keyboard()
+    sent_msg = await message.answer("🔔 Выберите действие:", reply_markup=keyboard_news_answers)
+    sent_messages.setdefault(message.chat.id, []).append(sent_msg.message_id)
+
 
 @router.message(lambda message: message.text == "💰 Донаты")
 async def donate_handler(message: Message):
@@ -107,6 +107,7 @@ async def back_to_main_menu(message: Message):
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
     await send_and_store(message.chat.id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=keyboard)
 
+
 @router.message(lambda message: message.text == "🧹 Почистить чат")
 async def clear_chat_handler(message: Message):
     logger.info(f"👤 Пользователь {message.from_user.id} запросил 🧹 Почистить чат")
@@ -115,10 +116,22 @@ async def clear_chat_handler(message: Message):
 
     async def clear_and_send_menu():
         logger.info(f"БОТ {message.from_user.id} 🧹 Чистит чат")
-        await clear_chat(message.chat.id)
-        await send_and_store(message.chat.id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=keyboard)
+        chat_id = message.chat.id
+
+        # Удаляем все сообщения, которые бот отправлял раньше в этом чате
+        if chat_id in sent_messages:
+            for msg_id in sent_messages[chat_id]:
+                try:
+                    await message.bot.delete_message(chat_id, msg_id)
+                except Exception as e:
+                    logger.warning(f"Ошибка удаления сообщения {msg_id}: {e}")
+            sent_messages[chat_id].clear()
+
+        sent_msg = await send_and_store(chat_id, MAIN_MENU_ANSWER, parse_mode="HTML", reply_markup=keyboard)
+        sent_messages.setdefault(chat_id, []).append(sent_msg.message_id)
 
     asyncio.create_task(clear_and_send_menu())
+
 
 
 @router.message(lambda message: message.text == "🧬 Платформы")
@@ -127,7 +140,7 @@ async def show_platforms(message: Message):
     sent_messages.setdefault(message.chat.id, []).append(message.message_id)
     await send_and_store(
         message.chat.id,
-        DONATE_TEXT,
+        PLATFORMS_TEXT,
         reply_markup=platforms_keyboard,
         parse_mode="HTML"
     )

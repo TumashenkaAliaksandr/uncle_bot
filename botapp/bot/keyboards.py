@@ -1,6 +1,9 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, Message
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-from botapp.models import Album
+
+from botapp.bot.config import logger
+from botapp.bot.loader import sent_messages
+from botapp.models import Album, News
 from asgiref.sync import sync_to_async
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from botapp.models import SongInfo
@@ -59,3 +62,21 @@ platforms_keyboard = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text="🎥 Ютуб", url="https://www.youtube.com/@juniorpegasus6871")],
     [InlineKeyboardButton(text="🌐 Слушать веб версию", url="http://164.92.218.63/")],
 ])
+
+
+async def news_keyboard():
+    logger.info("Начинаем загрузку новостей из базы...")
+    news_list = await sync_to_async(lambda: list(News.objects.select_related('track').all()))()
+    logger.info(f"Загружено новостей: {len(news_list)}")
+    print(f"[DEBUG] Loaded {len(news_list)} news items from DB")
+
+    builder = InlineKeyboardBuilder()
+    builder.button(text="☀️ Показать новости сегодня", callback_data="news_today")
+    builder.button(text="📰 Показать все новости", callback_data="news_old")
+    builder.adjust(1)
+
+    logger.info("Клавиатура с новостями сформирована и возвращается")
+    print(f"[DEBUG] Keyboard ready with {len(news_list)+1} buttons")
+
+
+    return builder.as_markup()

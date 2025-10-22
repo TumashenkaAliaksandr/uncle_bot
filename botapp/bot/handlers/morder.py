@@ -8,7 +8,7 @@ from aiogram.dispatcher.router import Router
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-BAD_WORDS = {'хуй', 'пизда', 'ебацца', 'херня', 'ебаный', 'ёбаный', 'нахуй'}
+BAD_WORDS = {'хуй', 'пизда', 'ебацца', 'херня', 'ебаный', 'нахуй'}
 
 class BadWordsFilter(BaseFilter):
     async def __call__(self, message: Message) -> bool:

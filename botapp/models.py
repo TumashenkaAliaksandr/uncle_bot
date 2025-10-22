@@ -40,11 +40,11 @@ class Track(models.Model):
     def __str__(self):
         return self.title
 
-
 class News(models.Model):
     title_news = models.CharField(max_length=300, default='News')
     description = models.TextField(blank=True, verbose_name='Описание')
     photo = models.ImageField(upload_to='news/photos/', blank=True, null=True, verbose_name='Фото')
+    audio = models.FileField(upload_to='news/audio/', blank=True, null=True, verbose_name='Аудио')
     date = models.DateTimeField(auto_now_add=True, verbose_name='Дата публикации')
     track = models.ForeignKey(
         'botapp.Track',
