@@ -1697,10 +1697,12 @@ body.light {
 
     .margin-files {
         position: relative;
-        top: 5px;
+        top: 280px;
         left: 0;
         max-width: 100%;
         text-align: justify;
+        font-size: 15px!important;
+        height: max-content;
     }
 
     .chips-arrow {
@@ -2144,16 +2146,26 @@ body.light {
     height: 160px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
   }
+
+    .margin-files-process {
+        bottom: 83%;
+        right: 90px;
+        background: #3169593b;
+        border-radius: 4px;
+        padding: 4px;
+        width: 370px!important;
+        display: none;
+    }
 }
 
 /* 📱 Очень маленькие экраны (например, iPhone SE) */
 @media (max-width: 480px) {
     .babuino-jan {
-        bottom: 81%;
+        bottom: 80%;
         right: 83%;
         transform: translateX(50%);
-        width: 125px;
-        height: 137px;
+        width: 120px;
+        height: 120px;
     }
 }
 /* ==== Фоновая анимация галактик ==== */
@@ -2173,3 +2185,248 @@ body.light {
 /*  display: block;*/
 /*  pointer-events: none; !* не мешает кликам *!*/
 /*}*/
+@media (max-width: 1260px) {
+    .cover img {
+        width: 200px;
+        height: 200px;
+        border-radius: 16px;
+        object-fit: cover;
+        margin-bottom: 15px;
+        /* box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3); */
+        right: 88px;
+        position: relative;
+        box-shadow: rgba(255, 77, 77, 0.2) 0 4px 8px;
+        top: 0;
+    }
+
+    .margin-files {
+        position: absolute;
+        bottom: 84.6%;
+        right: 50px;
+        background: #3169593b;
+        border-radius: 4px;
+        padding: 4px;
+        width: 625px;
+        font-size: 14px;
+    }
+
+    .countdown-container {
+        max-width: 340px;
+        margin: 2rem auto;
+        background-color: var(--panel, #2642518f);
+        padding: 1.5rem 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
+        position: relative;
+        right: 90%;
+        top: 64%;
+    }
+
+    .track-info h2 {
+        font-size: 1.1em;
+        margin: 0;
+    }
+
+    .bg-secondary {
+        background-color: #3169590a !important;
+        height: 66px;
+    }
+
+    .advantages-block {
+        margin: 2rem auto;
+        padding: 1rem;
+        background: #3169593b;
+        border-radius: 8px;
+        text-align: center;
+        position: absolute;
+        box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
+        right: 56px;
+        overflow: visible;
+        top: 67px;
+        height: 88px;
+    }
+
+    .margin-files-evening {
+        position: absolute;
+        bottom: 86.5%;
+        right: 50px;
+        background: #3169593b;
+        border-radius: 4px;
+        padding: 4px;
+        width: 627px;
+        font-size: 14px;
+    }
+
+    .margin-files-process {
+        bottom: 83%;
+        right: 90px;
+        background: #3169593b;
+        border-radius: 4px;
+        padding: 4px;
+        width: 630px;
+    }
+
+    .advantage-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 130px;
+        margin: 0.5rem;
+        cursor: default;
+    }
+
+    .advantage-text {
+        font-weight: 600;
+        font-size: 12px;
+        color: #e4dfdf;
+    }
+
+    .icon-movie img {
+        display: block;
+        width: 44px;
+        height: 44px;
+        margin-bottom: 0.5rem;
+    }
+
+
+    .track-info {
+        position: relative;
+        right: 88px;
+    }
+
+    .track-info p {
+        /* color: #aaa; */
+        font-size: 13px;
+        margin: 10px 0 10px 0;
+    }
+
+    .countdown-container h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: #cbab6c;
+        text-shadow: 1px 1px 2px #c1c1c1;
+    }
+}
+
+@media (max-width: 1100px) {
+    .cover img {
+        width: 200px;
+        height: 200px;
+        border-radius: 16px;
+        object-fit: cover;
+        margin-bottom: 15px;
+        /* box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3); */
+        right: 88px;
+        position: relative;
+        box-shadow: rgba(255, 77, 77, 0.2) 0 4px 8px;
+        top: 0;
+    }
+
+    .margin-files {
+        position: absolute;
+        bottom: 85%;
+        right: 50px;
+        background: #3169593b;
+        border-radius: 4px;
+        padding: 4px;
+        width: 477px;
+        font-size: 12px;
+    }
+
+    .countdown-container {
+        max-width: 340px;
+        margin: 2rem auto;
+        background-color: var(--panel, #2642518f);
+        padding: 1.5rem 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
+        position: relative;
+        right: 90%;
+        top: 64%;
+    }
+
+    .track-info h2 {
+        font-size: 1.1em;
+        margin: 0;
+    }
+
+    .bg-secondary {
+        background-color: #3169590a !important;
+        height: 66px;
+    }
+
+    .advantages-block {
+        margin: 2rem auto;
+        padding: 1rem;
+        background: #3169593b;
+        border-radius: 8px;
+        text-align: center;
+        position: absolute;
+        box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
+        right: 44px;
+        overflow: visible;
+        top: 67px;
+        height: 88px;
+    }
+
+    .margin-files-evening {
+        position: absolute;
+        bottom: 84.5%;
+        right: 44px;
+        background: #3169593b;
+        border-radius: 4px;
+        padding: 4px;
+        width: 477px;
+        font-size: 14px;
+    }
+
+    .margin-files-process {
+        bottom: 83%;
+        right: 90px;
+        background: #3169593b;
+        border-radius: 4px;
+        padding: 4px;
+        width: 520px;
+    }
+
+    .advantage-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 95px;
+        margin: 0.5rem;
+        cursor: default;
+    }
+
+    .advantage-text {
+        font-weight: 600;
+        font-size: 12px;
+        color: #e4dfdf;
+    }
+
+    .icon-movie img {
+        display: block;
+        width: 30px;
+        height: 30px;
+        margin-bottom: 0.5rem;
+    }
+
+
+    .track-info {
+        position: relative;
+        right: 88px;
+    }
+
+    .track-info p {
+        /* color: #aaa; */
+        font-size: 13px;
+        margin: 10px 0 10px 0;
+    }
+
+    .countdown-container h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: #cbab6c;
+        text-shadow: 1px 1px 2px #c1c1c1;
+    }
+}
