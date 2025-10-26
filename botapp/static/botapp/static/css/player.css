@@ -46,7 +46,7 @@ body::before {
 .player-container {
     width: 94%;
     margin: 40px auto;
-    background: var(--panel, #000E17F5);
+    background: var(--panel, #030013F4);
     border-radius: 13px;
     box-shadow: 0 17px 22px -13px rgb(6 102 40);
     padding: 30px 20px;
@@ -69,7 +69,7 @@ body::before {
 
 .track-info {
     position: relative;
-    right: 120px;
+    right: 140px;
 }
 
 .track-info h2 {
@@ -106,7 +106,7 @@ body::before {
     box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
     position: relative;
     right: 90%;
-    top: 57%;
+    top: 66%;
 }
 
 .countdown-container-videos {
@@ -741,7 +741,7 @@ body::before {
 .omuamua-link {
     position: absolute;
     left: 60px;
-    top: 505px;
+    top: 533px;
     display: inline-block;
     width: 120px;
     user-select: none;
@@ -1415,14 +1415,14 @@ body::before {
 :root {
     --bg: #000c12;
     --fg: #fff;
-    --panel: rgba(0, 14, 23, 0.96);
+    --panel: rgba(3, 0, 19, 0.96);
     --panel2: #181818;
 }
 
 body.light {
     --bg: #fff;
     --fg: #222;
-    --panel: #dae9f2;
+    --panel: #daf2e0;
     --panel2: #eaeaea;
 }
 
@@ -1482,6 +1482,34 @@ body.light {
             box-shadow: none;
         }
     }
+    .margin-files {
+        position: relative;
+        top: 280px;
+        left: 0;
+        max-width: 344px;
+        text-align: justify;
+        /* font-size: 17px !important; */
+        height: max-content;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        right: 0 !important;
+    }
+
+    .babuino-jan {
+        position: absolute;
+        bottom: 79%;
+        right: 85% !important;
+        width: 115px;
+        height: 130px;
+        z-index: 9999;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+    }
 }
 
 @media (max-width: 400px) {
@@ -1495,12 +1523,59 @@ body.light {
         right: 125px;
         position: relative;
     }
+        .margin-files {
+        position: relative;
+        top: 280px;
+        left: 0;
+        max-width: 344px;
+        text-align: justify;
+        /* font-size: 17px !important; */
+        height: max-content;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        right: 0 !important;
+    }
+
+    .babuino-jan {
+        position: absolute;
+        bottom: 79%;
+        right: 85% !important;
+        width: 115px;
+        height: 130px;
+        z-index: 9999;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+    }
 }
+
+
+@media (max-width: 375px) {
+    .margin-files {
+        position: relative;
+        top: 280px;
+        left: 0;
+        max-width: 344px;
+        text-align: justify;
+        /* font-size: 17px !important; */
+        height: max-content;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        right: 0 !important;
+    }
+}
+
 
 /* Стили для мобильных устройств (до 576px) */
 @media (max-width: 575.98px) {
     .player-container {
         width: 95% !important;
+        height: 777px;
         padding: 15px 10px !important;
         position: relative;
         margin-left: auto !important;
@@ -1585,6 +1660,21 @@ body.light {
 
     #visualizer {
         display: none;
+    }
+
+    .babuino-jan {
+        position: absolute;
+        bottom: 79%;
+        right: 85% !important;
+        width: 115px;
+        height: 130px;
+        z-index: 9999;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
     }
 }
 
@@ -1698,11 +1788,14 @@ body.light {
     .margin-files {
         position: relative;
         top: 280px;
-        left: 0;
-        max-width: 100%;
+        left: 2px;
+        max-width: 385px !important;
         text-align: justify;
-        font-size: 15px!important;
+        font-size: 15px !important;
         height: max-content;
+        /* width: 100%; */
+        margin-left: 4px;
+        margin-right: 4px;
     }
 
     .chips-arrow {
@@ -1739,7 +1832,8 @@ body.light {
         z-index: 1000;
         font-family: monospace, monospace;
         margin-left: 0;
-        display: none;
+        display: none!important;
+        padding: 10px!important;
     }
 
     .omuamua-link {
@@ -1753,6 +1847,21 @@ body.light {
         pointer-events: auto;
         text-decoration: none;
         z-index: 1000;
+    }
+
+    .babuino-jan {
+        position: absolute;
+        bottom: 79%;
+        right: 85% !important;
+        width: 115px;
+        height: 130px;
+        z-index: 9999;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
     }
 }
 
@@ -1772,6 +1881,21 @@ body.light {
         position: relative;
         right: 15px;
     }
+
+    .babuino-jan {
+        position: absolute;
+        bottom: 79%;
+        right: 85% !important;
+        width: 115px;
+        height: 130px;
+        z-index: 9999;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+    }
 }
 
 .chips-wrapper {
@@ -1786,10 +1910,11 @@ body.light {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: var(--panel, #DAE9F2);
+    background: var(--panel, #daf2e0);
     padding: 8px 12px;
     border-radius: 0 0 8px 8px;
     box-shadow: 0 13px 22px -17px rgb(162 188 139);
+    border: 1px solid #262f2a;
 }
 
 .chips-arrow {
@@ -2140,11 +2265,16 @@ body.light {
 @media (max-width: 768px) {
   .babuino-jan {
     position: absolute;            /* фиксируем, чтобы не уехало при скролле */
-    bottom: 15%;                /* сместим немного вверх */
-    right: 10%;                 /* ближе к центру */
-    width: 140px;               /* меньше размер */
-    height: 160px;
+    bottom: 75% !important;                /* сместим немного вверх */
+    right: 85% !important;                 /* ближе к центру */
+    width: 115px!important;               /* меньше размер */
+    height: 130px!important;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
+       z-index: 9999;
+        border-radius: 12px;
+        overflow: hidden;
+      justify-content: left;
+      align-items: start;
   }
 
     .margin-files-process {
@@ -2161,7 +2291,7 @@ body.light {
 /* 📱 Очень маленькие экраны (например, iPhone SE) */
 @media (max-width: 480px) {
     .babuino-jan {
-        bottom: 80%;
+        bottom: 79%;
         right: 83%;
         transform: translateX(50%);
         width: 120px;
@@ -2202,11 +2332,11 @@ body.light {
     .margin-files {
         position: absolute;
         bottom: 84.6%;
-        right: 50px!important;
+        /*right: 50px!important;*/
         background: #3169593b;
         border-radius: 4px;
         padding: 4px;
-        width: 625px!important;
+        width: fit-content!important;
         font-size: 14px;
     }
 
@@ -2306,6 +2436,20 @@ body.light {
         color: #cbab6c;
         text-shadow: 1px 1px 2px #c1c1c1;
     }
+    .babuino-jan {
+        position: absolute;
+        bottom: 65%;
+        right: 59.4%!important;
+        width: 213px;
+        height: 220px;
+        z-index: 9999;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+    }
 }
 
 @media (max-width: 1100px) {
@@ -2320,6 +2464,32 @@ body.light {
         position: relative;
         box-shadow: rgba(255, 77, 77, 0.2) 0 4px 8px;
         top: 0;
+    }
+
+    .chips-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--panel, #DAE9F2);
+        padding: 8px 12px;
+        border-radius: 0 0 8px 8px;
+        box-shadow: 0 13px 22px -17px rgb(162 188 139);
+        border: 1px solid #717774;
+    }
+
+    .babuino-jan {
+        position: absolute;
+        bottom: 65%;
+        right: 59.4%!important;
+        width: 213px;
+        height: 220px;
+        z-index: 9999;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
     }
 
     .margin-files {
@@ -2451,7 +2621,7 @@ body.light {
         right: 80px;
         background: #3169593b;
         border-radius: 4px;
-        padding: 4px;
+        padding: 13px;
         width: 700px;
         font-size: 14px;
     }
@@ -2464,8 +2634,9 @@ body.light {
         border-radius: 12px;
         box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
         position: relative;
-        right: 90%;
-        top: 64%;
+        right: 0;
+        top: 90%;
+        font-size: 14px;
     }
 
     .track-info h2 {
@@ -2516,7 +2687,7 @@ body.light {
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 130px!important;
+        width: 130px !important;
         margin: 0.5rem;
         cursor: default;
     }
@@ -2547,9 +2718,24 @@ body.light {
     }
 
     .countdown-container h3 {
-        font-size: 1.3rem;
+        font-size: 1rem;
         margin-bottom: 1rem;
         color: #cbab6c;
         text-shadow: 1px 1px 2px #c1c1c1;
+    }
+
+    .babuino-jan {
+        position: absolute;
+        bottom: 81.5%!important;
+        right: 85%!important;
+        width: 105px!important;
+        height: 130px!important;
+        z-index: 9999;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
     }
 }
