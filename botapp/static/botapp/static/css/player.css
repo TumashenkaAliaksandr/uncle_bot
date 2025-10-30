@@ -52,6 +52,7 @@ body::before {
     padding: 30px 20px;
     text-align: center;
     overflow: hidden;
+    border: 1px solid #18251e;
 }
 
 .cover img {
@@ -192,7 +193,7 @@ body::before {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
     max-width: fit-content;
     user-select: text;
-    position: relative;
+    position: absolute;
     top: 44%;
     right: 74%;
     z-index: 9999;
