@@ -360,9 +360,9 @@ body::before {
 }
 
 .mini-cover {
-    width: 34px;
-    height: 34px;
-    border-radius: 6px;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px !important;
     object-fit: cover;
 }
 
