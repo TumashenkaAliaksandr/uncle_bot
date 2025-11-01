@@ -14,7 +14,7 @@ body::before {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url('albums/covers/Musical_Ground2.png');
+    background-image: url('albums/covers/uncle_derevnya.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -66,6 +66,16 @@ body::before {
     position: relative;
     box-shadow: rgba(255, 77, 77, 0.2) 0 4px 8px;
     top: 0;
+}
+#stage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1000;
+    pointer-events: none;
+    user-select: none;
 }
 
 .track-info {
@@ -141,7 +151,7 @@ body::before {
 
 .margin-files {
     position: absolute;
-    bottom: 84%;
+    bottom: 79.5%;
     right: 90px;
     background: #3169593b;
     border-radius: 4px;
@@ -151,13 +161,54 @@ body::before {
 
 .margin-files-evening {
     position: absolute;
-    bottom: 86%;
+    bottom: 82.3%;
     right: 90px;
     background: #3169593b;
     border-radius: 4px;
     padding: 4px;
     width: 790px;
 }
+
+input[type=range] {
+  -webkit-appearance: none; /* убираем стили по умолчанию */
+  background: #ddd;
+  border-radius: 4px;
+  outline: none;
+}
+
+/* зеленая часть прогресса в WebKit браузерах */
+input[type=range]::-webkit-slider-runnable-track {
+  height: 8px;
+  background: #006c24; /* зеленый цвет */
+  border-radius: 4px;
+}
+
+/* зеленый ползунок */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #1db954;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -6px; /* выравнивание с треком */
+}
+
+/* Для Firefox */
+input[type=range]::-moz-range-track {
+  height: 8px;
+  background: #1db954;
+  border-radius: 4px;
+}
+
+input[type=range]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #1db954;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 
 .margin-files-process {
     bottom: 83%;
@@ -757,7 +808,7 @@ body::before {
     width: 100%;
     height: auto;
     pointer-events: none; /* контейнер не мешает клику */
-    filter: drop-shadow(0 0 4px rgba(163, 154, 86, 0.7)) drop-shadow(0 0 7px rgba(197, 183, 121, 0.5)) drop-shadow(0 0 14px rgba(197, 183, 121, 0.3));
+    filter: drop-shadow(0 0 4px rgba(163, 154, 86, 0.2)) drop-shadow(0 0 7px rgba(197, 183, 121, 0.1)) drop-shadow(0 0 14px rgba(197, 183, 121, 0.1));
     animation: omuamuaFlight 57s ease-in-out infinite;
     animation-fill-mode: forwards;
     transform-origin: center center;
@@ -1992,7 +2043,7 @@ body.light {
     text-align: center;
     position: absolute;
     box-shadow: 0 4px 8px rgba(255, 77, 77, 0.2);
-    right: 168px;
+    right: 60px;
     overflow: visible;
     top: 6%;
     height: 100px;

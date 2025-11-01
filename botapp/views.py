@@ -139,4 +139,4 @@ def new_the_day(request, album_id=None, track_id=None):
     })
 
 def test (request):
-    return render(request, 'test.html')
+    return render(request, 'stars_bg.html')

@@ -24,71 +24,79 @@
         <!-- Здесь сам плеер или другой контент -->
         <button id="themeToggle" class="btn btn-outline-light">
             <span class="icon">🌗</span>
-{#            <span class="text">Светлая вселенная</span>#}
+            {#            <span class="text">Светлая вселенная</span>#}
         </button>
     </div>
 </section>
 
 <h2 class="player-title">
-  <a href="{% url 'player' %}">
-    <img src="{% static 'botapp/static/img/logo.png' %}" alt="logo" />
-    ДЯДЯ
-  </a>
+    <a href="{% url 'player' %}">
+        <img src="{% static 'botapp/static/img/logo.png' %}" alt="logo"/>
+        ДЯДЯ
+    </a>
 </h2>
 
 
 <div class="chips-wrapper">
-        <div class="chips-header">
-            <button class="chips-arrow chips-arrow-left" aria-label="Предыдущая страница" tabindex="0">
-{#                <!-- SVG иконка стрелки влево -->#}
-{#                <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">#}
-{#                    <path d="M14.96 18.96 8 12l6.96-6.96.71.71L9.41 12l6.25 6.25-.7.71z" fill="currentColor"/>#}
-{#                </svg>#}
-            </button>
+    <div class="chips-header">
+        <button class="chips-arrow chips-arrow-left" aria-label="Предыдущая страница" tabindex="0">
+            {#                <!-- SVG иконка стрелки влево -->#}
+            {#                <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">#}
+            {#                    <path d="M14.96 18.96 8 12l6.96-6.96.71.71L9.41 12l6.25 6.25-.7.71z" fill="currentColor"/>#}
+            {#                </svg>#}
+        </button>
 
-            <div class="chips-scroll" role="tablist" aria-label="Фильтры">
-                <a href="{{ player_url }}">
-                    <button class="chip-chip {% if request.path == player_url %}selected{% endif %}" role="tab"
-                            aria-selected="{% if request.path == player_url %}true{% else %}false{% endif %}"
-                            tabindex="{% if request.path == player_url %}0{% else %}-1{% endif %}">
-                        👣 Все
-                    </button>
-                </a>
-{#                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">💽 Албомы</button>#}
-                <a href="{{ videos_url }}">
-                <button class="chip-chip {% if request.path == videos_url %}selected{% endif %}" role="tab" aria-selected="{% if request.path == videos_url %}true{% else %}false{% endif %}" tabindex="{% if request.path == videos_url %}0{% else %}-1{% endif %}">📽️ Видео</button>
-                </a>
-                <a href="{{ music_movies_url }}">
-                    <button class="chip-chip {% if request.path == music_movies_url %}selected{% endif %}" role="tab"
-                            aria-selected="{% if request.path == music_movies_url %}true{% else %}false{% endif %}"
-                            tabindex="{% if request.path == music_movies_url %}0{% else %}-1{% endif %}">
-                        🎞️ Музыка для Кино
-                    </button>
-                </a>
-{#                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">🎩 ТОП</button>#}
-{#                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">👀 Просмотрено</button>#}
-                <a href="{% url 'new_the_day' %}">
-                    <button class="chip-chip {% if request.path == '/new-the-day/' %}selected{% endif %}" role="tab"
-                            aria-selected="{% if request.path == '/new-the-day/' %}true{% else %}false{% endif %}"
-                            tabindex="{% if request.path == '/new-the-day/' %}0{% else %}-1{% endif %}">
-                        💥 Новое для вас
-                    </button>
-                </a>
+        <div class="chips-scroll" role="tablist" aria-label="Фильтры">
+            <a href="{{ player_url }}">
+                <button class="chip-chip {% if request.path == player_url %}selected{% endif %}" role="tab"
+                        aria-selected="{% if request.path == player_url %}true{% else %}false{% endif %}"
+                        tabindex="{% if request.path == player_url %}0{% else %}-1{% endif %}">
+                    👣 Все
+                </button>
+            </a>
+            {#                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">💽 Албомы</button>#}
+            <a href="{{ videos_url }}">
+                <button class="chip-chip {% if request.path == videos_url %}selected{% endif %}" role="tab"
+                        aria-selected="{% if request.path == videos_url %}true{% else %}false{% endif %}"
+                        tabindex="{% if request.path == videos_url %}0{% else %}-1{% endif %}">📽️ Видео
+                </button>
+            </a>
+            <a href="{{ music_movies_url }}">
+                <button class="chip-chip {% if request.path == music_movies_url %}selected{% endif %}" role="tab"
+                        aria-selected="{% if request.path == music_movies_url %}true{% else %}false{% endif %}"
+                        tabindex="{% if request.path == music_movies_url %}0{% else %}-1{% endif %}">
+                    🎞️ Музыка для Кино
+                </button>
+            </a>
+            {#                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">🎩 ТОП</button>#}
+            {#                <button class="chip-chip" role="tab" aria-selected="false" tabindex="-1">👀 Просмотрено</button>#}
+            <a href="{% url 'new_the_day' %}">
+                <button class="chip-chip {% if request.path == '/new-the-day/' %}selected{% endif %}" role="tab"
+                        aria-selected="{% if request.path == '/new-the-day/' %}true{% else %}false{% endif %}"
+                        tabindex="{% if request.path == '/new-the-day/' %}0{% else %}-1{% endif %}">
+                    💥 Новое для вас
+                </button>
+            </a>
 
-            </div>
-
-            <button class="chips-arrow chips-arrow-right" aria-label="Следующая страница" tabindex="0">
-                <!-- SVG иконка стрелки вправо -->
-{#                <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">#}
-{#                    <path d="m9.4 18.4-.7-.7 5.6-5.6-5.7-5.7.7-.7 6.4 6.4-6.3 6.3z" fill="currentColor"/>#}
-{#                </svg>#}
-            </button>
         </div>
+
+        <button class="chips-arrow chips-arrow-right" aria-label="Следующая страница" tabindex="0">
+            <!-- SVG иконка стрелки вправо -->
+            {#                <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">#}
+            {#                    <path d="m9.4 18.4-.7-.7 5.6-5.6-5.7-5.7.7-.7 6.4 6.4-6.3 6.3z" fill="currentColor"/>#}
+            {#                </svg>#}
+        </button>
     </div>
-{#{% include 'test.html' %}#}
+</div>
 {% block content %}{% endblock %}
 
 <div id="skyContainer">
+
+    <!-- ==== Фон галактик и созвездий ==== -->
+    <div id="galaxyBackground">
+        <canvas id="stage"></canvas>
+        <svg id="svgLayer" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
     <div class="pulse-dot"
          style="width: 60px; height: 20px; top: 10%; left: 15%; background-color: #ff4d4d; animation-delay: 0s;"></div>
     <div class="pulse-dot"
@@ -126,17 +134,12 @@
 
 </section>
 
-<!-- ==== Фон галактик и созвездий ==== -->
-<div id="galaxyBackground">
-  <canvas id="stage"></canvas>
-  <svg id="svgLayer" xmlns="http://www.w3.org/2000/svg"></svg>
-</div>
+{% include 'stars_bg.html' %}
 
 
 <footer class="text-center" style="font-size: 0.85rem; opacity: 0.5; margin-top: 2rem;">
     © 2025 ДЯДЯПлеер &mdash; by @ultavioletpartyeyes
 </footer>
-
 
 
 <script>

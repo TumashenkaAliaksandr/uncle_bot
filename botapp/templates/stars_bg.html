@@ -1,0 +1,17 @@
+{% load static %}
+
+  <!-- Канвас для рисования -->
+  <canvas id="stage"></canvas>
+
+
+
+  <!-- UI для настройки (можно отключить) -->
+  <div class="ui fade-in">
+      <label style="height:4px;padding: 10px; position: absolute; color: #1db954;">
+          ˗ˏˋ ★ ˎˊ˗
+          <input id="starsRange" type="range" min="100" max="2000" value="600">
+      </label>
+    <div style="height:4px;"></div>
+  </div>
+
+<script src="{% static 'botapp/static/js/galaxy-bg.js' %}"></script>
