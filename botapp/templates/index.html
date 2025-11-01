@@ -137,8 +137,21 @@
 {% include 'stars_bg.html' %}
 
 
-<footer class="text-center" style="font-size: 0.85rem; opacity: 0.5; margin-top: 2rem;">
+{# footer.html (или в шаблон где футер) #}
+
+<footer style="font-size: 0.85rem; opacity: 0.5; margin-top: 2rem; display: flex; justify-content: center; align-items: center; gap: 12px;">
+  <div style="flex-grow: 1; text-align: center;">
     © 2025 ДЯДЯПлеер &mdash; by @ultavioletpartyeyes
+  </div>
+  <div class="social-networks" style="display: flex; gap: 16px; align-items: center;">
+    {% for sn in social_networks %}
+      <a href="{{ sn.url }}" target="_blank" rel="noopener noreferrer" style="margin: 0;">
+        <span class="social-icon" aria-label="{{ sn.name }}" title="{{ sn.name }}">
+          {{ sn.svg_icon|safe }}
+        </span>
+      </a>
+    {% endfor %}
+  </div>
 </footer>
 
 

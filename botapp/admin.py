@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from urllib.parse import quote
 
-from botapp.models import Track, Album, News, SongInfo, Countdown, Video
+from botapp.models import Track, Album, News, SongInfo, Countdown, Video, SocialNetwork
 
 
 class TrackInline(admin.TabularInline):
@@ -98,3 +98,10 @@ class VideoAdmin(admin.ModelAdmin):
             'fields': ('name', 'description', 'date', 'video_file')
         }),
     )
+
+@admin.register(SocialNetwork)
+class SocialNetworkAdmin(admin.ModelAdmin):
+    list_display = ['name', 'url', 'order']
+    ordering = ['order', 'name']
+    search_fields = ['name', 'url']
+    fields = ['name', 'url', 'svg_icon', 'order']

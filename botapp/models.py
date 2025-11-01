@@ -97,3 +97,19 @@ class Video(models.Model):
         verbose_name = "📹 Видео"
         verbose_name_plural = "📹 Видео"
 
+
+class SocialNetwork(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    url = models.URLField(max_length=255)
+    svg_icon = models.TextField(
+        help_text="SVG код иконки соцсети. Например, <svg>...</svg>"
+    )
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order', 'name']
+        verbose_name = "Социальная сеть"
+        verbose_name_plural = "Социальные сети"
+
+    def __str__(self):
+        return self.name
