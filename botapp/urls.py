@@ -12,7 +12,7 @@ urlpatterns = [
     path('music-movies/', views.music_movies, name='music_movies'),
     path('videos/', views.videos, name='videos'),
     path('top/', views.top, name='top'),
-    path('test/', views.test, name='test'),
+    path('stars/', views.stars, name='stars'),
     path('new-the-day/', views.new_the_day, name='new_the_day'),
 
 ]

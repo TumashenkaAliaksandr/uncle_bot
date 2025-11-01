@@ -138,5 +138,5 @@ def new_the_day(request, album_id=None, track_id=None):
         'countdown': countdown,
     })
 
-def test (request):
+def stars (request):
     return render(request, 'stars_bg.html')
